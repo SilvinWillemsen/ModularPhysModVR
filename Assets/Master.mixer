@@ -46,6 +46,8 @@ AudioMixerController:
     name: mouseY
   - guid: 97eb09b9448af4b4a9ffee2de642f454
     name: mouseX
+  - guid: ac0658ad054fe4623b617da2f16c1fa9
+    name: excitationType
   m_AudioMixerGroupViews:
   - guids:
     - a467cd9e32e9f419ba48f107a96416b4
@@ -96,10 +98,10 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: c871f84b9623b4377852cd42e0ed6aa8
   m_FloatValues:
-    b2a50f28695ad4ca9af6ff511720ce38: 0.2
+    b2a50f28695ad4ca9af6ff511720ce38: 1
     97eb09b9448af4b4a9ffee2de642f454: 0.51
-    d327f66a506f64ff797ba6c297955808: 0.45
+    d327f66a506f64ff797ba6c297955808: 1
     e29fa3dcf47f944c490d0cde023cc714: 1
-    587d220d56fda4542a333f10dc34f820: 0.12
-    ac0658ad054fe4623b617da2f16c1fa9: 1
+    587d220d56fda4542a333f10dc34f820: 0.31
+    ac0658ad054fe4623b617da2f16c1fa9: 0
   m_TransitionOverrides: {}
