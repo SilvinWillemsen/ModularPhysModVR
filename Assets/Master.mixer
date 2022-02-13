@@ -1,28 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!244 &-521196930341902829
+--- !u!244 &-7444361102765598122
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_EffectID: 2df1f9636c2ec469bb425befe1c1f168
+  m_EffectID: b8efbb7dfe28dd24685a176eac3394ff
   m_EffectName: audioplugin_ModularVST
-  m_MixLevel: fdfd91a99e79c42d187f5c5d5fa4d7de
+  m_MixLevel: df8cb92b0105b794ba5852a36dc88f54
   m_Parameters:
   - m_ParameterName: Mouse X
-    m_GUID: 97eb09b9448af4b4a9ffee2de642f454
+    m_GUID: 43fd74551458c3147a57e38fb568c3ae
   - m_ParameterName: Mouse Y
-    m_GUID: 587d220d56fda4542a333f10dc34f820
+    m_GUID: 1ff7bb756c971444bb637113f7140262
   - m_ParameterName: Excite
-    m_GUID: e29fa3dcf47f944c490d0cde023cc714
+    m_GUID: 4f6d42f3d0629a74ab50cb2fffe04e44
   - m_ParameterName: Excitation Type
-    m_GUID: ac0658ad054fe4623b617da2f16c1fa9
-  - m_ParameterName: Preset Select
-    m_GUID: b2a50f28695ad4ca9af6ff511720ce38
-  - m_ParameterName: Load preset
-    m_GUID: d327f66a506f64ff797ba6c297955808
+    m_GUID: 71f6242975be0694fbe8b6795adb8660
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
@@ -42,12 +38,14 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
-  - guid: 587d220d56fda4542a333f10dc34f820
-    name: mouseY
-  - guid: 97eb09b9448af4b4a9ffee2de642f454
-    name: mouseX
-  - guid: ac0658ad054fe4623b617da2f16c1fa9
+  - guid: 4f6d42f3d0629a74ab50cb2fffe04e44
+    name: excite
+  - guid: 71f6242975be0694fbe8b6795adb8660
     name: excitationType
+  - guid: 43fd74551458c3147a57e38fb568c3ae
+    name: mouseX
+  - guid: 1ff7bb756c971444bb637113f7140262
+    name: mouseY
   m_AudioMixerGroupViews:
   - guids:
     - a467cd9e32e9f419ba48f107a96416b4
@@ -69,7 +67,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
-  - {fileID: -521196930341902829}
+  - {fileID: -7444361102765598122}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -98,7 +96,11 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: c871f84b9623b4377852cd42e0ed6aa8
   m_FloatValues:
+    4f6d42f3d0629a74ab50cb2fffe04e44: 1
+    43fd74551458c3147a57e38fb568c3ae: 0.391
+    1ff7bb756c971444bb637113f7140262: 0
     b2a50f28695ad4ca9af6ff511720ce38: 1
+    71f6242975be0694fbe8b6795adb8660: 1
     97eb09b9448af4b4a9ffee2de642f454: 0.51
     d327f66a506f64ff797ba6c297955808: 1
     e29fa3dcf47f944c490d0cde023cc714: 1
