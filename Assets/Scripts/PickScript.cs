@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 
 public class PickScript : MonoBehaviour
 {
     public AudioMixer audioMixer;
+    public Text debugText;
+    public ChangePreset presetController;
     private int curExcitationType;
     // Start is called before the first frame update
     Collider m_Collider;
@@ -51,23 +56,44 @@ public class PickScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.mouseScrollDelta.y < 0.0f)
+        if (Input.mouseScrollDelta.y != 0) 
         {
-            if (curExcitationType < 2)
+            if (Input.mouseScrollDelta.y < 0.0f)
             {
-                curExcitationType++;
-            }
-            Debug.Log("scroll up");
-        } 
-        else if (Input.mouseScrollDelta.y > 0.0f) 
-        {
-            if (curExcitationType > 0)
+                if (curExcitationType < 2)
+                {
+                    curExcitationType++;
+                }
+                Debug.Log("scroll up");
+
+            } 
+            else if (Input.mouseScrollDelta.y > 0.0f) 
             {
-                curExcitationType--;
+                if (curExcitationType > 0)
+                {
+                    curExcitationType--;
+                }
+                Debug.Log("scroll down");
             }
-            Debug.Log("scroll down");
+            audioMixer.SetFloat("excitationType", curExcitationType * 0.33f + 0.1f);
+            string excitationTypeString= "Excitation: ";
+            switch(curExcitationType)
+            {
+                case 0:
+                    excitationTypeString += "Pluck";
+                    break;
+                case 1:
+                    excitationTypeString += "Hammer";
+                    break;
+                case 2:
+                    excitationTypeString += "Bow";
+                    break;
+                default:
+                    excitationTypeString = "";
+                    break;
+            }
+            debugText.GetComponent<DebugTextScript>().setDebugText (excitationTypeString);
         }
-        audioMixer.SetFloat("excitationType", curExcitationType * 0.33f + 0.1f);
 
     }
     // void OnTriggerEnter(Collider other) {
@@ -87,14 +113,26 @@ public class PickScript : MonoBehaviour
     // }
 
 
-    void OnTriggerStay(Collider other) {
+    void OnTriggerStay (Collider other) {
+
+        string currentPresetName = Marshal.PtrToStringAuto(getPresetAt(presetController.currentlyActivePreset));
+
         float ratioLocX = (other.gameObject.transform.position.x - m_Min_x) / x_range;
         float ratioLocY = (1.0f - (other.gameObject.transform.position.y - m_Min_y) / y_range);
-        ratioLocY = ratioLocY * 0.75f; // usable ratio for the guitar is 6/8 modules;
-        // print("Ratio X: " + ratioLocX);
-        // print("Ratio Y: " + ratioLocY);
+
+        if (currentPresetName == "guitar_xml")
+        {
+            ratioLocY = ratioLocY * 0.75f; // usable ratio for the guitar is 6/8 modules;
+        } else if (currentPresetName == "BanjoLele_xml")
+        {
+            ratioLocY = ratioLocY * 0.66f; // usable ratio for the guitar is 4/6 modules;
+        }
         audioMixer.SetFloat("mouseX", ratioLocX);
         audioMixer.SetFloat("mouseY", ratioLocY);
 
     }
+
+    [DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
+    static extern IntPtr getPresetAt (int i);
+
 }
