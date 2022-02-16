@@ -21,6 +21,8 @@ public class ChangePreset : MonoBehaviour
         Debug.Log("Number of presets in app = " + numPresets);
         float currentPresetFloat;
         audioMixer.GetFloat ("presetSelect", out currentPresetFloat);
+        Debug.Log("CurrentPresetFloat = " + currentPresetFloat);
+
         currentlyActivePreset = (int)Mathf.Floor (currentPresetFloat * numPresets);
         Debug.Log("currentlyActivePreset = " + currentlyActivePreset);
         presetToLoad = currentlyActivePreset;
