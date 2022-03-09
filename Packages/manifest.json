@@ -26,6 +26,7 @@
     "io.extendreality.tilia.indicators.objectpointers.unity": "1.8.2",
     "io.extendreality.tilia.input.unityinputsystem": "1.1.18",
     "io.extendreality.tilia.interactions.interactables.unity": "1.22.7",
+    "io.extendreality.tilia.interactions.pointerinteractors.unity": "1.10.3",
     "io.extendreality.tilia.locomotors.teleporter.unity": "1.7.1",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
