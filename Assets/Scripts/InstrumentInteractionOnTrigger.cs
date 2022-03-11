@@ -52,8 +52,10 @@ public class InstrumentInteractionOnTrigger : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         
+        
         if (other.gameObject.name == pickGameObject.name || other.gameObject.name == bowGameObject.name)
         {
+            Debug.Log("Excited");
             // map x and y
             Vector3 collisionLoc = other.transform.position;
             Vector3 relLoc = collisionLoc - instrumentGameObject.transform.position;
