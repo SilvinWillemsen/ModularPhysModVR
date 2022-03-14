@@ -52,7 +52,7 @@ public class CubeMovement : MonoBehaviour
         
             if (Physics.Raycast(ray, out hit)) {
                 Transform objectHit = hit.transform;
-                if (objectHit != this)
+                if (objectHit == guitar.transform)
                 { 
                     this.gameObject.transform.position = new Vector3 (hit.point.x, hit.point.y, this.gameObject.transform.position.z);
                                 Debug.Log(this.gameObject.transform.position);
