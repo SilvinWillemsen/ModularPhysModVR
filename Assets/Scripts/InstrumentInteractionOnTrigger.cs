@@ -32,7 +32,7 @@ public class InstrumentInteractionOnTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        audioMixer.SetFloat("exite", 1.0f);
+        audioMixer.SetFloat("excite", 1.0f);
 
         Debug.Log(other.gameObject.name);
         Debug.Log(pickGameObject.name);
@@ -80,6 +80,6 @@ public class InstrumentInteractionOnTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        audioMixer.SetFloat("exite", 0.0f);
+        audioMixer.SetFloat("excite", 0.0f);
     }
 }
