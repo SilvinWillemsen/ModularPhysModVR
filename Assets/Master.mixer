@@ -50,8 +50,6 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: 4f6d42f3d0629a74ab50cb2fffe04e44
     name: excite
-  - guid: 71f6242975be0694fbe8b6795adb8660
-    name: excitationType
   - guid: b2a50f28695ad4ca9af6ff511720ce38
     name: presetSelect
   - guid: d327f66a506f64ff797ba6c297955808
@@ -60,6 +58,14 @@ AudioMixerController:
     name: smoothness
   - guid: febdb086d1ab647f3b801e9c4cea28cb
     name: trigger
+  - guid: 43fd74551458c3147a57e38fb568c3ae
+    name: mouseX
+  - guid: 1ff7bb756c971444bb637113f7140262
+    name: mouseY
+  - guid: 5db04090d6f7d417d8289ed06900b91e
+    name: smooth
+  - guid: ac0658ad054fe4623b617da2f16c1fa9
+    name: excitationType
   m_AudioMixerGroupViews:
   - guids:
     - a467cd9e32e9f419ba48f107a96416b4
