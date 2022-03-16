@@ -18,7 +18,17 @@ AudioMixerEffectController:
   - m_ParameterName: Excite
     m_GUID: 4f6d42f3d0629a74ab50cb2fffe04e44
   - m_ParameterName: Excitation Type
-    m_GUID: 71f6242975be0694fbe8b6795adb8660
+    m_GUID: ac0658ad054fe4623b617da2f16c1fa9
+  - m_ParameterName: Preset Select
+    m_GUID: b2a50f28695ad4ca9af6ff511720ce38
+  - m_ParameterName: Load preset
+    m_GUID: d327f66a506f64ff797ba6c297955808
+  - m_ParameterName: Smoothness
+    m_GUID: ae238d8d9a5764df78a425f9853c2c0d
+  - m_ParameterName: Trigger
+    m_GUID: febdb086d1ab647f3b801e9c4cea28cb
+  - m_ParameterName: Smooth
+    m_GUID: 5db04090d6f7d417d8289ed06900b91e
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
@@ -42,10 +52,14 @@ AudioMixerController:
     name: excite
   - guid: 71f6242975be0694fbe8b6795adb8660
     name: excitationType
-  - guid: 43fd74551458c3147a57e38fb568c3ae
-    name: mouseX
-  - guid: 1ff7bb756c971444bb637113f7140262
-    name: mouseY
+  - guid: b2a50f28695ad4ca9af6ff511720ce38
+    name: presetSelect
+  - guid: d327f66a506f64ff797ba6c297955808
+    name: loadPreset
+  - guid: ae238d8d9a5764df78a425f9853c2c0d
+    name: smoothness
+  - guid: febdb086d1ab647f3b801e9c4cea28cb
+    name: trigger
   m_AudioMixerGroupViews:
   - guids:
     - a467cd9e32e9f419ba48f107a96416b4
@@ -96,14 +110,13 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: c871f84b9623b4377852cd42e0ed6aa8
   m_FloatValues:
-    4f6d42f3d0629a74ab50cb2fffe04e44: 1
-    43fd74551458c3147a57e38fb568c3ae: 0.36
-    1ff7bb756c971444bb637113f7140262: 0.156
-    b2a50f28695ad4ca9af6ff511720ce38: 1
-    71f6242975be0694fbe8b6795adb8660: 1
+    5db04090d6f7d417d8289ed06900b91e: 1
+    febdb086d1ab647f3b801e9c4cea28cb: 1
+    b2a50f28695ad4ca9af6ff511720ce38: 0
     97eb09b9448af4b4a9ffee2de642f454: 0.51
     d327f66a506f64ff797ba6c297955808: 1
     e29fa3dcf47f944c490d0cde023cc714: 1
-    587d220d56fda4542a333f10dc34f820: 0.31
+    587d220d56fda4542a333f10dc34f820: 0.09
+    ae238d8d9a5764df78a425f9853c2c0d: 0
     ac0658ad054fe4623b617da2f16c1fa9: 0
   m_TransitionOverrides: {}

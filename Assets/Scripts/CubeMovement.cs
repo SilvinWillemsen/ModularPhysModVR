@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CubeMovement : MonoBehaviour
 {   
+    public Camera camera;
     private float curXVal, xValToGoTo, curYVal, yValToGoTo;
-    private bool mouseControl = true;
+    private bool mouseControl = false;
+    private bool rayCastControl = true;
     public GameObject guitar;
     private float guitarColliderMinX, guitarColliderMaxX, guitarColliderRangeX, guitarColliderMinY, guitarColliderMaxY, guitarColliderRangeY;
     void Start()
@@ -43,6 +45,20 @@ public class CubeMovement : MonoBehaviour
                 this.gameObject.transform.position.z);
             // Debug.Log("MouseX: " + Input.mousePosition.x / Screen.width);
             // Debug.Log("MouseY: " + Input.mousePosition.y / Screen.height);
+        } else if (rayCastControl)
+        {
+            RaycastHit hit;
+            Ray ray = camera.ScreenPointToRay (Input.mousePosition);
+        
+            if (Physics.Raycast(ray, out hit)) {
+                Transform objectHit = hit.transform;
+                if (objectHit == guitar.transform)
+                { 
+                    this.gameObject.transform.position = new Vector3 (hit.point.x, hit.point.y, this.gameObject.transform.position.z);
+                                Debug.Log(this.gameObject.transform.position);
+                }
+
+            }
         } else {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -86,9 +102,9 @@ public class CubeMovement : MonoBehaviour
                     yValToGoTo = guitarColliderMaxY;	
                 print("up");
             }
-
-            curXVal = 0.95f * curXVal + 0.05f * xValToGoTo;
-            curYVal = 0.95f * curYVal + 0.05f * yValToGoTo;
+            // Smoothing happens inside the plugin
+            // curXVal = 0.95f * curXVal + 0.05f * xValToGoTo;
+            // curYVal = 0.95f * curYVal + 0.05f * yValToGoTo;
 
             this.gameObject.transform.position = new Vector3 (curXVal, curYVal, this.gameObject.transform.position.z);
         }

@@ -20,6 +20,5 @@ public class MousePosition : MonoBehaviour
             transform.position = raycastHit.point;
             print(transform.position);
         }
-        print(Input.mousePosition);
     }
 }
