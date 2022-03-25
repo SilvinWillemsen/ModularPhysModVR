@@ -55,7 +55,7 @@ public class CubeMovement : MonoBehaviour
                 if (objectHit == guitar.transform)
                 { 
                     this.gameObject.transform.position = new Vector3 (hit.point.x, hit.point.y, this.gameObject.transform.position.z);
-                                Debug.Log(this.gameObject.transform.position);
+                                // Debug.Log(this.gameObject.transform.position);
                 }
 
             }
