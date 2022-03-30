@@ -7,6 +7,7 @@ TagManager:
   - Pick
   - Hammer
   - Bow
+  - Instrument
   layers:
   - Default
   - TransparentFX
