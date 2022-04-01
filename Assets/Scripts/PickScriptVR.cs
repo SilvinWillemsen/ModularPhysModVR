@@ -91,9 +91,9 @@ public class PickScriptVR : MonoBehaviour
 
     void OnTriggerStay (Collider other)
     {
-        Debug.Log (other.tag);
-        if (other.tag != "Pick")
+        if (other.tag != "PlayArea")
             return;
+        Debug.Log(other.tag);
 
         string currentPresetName = "guitar_xml";
 
@@ -109,6 +109,8 @@ public class PickScriptVR : MonoBehaviour
         }
         audioMixer.SetFloat("mouseX", ratioLocX);
         audioMixer.SetFloat("mouseY", ratioLocY);
+        Debug.Log(ratioLocX);
+
     }
 
     [DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
