@@ -89,7 +89,7 @@ public class PickScriptVR : MonoBehaviour
 
 
 
-    void OnCollisionStay (Collider other)
+    void OnTriggerStay (Collider other)
     {
         Debug.Log (other.tag);
         if (other.tag != "Pick")
