@@ -97,8 +97,8 @@ public class PickScriptVR : MonoBehaviour
 
         string currentPresetName = "guitar_xml";
 
-        float ratioLocX = (other.gameObject.transform.position.x - m_Min_x) / x_range;
-        float ratioLocY = (1.0f - (other.gameObject.transform.position.y - m_Min_y) / y_range);
+        float ratioLocX = (other.gameObject.transform.localPosition.x - m_Min_x) / x_range;
+        float ratioLocY = (1.0f - (other.gameObject.transform.localPosition.y - m_Min_y) / y_range);
         if (currentPresetName == "guitar_xml")
         {
             ratioLocY = ratioLocY * 0.75f; // usable ratio for the guitar is 6/8 modules;
