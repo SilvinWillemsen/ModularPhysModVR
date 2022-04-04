@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class InstrumentInteractionOnTrigger : MonoBehaviour
+public class PlayAreaInteraction : MonoBehaviour
 {
     public enum StringOrientation
     {
@@ -13,50 +13,14 @@ public class InstrumentInteractionOnTrigger : MonoBehaviour
 
     [SerializeField] AudioMixer audioMixer;    
 
-    private float excitationType;
     private GameObject excitationLoc;
     [SerializeField] private StringOrientation stringOrientation;
 
-    //public float selectedPreset = 0.0f;
 
 
     // Start is called before the first frame update
     void Start()
     {        
-        int nPresets = System.Enum.GetValues(typeof(InstrumentType)).Length;
-        // changing instrument preset
-        int chosenInstrument = 0;
-        //switch (instrumentType)
-        //{
-        //    case InstrumentType.Guitar:
-        //        chosenInstrument = (int)InstrumentType.Guitar;
-        //        break;
-
-        //    case InstrumentType.Harp:
-        //        chosenInstrument = (int)InstrumentType.Harp;
-        //        break;
-
-        //    case InstrumentType.TwoStrings:
-        //        chosenInstrument = (int)InstrumentType.TwoStrings;
-        //        break;
-
-        //    case InstrumentType.banjoline:
-        //        chosenInstrument = (int)InstrumentType.banjoline;
-        //        break;
-        //    default:
-        //        Debug.Log("Please specify instrument type from inspector");
-        //        break;
-        //}
-
-        /*[DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
-        static extern IntPtr getPresetAt(int i);
-
-        [DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
-        static extern int getNumPresets();*/
-
-        //selectedPreset = (float)chosenInstrument / nPresets;
-        //Debug.Log(chosenInstrument);
-        //StartCoroutine(ChangePreset());
         // create an object indicating where it is excited 
         excitationLoc = Instantiate(new GameObject(), transform);
         excitationLoc.name = "excitationLoc";
@@ -101,20 +65,6 @@ public class InstrumentInteractionOnTrigger : MonoBehaviour
 
         }
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-    }
-
-    IEnumerator ChangePreset()
-    {
-        //audioMixer.SetFloat("presetSelect", selectedPreset);
-        yield return new WaitForSeconds(0.1f);
-        audioMixer.SetFloat("loadPreset", 1.0f);
-        yield return new WaitForSeconds(0.1f);
-        audioMixer.SetFloat("loadPreset", 0.0f);
-    }
-
 
 
 }

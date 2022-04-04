@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
-public class ExciterInteractionOnTrigger : MonoBehaviour
+public class SelectExciter : MonoBehaviour
 {
     [SerializeField] AudioMixer audioMixer;
     private float excitationTypeValue;
     // Start is called before the first frame update
 
+    // Three excitation types
     public enum ExcitationType
     {
         Pick,
@@ -33,9 +34,13 @@ public class ExciterInteractionOnTrigger : MonoBehaviour
     public void ExciterGrabbed()
     {
         Debug.Log("ExciterGrabbed");
+
+        // Turn on excite in the plugin once exciter is grabbed
         audioMixer.SetFloat("excite", 1.0f);
 
         Debug.Log (excitationType);
+
+        // Choose what excitation type to set the plugin to based on the dropdown menu in the inspector
         switch (excitationType)
         {
             case ExcitationType.Pick:
@@ -54,8 +59,8 @@ public class ExciterInteractionOnTrigger : MonoBehaviour
 
     public void ExciterReleased()
     {
+        // Turn off excite in the plugin once exciter is released
         audioMixer.SetFloat("excite", 0.0f);
-
     }
 
 }
