@@ -17,17 +17,17 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
     IEnumerator Startup()
     {
         // disable all instruments, prevent Unity crashing
-        GetComponent<DespawnInstruments>().Despawn(instruments);
+        Global.DespawnInstruments(instruments);
 
         // Space all instruments around the origin 
-        GetComponent<SpaceInstruments>().SpaceEqually(instruments, radiusToOrigin);
+        Global.SpaceEqually(instruments, radiusToOrigin);
 
         // Make all instruments face origin
-        GetComponent<FaceInstruments>().FaceInstrumentsToOrigin(instruments);
+        Global.FaceInstrumentsToOrigin(instruments);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
 
         // Respawn instruments;
-        GetComponent<SpawnInstruments>().Spawn(instruments);
+        Global.SpawnInstruments(instruments);
     }
 }
