@@ -119,5 +119,18 @@ public class Global : MonoBehaviour
         }
     }
 
+    public static float Map(float value, float from1, float to1, float from2, float to2)
+    {
+        return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+    }
+
+    public static float Limit(float val, float min, float max)
+    {
+        if (val < min) return min;
+        else if (val > max) return max;
+        else return val;
+    }
+
+
 
 }

@@ -5,23 +5,61 @@ using UnityEngine.Audio;
 
 public class InstrumentInteractionOnTrigger : MonoBehaviour
 {
+    public enum StringOrientation
+    {
+        Horizontal,
+        Vertical,
+    };
 
-    [SerializeField] AudioMixer audioMixer;
-    [SerializeField] GameObject instrumentGameObject; 
-    [SerializeField] GameObject pickGameObject;
-    [SerializeField] GameObject bowGameObject;
-    [SerializeField] bool isVertical;               // strings are vertical
+    [SerializeField] AudioMixer audioMixer;    
 
     private float excitationType;
+    private GameObject excitationLoc;
+    [SerializeField] private StringOrientation stringOrientation;
 
-    Collider instrumentCollider;
+    //public float selectedPreset = 0.0f;
+
 
     // Start is called before the first frame update
     void Start()
-    {
-        pickGameObject.name = "Pick";
-        bowGameObject.name = "Bow";
-        instrumentCollider = instrumentGameObject.GetComponent<Collider>();
+    {        
+        int nPresets = System.Enum.GetValues(typeof(InstrumentType)).Length;
+        // changing instrument preset
+        int chosenInstrument = 0;
+        //switch (instrumentType)
+        //{
+        //    case InstrumentType.Guitar:
+        //        chosenInstrument = (int)InstrumentType.Guitar;
+        //        break;
+
+        //    case InstrumentType.Harp:
+        //        chosenInstrument = (int)InstrumentType.Harp;
+        //        break;
+
+        //    case InstrumentType.TwoStrings:
+        //        chosenInstrument = (int)InstrumentType.TwoStrings;
+        //        break;
+
+        //    case InstrumentType.banjoline:
+        //        chosenInstrument = (int)InstrumentType.banjoline;
+        //        break;
+        //    default:
+        //        Debug.Log("Please specify instrument type from inspector");
+        //        break;
+        //}
+
+        /*[DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
+        static extern IntPtr getPresetAt(int i);
+
+        [DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
+        static extern int getNumPresets();*/
+
+        //selectedPreset = (float)chosenInstrument / nPresets;
+        //Debug.Log(chosenInstrument);
+        //StartCoroutine(ChangePreset());
+        // create an object indicating where it is excited 
+        excitationLoc = Instantiate(new GameObject(), transform);
+        excitationLoc.name = "excitationLoc";
     }
 
     // Update is called once per frame
@@ -30,56 +68,53 @@ public class InstrumentInteractionOnTrigger : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        audioMixer.SetFloat("excite", 1.0f);
-
-        Debug.Log(other.gameObject.name);
-        Debug.Log(pickGameObject.name);
-        if (other.gameObject.name == pickGameObject.name)
-        {
-            
-            excitationType = 0.1f;
-        }
-
-        if (other.gameObject.name == bowGameObject.name)
-        {
-            excitationType = 0.76f;
-        }
-
-        audioMixer.SetFloat("excitationType", excitationType);
-    }
     private void OnTriggerStay(Collider other)
     {
-        
-        
-        if (other.gameObject.name == pickGameObject.name || other.gameObject.name == bowGameObject.name)
+        if (other.gameObject.tag == "ExciterArea")
         {
-            Debug.Log("Excited");
-            // map x and y
-            Vector3 collisionLoc = other.transform.position;
-            Vector3 relLoc = collisionLoc - instrumentGameObject.transform.position;
+            //Debug.Log("Excited");
 
-            // calculate where on the collider it is hit:
-            float xPos = relLoc.x + instrumentCollider.bounds.size.x / 2;
-            float yPos = relLoc.y + instrumentCollider.bounds.size.y / 2;
+            // calculate where on the instrument it's exciting:
+            excitationLoc.transform.position = other.transform.position;
 
-            if (!isVertical) // strings are horizontal, normal mapping
-            {
-                audioMixer.SetFloat("mouseX", xPos);
-                audioMixer.SetFloat("mouseY", yPos);
-            }
+            Vector3 localPos = new Vector3(excitationLoc.transform.localPosition.x, excitationLoc.transform.localPosition.y, excitationLoc.transform.localPosition.z);
 
-            if (isVertical) // strings are vertical, swap x and y
-            {
-                audioMixer.SetFloat("mouseX", yPos);
-                audioMixer.SetFloat("mouseY", xPos);
-            }
+            float xBounds = transform.localScale.x;
+            float yBounds = transform.localScale.y;
+
+            //Debug.Log("x pos = " + localPos.x + "y pos = " + localPos.y);
+            //Debug.Log("xBbounds = " + xBounds + ", yBounds = " + yBounds);
+
+            // map & limit values, swap value for juce
+            float xPos = 1.0f - Global.Limit(Global.Map(localPos.x, -xBounds / 2, xBounds / 2, 0, 1), 0, 1);
+            float yPos = 1.0f - Global.Limit(Global.Map(localPos.y, -yBounds / 2, yBounds / 2, 0, 1), 0, 1);
+
+
+            // map according to the string orientation
+            
+            // Flip x and y positions if vertical
+            audioMixer.SetFloat("mouseX", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
+            audioMixer.SetFloat("mouseY", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
+
+            // visual representation
+            //excitelocIcon.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos * 10, yPos * 10);
+
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        audioMixer.SetFloat("excite", 0.0f);
     }
+
+    IEnumerator ChangePreset()
+    {
+        //audioMixer.SetFloat("presetSelect", selectedPreset);
+        yield return new WaitForSeconds(0.1f);
+        audioMixer.SetFloat("loadPreset", 1.0f);
+        yield return new WaitForSeconds(0.1f);
+        audioMixer.SetFloat("loadPreset", 0.0f);
+    }
+
+
+
 }

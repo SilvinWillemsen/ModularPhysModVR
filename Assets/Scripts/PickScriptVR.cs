@@ -91,8 +91,10 @@ public class PickScriptVR : MonoBehaviour
 
     void OnTriggerStay (Collider other)
     {
+
         if (other.tag != "PlayArea")
             return;
+
         Debug.Log(other.tag);
 
         string currentPresetName = "guitar_xml";
