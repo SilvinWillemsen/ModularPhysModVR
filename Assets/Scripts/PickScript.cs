@@ -172,13 +172,6 @@ public class PickScript : MonoBehaviour
 
     }
 
-    void OnCollisionStay (Collision collision)
-    {
-        ContactPoint contact = collision.contacts[0];
-        Vector3 pos = contact.point;
-        Debug.Log(pos);
-    }
-
     [DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
     static extern IntPtr getPresetAt (int i);
 
