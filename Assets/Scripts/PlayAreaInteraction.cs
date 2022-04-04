@@ -11,7 +11,8 @@ public class PlayAreaInteraction : MonoBehaviour
         Vertical,
     };
 
-    [SerializeField] AudioMixer audioMixer;    
+    [SerializeField] AudioMixer audioMixer;
+    [HideInInspector] public string instrumentType;
 
     private GameObject excitationLoc;
     [SerializeField] private StringOrientation stringOrientation;
@@ -55,10 +56,15 @@ public class PlayAreaInteraction : MonoBehaviour
 
 
             // map according to the string orientation
-            
-            // Flip x and y positions if vertical
-            audioMixer.SetFloat("mouseX", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
-            audioMixer.SetFloat("mouseY", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
+
+            if (instrumentType == "Harp")
+            {
+                Debug.Log("Harp is reached");
+            } else {
+                // Flip x and y positions if vertical
+                audioMixer.SetFloat("mouseX", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
+                audioMixer.SetFloat("mouseY", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
+            }
 
             // visual representation
             //excitelocIcon.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos * 10, yPos * 10);

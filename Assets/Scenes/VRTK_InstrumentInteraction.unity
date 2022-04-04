@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 5842b2091ae0944dc8afb6ac60083661, type: 2}
+  instrumentType: 
   stringOrientation: 0
 --- !u!1 &42725331
 GameObject:
@@ -2346,6 +2347,10 @@ PrefabInstance:
       value: ElectricGuitar_st
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a8d53702db3c4f24db9805f2662d6c37, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a8d53702db3c4f24db9805f2662d6c37, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -4093,6 +4098,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 072f3fff3761a47489567a6ae6de3627, type: 3}
   m_PrefabInstance: {fileID: 941744648}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1232331219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232331218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7da4aadb75628948821e2361cb121b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 5842b2091ae0944dc8afb6ac60083661, type: 2}
+  instrumentType: 1
 --- !u!65 &1232331222
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4343,6 +4362,14 @@ PrefabInstance:
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: FirstGrabbed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417232386877869616, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630000796974167091, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1630000796974167091, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: m_IsActive
@@ -6294,6 +6321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 5842b2091ae0944dc8afb6ac60083661, type: 2}
+  instrumentType: 
   stringOrientation: 0
 --- !u!4 &1809564805 stripped
 Transform:

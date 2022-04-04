@@ -36,6 +36,7 @@ public class SelectPreset : MonoBehaviour
                 break;
 
             case InstrumentType.Harp:
+                //transform.GetChild(0).GetComponent<PlayAreaInteraction>().instrumentType = "Harp";
                 chosenInstrument = (int)InstrumentType.Harp;
                 break;
 
