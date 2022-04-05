@@ -29,15 +29,16 @@ public class Global : MonoBehaviour
             {
                 if (child.tag == "Instrument")
                 {
-                    child.gameObject.SetActive(false);
-
-                    //instance.StartCoroutine(Fade(child.gameObject, 0.0f, 1.0f));
+                    child.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                    GameObject target = child.GetChild(0).gameObject;
+                    iTween.ScaleTo(target, Vector3.zero, 0.5f);
+                    ;
                 }
             }
         }
     }
 
-    public static void SpawnInstruments(GameObject[] instruments)
+    public static void SpawnInstruments(GameObject[] instruments, List<Vector3> instrumentScales)
     {
         //Init();
         foreach (GameObject instrument in instruments)
@@ -46,60 +47,12 @@ public class Global : MonoBehaviour
             {
                 if (child.tag == "Instrument")
                 {
-                    child.gameObject.SetActive(true);
-                    
-                    //instance.StartCoroutine(Fade(child.gameObject, 1.0f, 1.0f));
-
-                    
+                    GameObject target = child.GetChild(0).gameObject;
+                    iTween.ScaleTo(target, iTween.Hash("x", 1.0f, "y", 1.0f, "z", 1.0f, "time", 0.5f, "onComplete", "TurnGravityOn"));
                 }
             }
         }
     }
-
-    public static IEnumerator Fade(GameObject gameObject, float targetVal, float fadeTime)
-    {
-        float currentTime = 0.0f;
-        Material mat = gameObject.transform.GetChild(0).transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().material;
-        float startVal = mat.color.a; 
-        Color color = mat.color; 
-
-        if(currentTime < fadeTime)
-        {
-            color.a = Mathf.Lerp(startVal, targetVal, currentTime / fadeTime);
-            mat.color = color; 
-            currentTime += Time.deltaTime;
-            yield return null;
-        }
-    }
-
-    /*public static void SetMaterialsTransparent(GameObject gameObject)
-    {
-        foreach(Material mat in gameObject.GetComponent<Renderer>().materials)
-        {
-            mat.SetFloat("_Mode", 2);
-            mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-            mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-            mat.SetInt("_ZWrite", 0);
-            mat.DisableKeyword("_ALPHATEST_ON");
-            mat.EnableKeyword("_ALPHABLEND_ON");
-            mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-            mat.renderQueue = 3000; 
-        }
-    }*/
-
-  /*  public static void SetMaterialsOpaque(GameObject gameObject)
-    {
-        foreach (Material mat in gameObject.GetComponent<Renderer>().materials)
-        {
-            mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-            mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-            mat.SetInt("_ZWrite", 1);
-            mat.DisableKeyword("_ALPHATEST_ON");
-            mat.DisableKeyword("_ALPHABLEND_ON");
-            mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-            mat.renderQueue = -1;
-        }
-    }*/
 
     public static void SpaceEqually(GameObject[] instruments, float radius)
     {
