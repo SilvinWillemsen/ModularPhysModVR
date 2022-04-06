@@ -16,10 +16,13 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
 
         foreach (GameObject instrument in instruments)
         {
+            Debug.Log("Looking at " + instrument.name);
             foreach (Transform child in instrument.transform)
             {
                 if (child.tag == "Instrument")
                 {
+                    // Debug.Log("Looking at " + child.GetChild(0).name);
+                    // child.gameObject.GetComponent<Rigidbody>().useGravity = true;
                     child.GetChild(0).gameObject.AddComponent<ResetGravity>();
                     instrumentStartScales.Add(child.transform.localScale);
                 }

@@ -57,6 +57,7 @@ public class Global : MonoBehaviour
                 {
                     GameObject target = child.GetChild(0).gameObject;
                     iTween.ScaleTo(target, iTween.Hash("x", 1.0f, "y", 1.0f, "z", 1.0f, "time", 0.5f, "onComplete", "TurnGravityOn"));
+                    // child.gameObject.GetComponent<Rigidbody>().useGravity = true;
                 }
             }
         }

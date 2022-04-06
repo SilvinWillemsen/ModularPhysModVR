@@ -15,19 +15,11 @@ public class SelectPreset : MonoBehaviour
 
     public AudioMixer audioMixer;
 
-    public enum InstrumentType
-    {
-        Guitar,
-        Harp,
-        TwoStrings,
-        BanjoLele
-    }
-
-    public List<string> NameList; 
+    // public List<string> NameList; 
      
-    [Dropdown("NameList")]//input the path of the list
-     public string MyName;
-    [SerializeField] InstrumentType instrumentType;
+    // [Dropdown("NameList")]//input the path of the list
+    //  public string MyName;
+    [SerializeField] Global.InstrumentType instrumentType;
 
         // Start is called before the first frame update
     void Start()
@@ -35,7 +27,10 @@ public class SelectPreset : MonoBehaviour
         int nPresets = getNumPresets();
 
         // changing instrument preset
-        int chosenInstrument = (int)instrumentType;
+        if (gameObject.GetComponentInChildren<PlayAreaInteraction>() == null)
+            Debug.LogWarning("There is no playarea in this instrument!");
+        else
+            gameObject.GetComponentInChildren<PlayAreaInteraction>().instrumentType = instrumentType;
         // switch (instrumentType)
         // {
         //     case InstrumentType.Guitar:
@@ -60,8 +55,8 @@ public class SelectPreset : MonoBehaviour
         // }
 
 
-        selectedPreset = (float)chosenInstrument / nPresets;
-        Debug.Log (chosenInstrument);
+        selectedPreset = (float)instrumentType / nPresets;
+        Debug.Log ((int)instrumentType);
     }
 
     // Update is called once per frame
