@@ -1,5 +1,9 @@
+using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -19,38 +23,41 @@ public class SelectPreset : MonoBehaviour
         BanjoLele
     }
 
+    public List<string> NameList; 
+     
+    [Dropdown("NameList")]//input the path of the list
+     public string MyName;
     [SerializeField] InstrumentType instrumentType;
 
-    // Start is called before the first frame update
+        // Start is called before the first frame update
     void Start()
     {
-        int nPresets = 4;
-
+        int nPresets = getNumPresets();
 
         // changing instrument preset
-        int chosenInstrument = 0;
-        switch (instrumentType)
-        {
-            case InstrumentType.Guitar:
-                chosenInstrument = (int)InstrumentType.Guitar;
-                break;
+        int chosenInstrument = (int)instrumentType;
+        // switch (instrumentType)
+        // {
+        //     case InstrumentType.Guitar:
+        //         chosenInstrument = (int)InstrumentType.Guitar;
+        //         break;
 
-            case InstrumentType.Harp:
-                //transform.GetChild(0).GetComponent<PlayAreaInteraction>().instrumentType = "Harp";
-                chosenInstrument = (int)InstrumentType.Harp;
-                break;
+        //     case InstrumentType.Harp:
+        //         //transform.GetChild(0).GetComponent<PlayAreaInteraction>().instrumentType = "Harp";
+        //         chosenInstrument = (int)InstrumentType.Harp;
+        //         break;
 
-            case InstrumentType.TwoStrings:
-                chosenInstrument = (int)InstrumentType.TwoStrings;
-                break;
+        //     case InstrumentType.TwoStrings:
+        //         chosenInstrument = (int)InstrumentType.TwoStrings;
+        //         break;
 
-            case InstrumentType.BanjoLele:
-                chosenInstrument = (int)InstrumentType.BanjoLele;
-                break;
-            default:
-                Debug.Log("Please specify instrument type from inspector");
-                break;
-        }
+        //     case InstrumentType.BanjoLele:
+        //         chosenInstrument = (int)InstrumentType.BanjoLele;
+        //         break;
+        //     default:
+        //         Debug.Log("Please specify instrument type from inspector");
+        //         break;
+        // }
 
 
         selectedPreset = (float)chosenInstrument / nPresets;
@@ -78,10 +85,8 @@ public class SelectPreset : MonoBehaviour
         audioMixer.SetFloat("loadPreset", 0.0f);
     }
 
+    [DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
+    static extern int getNumPresets();
 
-    //[DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
-    //static extern IntPtr getPresetAt(int i);
 
-    //[DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
-    //static extern int getNumPresets();
 }

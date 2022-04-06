@@ -20,6 +20,14 @@ public class Global : MonoBehaviour
         }
     }*/
 
+    public enum InstrumentType
+    {
+        Guitar,
+        Harp,
+        TwoStrings,
+        BanjoLele
+    }
+
     public static void DespawnInstruments(GameObject[] instruments)
     {
         //Init();
