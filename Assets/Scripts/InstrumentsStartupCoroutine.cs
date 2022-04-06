@@ -6,12 +6,25 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
 {
 
     private GameObject[] instruments;
+    private List<Vector3> instrumentStartScales = new List<Vector3>(); 
     [SerializeField] private float radiusToOrigin = 5.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         instruments = GetComponent<InstrumentReferenceList>().instruments;
+
+        foreach (GameObject instrument in instruments)
+        {
+            foreach (Transform child in instrument.transform)
+            {
+                if (child.tag == "Instrument")
+                {
+                    child.GetChild(0).gameObject.AddComponent<ResetGravity>();
+                    instrumentStartScales.Add(child.transform.localScale);
+                }
+            }
+        }
         StartCoroutine(Startup());
     }
     IEnumerator Startup()
@@ -28,6 +41,6 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         // Respawn instruments;
-        Global.SpawnInstruments(instruments);
+        Global.SpawnInstruments(instruments, instrumentStartScales);
     }
 }
