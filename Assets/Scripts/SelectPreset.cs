@@ -19,7 +19,7 @@ public class SelectPreset : MonoBehaviour
     [HideInInspector] public List<String> pluginList; 
      
     [Dropdown("pluginList")]//input the path of the list
-    public String instrumentType;
+    public String InstrumentType;
     // [SerializeField] Global.InstrumentType instrumentType;
 
     // Start is called before the first frame update
@@ -34,8 +34,12 @@ public class SelectPreset : MonoBehaviour
         }
         else
         {
-            Debug.Log("The instrumentType is " + instrumentType);
-            transform.GetChild(0).GetComponent<PlayAreaInteraction>().SetInstrumentType (instrumentType);
+            Debug.Log("The instrumentType is " + InstrumentType);
+            transform.GetChild(0).GetComponent<PlayAreaInteraction>().SetInstrumentType (InstrumentType);
+
+            selectedPreset = (pluginList.IndexOf(InstrumentType) + 0.5f) / getNumPresets();
+            Debug.Log("The selected preset f-value of " + InstrumentType + " is " + selectedPreset);
+
         }
     }
 
@@ -53,6 +57,7 @@ public class SelectPreset : MonoBehaviour
 
     IEnumerator ChangePreset()
     {
+        Debug.Log(InstrumentType + " grabbed!"); 
         audioMixer.SetFloat("presetSelect", selectedPreset);
         yield return new WaitForSeconds(0.1f);
         audioMixer.SetFloat("loadPreset", 1.0f);

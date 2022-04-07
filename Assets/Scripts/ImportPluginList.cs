@@ -14,7 +14,7 @@ public class ImportPluginList : MonoBehaviour
     public List<String> pluginNames;
     void Start()
     {
-        PrintPluginNamesFromPlugin();
+        // PrintPluginNamesFromPlugin();
 
         // check if presetlist from the plugin has changed
         if (pluginNames.Count != getNumPresets())
@@ -38,12 +38,23 @@ public class ImportPluginList : MonoBehaviour
             }
         }
 
+        // Added this here in Start() such that new instruments also get the correct list
+        foreach (Transform child in instrumentDisplays.transform)
+        {
+            if (child.GetChild(0).tag == "Instrument")
+            {
+                Debug.Log("TEST");
+                GameObject model = child.GetChild(0).GetChild(0).GetChild(1).gameObject;
+                AddPluginsToModelList(model); 
+            }
+        }
+
     }
 
     void refreshPluginList()
     {
         Debug.Log("Refreshing plugin list!!");
-        Debug.LogError ("MAKE SURE YOU RESELECT THE RIGHT IN THE SELECTPLUGIN COMPONENT OF EACH MODEL!");
+        Debug.LogError ("MAKE SURE YOU RESELECT THE RIGHT IN THE SELECTPRESET COMPONENT OF EACH MODEL!");
 
         pluginNames.Clear();
         for (int i = 0; i < getNumPresets(); ++i)
@@ -69,14 +80,22 @@ public class ImportPluginList : MonoBehaviour
                 Debug.Log("Clearing " + model.name + "'s list");
                 model.GetComponent<SelectPreset>().pluginList.Clear();
 
-                Debug.Log("Adding to " + model.name + "'s list");
-                for (int i = 0; i < getNumPresets(); ++i)
-                    model.GetComponent<SelectPreset>().pluginList.Add(pluginNames[i]);
-                Debug.Log("Adding to NameList");
+                AddPluginsToModelList (model);
             }
         }
 
     }
+
+    void AddPluginsToModelList(GameObject model)
+    {
+        Debug.Log("Adding to " + model.name + "'s list");
+        for (int i = 0; i < getNumPresets(); ++i)
+            if (!model.GetComponent<SelectPreset>().pluginList.Contains(pluginNames[i]))
+                model.GetComponent<SelectPreset>().pluginList.Add(pluginNames[i]);
+        Debug.Log("Adding to NameList");
+
+    }
+
 
     void PrintPluginNamesFromPlugin()
     {
