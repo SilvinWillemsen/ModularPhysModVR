@@ -8,7 +8,8 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
     [SerializeField] private int maxNInstruments = 10;
 
     private List<GameObject> instruments;
-    private List<Vector3> instrumentsStartPos = new List<Vector3>();
+    private List<Vector3> instrumentStartPos = new List<Vector3>();
+    private List<Quaternion> instrumentStartOrientation = new List<Quaternion>();
 
     private InstrumentReferenceList instrumentReferenceList; 
 
@@ -27,15 +28,16 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
                 {
                     // Debug.Log("Looking at " + child.GetChild(0).name);
                     // child.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                    child.GetChild(0).gameObject.AddComponent<ResetGravity>();
+                    child.GetChild(0).gameObject.AddComponent<AnimationCallBack>();
 
-                    instrumentsStartPos.Add(child.GetChild(0).gameObject.transform.localPosition); 
+                    instrumentStartPos.Add(child.gameObject.transform.localPosition);
+                    instrumentStartOrientation.Add(child.gameObject.transform.localRotation);
                 }
             }
         }
 
-        instrumentReferenceList.instrumentStartPos = instrumentsStartPos; 
-        
+        instrumentReferenceList.instrumentStartPos = instrumentStartPos;
+        instrumentReferenceList.instrumentStartOrientation = instrumentStartOrientation;
         StartCoroutine(Startup());
     }
     IEnumerator Startup()
@@ -52,6 +54,6 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         // Respawn instruments;
-        Global.SpawnInstruments(instruments, 1.0f , instrumentsStartPos);
+        Global.SpawnInstruments(instruments, 1.0f , instrumentStartPos, instrumentStartOrientation);
     }
 }

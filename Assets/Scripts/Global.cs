@@ -33,13 +33,13 @@ public class Global : MonoBehaviour
                     if (disableGravity) child.gameObject.GetComponent<Rigidbody>().useGravity = false;
                     GameObject target = child.GetChild(0).gameObject;
                     // iTween.ScaleTo(target, Vector3.zero, 0.5f);
-                    iTween.ScaleTo(target, new Vector3(1e-5f, 1e-5f, 1e-5f), despawnTime);
+                    iTween.ScaleTo(target, iTween.Hash("x", 1e-5f, "y", 1e-5f, "z", 1e-5f, "time", despawnTime, "onComplete", "OnDespawn"));
                 }
             }
         }
     }
 
-    public static void SpawnInstruments(List<GameObject> instruments, float spawnTime , List<Vector3> instrumentStartPos)
+    public static void SpawnInstruments(List<GameObject> instruments, float spawnTime , List<Vector3> instrumentStartPos, List<Quaternion> instrumentStartOrientation)
     {
         //Init();
         int i = 0; 
@@ -50,9 +50,12 @@ public class Global : MonoBehaviour
                 if (child.tag == "Instrument")
                 {
                     child.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                    child.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
+                    child.gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0f, 0f, 0f);
+                    child.gameObject.transform.localPosition = instrumentStartPos[i];
+                    child.gameObject.transform.localRotation = instrumentStartOrientation[i];
                     GameObject target = child.GetChild(0).gameObject;
-                    target.transform.localPosition = instrumentStartPos[i];
-                    iTween.ScaleTo(target, iTween.Hash("x", 1.0f, "y", 1.0f, "z", 1.0f, "time", spawnTime, "onComplete", "TurnGravityOn"));
+                    iTween.ScaleTo(target, iTween.Hash("x", 1.0f, "y", 1.0f, "z", 1.0f, "time", spawnTime, "onComplete", "OnSpawn"));
                     child.gameObject.GetComponent<Rigidbody>().useGravity = true;
                     i++;
                 }

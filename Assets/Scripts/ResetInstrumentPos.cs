@@ -24,9 +24,8 @@ public class ResetInstrumentPos : MonoBehaviour
     IEnumerator StartResetCoroutine(List<GameObject> thisInstrument, float despawnTime, float spawnTime, float transitionTime)
     {
         Global.DespawnInstruments(thisInstrument, despawnTime, false);
-        thisInstrument[0].transform.GetChild(0).gameObject.SetActive(false); 
-        yield return new WaitForSeconds(transitionTime);
-        thisInstrument[0].transform.GetChild(0).gameObject.SetActive(true);
-        Global.SpawnInstruments(thisInstrument, spawnTime, instrumentReferenceList.instrumentStartPos);
+        yield return new WaitForSeconds(transitionTime + despawnTime); // wait for despawnTime + transition time before spawning agia
+        thisInstrument[0].transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.transform.localScale = Vector3.zero;
+        Global.SpawnInstruments(thisInstrument, spawnTime, instrumentReferenceList.instrumentStartPos, instrumentReferenceList.instrumentStartOrientation);
     }
 }
