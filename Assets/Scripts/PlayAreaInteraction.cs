@@ -56,7 +56,7 @@ public class PlayAreaInteraction : MonoBehaviour
 
 
             // map & limit values, swap value for juce (Silvin: turns out it's always from -0.5 to 0.5)
-            float xPos = 1.0f - Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
+            float xPos = Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
             float yPos = 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1);
 
             // Debug.Log(Global.Map(localPos.x, -xBounds / 2, xBounds / 2, 0, 1) + " " + Global.Map(localPos.y, -yBounds / 2, yBounds / 2, 0, 1));
@@ -68,6 +68,9 @@ public class PlayAreaInteraction : MonoBehaviour
             {
                 case "Guitar":
                     yPos = 0.75f * yPos;
+                    float range = 0.1f;
+                    float yPosPre = yPos;
+                    yPos = Global.Limit(Global.Map(yPos, 0, 0.75f, -(1.0f - xPos) * range, 0.75f + (1.0f - xPos) * range), 0, 1);
                     break;
                 case "Harp":
                     xPos = 1.0f - xPos;
