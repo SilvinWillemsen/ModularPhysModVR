@@ -5,9 +5,7 @@ using System;
 using UnityEngine;
 using System.Runtime.InteropServices;
 
-
-
-[ExecuteInEditMode]
+[ExecuteInEditMode] // IMPORTANT! Also runs in edit mode now
 public class ImportPluginList : MonoBehaviour
 {
     public GameObject instrumentDisplays;
@@ -16,17 +14,48 @@ public class ImportPluginList : MonoBehaviour
     public List<String> pluginNames;
     void Start()
     {
+        PrintPluginNamesFromPlugin();
+
+        // check if presetlist from the plugin has changed
+        if (pluginNames.Count != getNumPresets())
+        {
+            // length of the plugin list has changed, so refresh
+            refreshPluginList();
+        }
+        else
+        {
+            for (int i = 0; i < pluginNames.Count; ++i) // could also use < getNumPresets() but should be the same
+            {
+                string pluginNamePre = Marshal.PtrToStringAnsi(getPresetAt(i));
+                String pluginName = pluginNamePre;
+                pluginName = pluginName.Split('_')[0];
+
+                if (pluginNames[i] != pluginName) // a plugin has changed, so refresh the plugin list! 
+                {
+                    refreshPluginList();
+                    break;
+                }
+            }
+        }
+
+    }
+
+    void refreshPluginList()
+    {
+        Debug.Log("Refreshing plugin list!!");
+        Debug.LogError ("MAKE SURE YOU RESELECT THE RIGHT IN THE SELECTPLUGIN COMPONENT OF EACH MODEL!");
+
+        pluginNames.Clear();
         for (int i = 0; i < getNumPresets(); ++i)
         {
-            String pluginName = Marshal.PtrToStringAuto (getPresetAt(i));
+            string pluginNamePre = Marshal.PtrToStringAnsi(getPresetAt(i));
+            String pluginName = pluginNamePre;
             pluginName = pluginName.Split('_')[0];
-            if (!pluginNames.Contains (pluginName))
-            {
-                Debug.Log (pluginName);
-                pluginNames.Add (pluginName);
-            }
-
+ 
+            Debug.Log(pluginName + "Added to list!");
+            pluginNames.Add(pluginName);
         }
+
         foreach (Transform child in instrumentDisplays.transform)
         {
             if (child.GetChild(0).tag == "Instrument")
@@ -37,19 +66,25 @@ public class ImportPluginList : MonoBehaviour
                     Debug.LogWarning("Should be looking at model here!");
                     continue;
                 }
+                Debug.Log("Clearing " + model.name + "'s list");
+                model.GetComponent<SelectPreset>().pluginList.Clear();
+
                 Debug.Log("Adding to " + model.name + "'s list");
                 for (int i = 0; i < getNumPresets(); ++i)
-                    if (!model.GetComponent<SelectPreset>().pluginList.Contains(pluginNames[i]))
-                        model.GetComponent<SelectPreset>().pluginList.Add(pluginNames[i]);
+                    model.GetComponent<SelectPreset>().pluginList.Add(pluginNames[i]);
                 Debug.Log("Adding to NameList");
             }
         }
+
     }
 
-    // Update is called once per frame
-    void Update()
+    void PrintPluginNamesFromPlugin()
     {
-   
+        for (int i = 0; i < getNumPresets(); ++i)
+        {
+            string pluginNamePre = Marshal.PtrToStringAnsi(getPresetAt(i));
+            Debug.Log (pluginNamePre);
+        }
     }
 
     [DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
