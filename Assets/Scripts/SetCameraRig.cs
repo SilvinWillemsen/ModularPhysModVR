@@ -19,7 +19,8 @@ public class SetCameraRig : MonoBehaviour
     public GameObject TrackedAlias;
     public LinkedAliasAssociationCollection OculusCameraRig;
     public LinkedAliasAssociationCollection SimulatorCameraRig;
-
+    public GameObject LeftInteractor;
+    public GameObject RightInteractor;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,11 +41,15 @@ public class SetCameraRig : MonoBehaviour
     {
         bool switchToOculus = xrSetup == XRsetup.UseOculus;
         Debug.Log(xrSetup == XRsetup.UseOculus ? "Changing to Oculus" : "Changing to Simulator");
+
+        // Activate the correct GameObject
         OculusCameraRig.gameObject.SetActive (switchToOculus);
         SimulatorCameraRig.gameObject.SetActive (!switchToOculus);
 
+        // Change the Tracked alias list
         TrackedAlias.GetComponent<TrackedAliasFacade>().CameraRigs.Clear();
-
         TrackedAlias.GetComponent<TrackedAliasFacade>().CameraRigs.Add(switchToOculus ? OculusCameraRig : SimulatorCameraRig);
+
+        // 
     }
 }
