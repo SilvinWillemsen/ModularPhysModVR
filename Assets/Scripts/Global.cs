@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,14 +20,6 @@ public class Global : MonoBehaviour
             instance = gameObject.AddComponent<Global>();
         }
     }*/
-
-    public enum InstrumentType
-    {
-        Guitar,
-        Harp,
-        TwoStrings,
-        BanjoLele
-    }
 
     public static void DespawnInstruments(GameObject[] instruments)
     {

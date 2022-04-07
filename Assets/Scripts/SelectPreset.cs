@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 using UnityEngine;
+using System;
 using UnityEngine.Audio;
 
 
@@ -15,48 +16,27 @@ public class SelectPreset : MonoBehaviour
 
     public AudioMixer audioMixer;
 
-    [HideInInspector] public List<string> pluginList; 
+    [HideInInspector] public List<String> pluginList; 
      
-    [Dropdown("NameList")]//input the path of the list
-    public string instrumentType;
+    [Dropdown("pluginList")]//input the path of the list
+    public String instrumentType;
     // [SerializeField] Global.InstrumentType instrumentType;
 
-        // Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         int nPresets = getNumPresets();
 
         // changing instrument preset
         if (gameObject.GetComponentInChildren<PlayAreaInteraction>() == null)
+        {
             Debug.LogWarning("There is no playarea in this instrument!");
+        }
         else
-            gameObject.GetComponentInChildren<PlayAreaInteraction>().instrumentType = instrumentType;
-        // switch (instrumentType)
-        // {
-        //     case InstrumentType.Guitar:
-        //         chosenInstrument = (int)InstrumentType.Guitar;
-        //         break;
-
-        //     case InstrumentType.Harp:
-        //         //transform.GetChild(0).GetComponent<PlayAreaInteraction>().instrumentType = "Harp";
-        //         chosenInstrument = (int)InstrumentType.Harp;
-        //         break;
-
-        //     case InstrumentType.TwoStrings:
-        //         chosenInstrument = (int)InstrumentType.TwoStrings;
-        //         break;
-
-        //     case InstrumentType.BanjoLele:
-        //         chosenInstrument = (int)InstrumentType.BanjoLele;
-        //         break;
-        //     default:
-        //         Debug.Log("Please specify instrument type from inspector");
-        //         break;
-        // }
-
-
-        selectedPreset = pluginList.IndexOf (instrumentType) / nPresets;
-        Debug.Log (pluginList.IndexOf (instrumentType));
+        {
+            Debug.Log("The instrumentType is " + instrumentType);
+            transform.GetChild(0).GetComponent<PlayAreaInteraction>().SetInstrumentType (instrumentType);
+        }
     }
 
     // Update is called once per frame

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.Audio;
 
 public class PlayAreaInteraction : MonoBehaviour
@@ -12,7 +13,7 @@ public class PlayAreaInteraction : MonoBehaviour
     };
 
     [SerializeField] AudioMixer audioMixer;
-    [HideInInspector] public string instrumentType;
+    [HideInInspector] public String instrumentType;
 
     private GameObject excitationLoc;
     [SerializeField] private StringOrientation stringOrientation;
@@ -31,6 +32,12 @@ public class PlayAreaInteraction : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetInstrumentType(String instrumentTypeToSet)
+    {
+        Debug.Log("instrumentTypeToSet is " + instrumentTypeToSet);
+        instrumentType = instrumentTypeToSet;
     }
 
     private void OnTriggerStay(Collider other)
@@ -54,12 +61,15 @@ public class PlayAreaInteraction : MonoBehaviour
             // map & limit values, swap value for juce (Silvin: turns out it's always from -0.5 to 0.5)
             float xPos = 1.0f - Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
             float yPos = 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1);
-            
+
             // Debug.Log(Global.Map(localPos.x, -xBounds / 2, xBounds / 2, 0, 1) + " " + Global.Map(localPos.y, -yBounds / 2, yBounds / 2, 0, 1));
 
 
 
             // These cases are hard-coded
+            if (instrumentType == "guitar")
+                Debug.Log("instrumentType is guitar!");
+
             switch (instrumentType)
             {
                 case "guitar":
