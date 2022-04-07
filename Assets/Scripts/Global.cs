@@ -21,14 +21,13 @@ public class Global : MonoBehaviour
         }
     }*/
 
-    public static void DespawnInstruments(List<GameObject> instruments,float despawnTime, bool disableGravity)
+    public static void DespawnInstruments(List<GameObject> instruments, float despawnTime, bool disableGravity)
     {
-        //Init();
         foreach (GameObject instrument in instruments)
         {
             foreach (Transform child in instrument.transform)
             {
-                if (child.tag == "Instrument")
+                if (child.tag == "Instrument" || child.tag == "Exciter")
                 {
                     if (disableGravity) child.gameObject.GetComponent<Rigidbody>().useGravity = false;
                     GameObject target = child.GetChild(0).gameObject;
@@ -39,15 +38,15 @@ public class Global : MonoBehaviour
         }
     }
 
-    public static void SpawnInstruments(List<GameObject> instruments, float spawnTime , List<Vector3> instrumentStartPos, List<Quaternion> instrumentStartOrientation)
+    public static void SpawnInstruments(List<GameObject> instruments, float spawnTime, List<Vector3> instrumentStartPos, List<Quaternion> instrumentStartOrientation)
     {
         //Init();
-        int i = 0; 
+        int i = 0;
         foreach (GameObject instrument in instruments)
         {
             foreach (Transform child in instrument.transform)
             {
-                if (child.tag == "Instrument")
+                if (child.tag == "Instrument" || child.tag == "Exciter")
                 {
                     child.gameObject.GetComponent<Rigidbody>().useGravity = false;
                     child.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
