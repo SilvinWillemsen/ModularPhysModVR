@@ -23,10 +23,10 @@ public class ResetInstrumentPos : MonoBehaviour
 
     IEnumerator StartResetCoroutine(List<GameObject> thisInstrument, float despawnTime, float spawnTime, float transitionTime)
     {
-        //Global.DespawnInstruments(thisInstrument, despawnTime, false);
+        Global.DespawnInstruments(thisInstrument, despawnTime, false);
         thisInstrument[0].transform.GetChild(0).gameObject.SetActive(false); 
         yield return new WaitForSeconds(transitionTime);
         thisInstrument[0].transform.GetChild(0).gameObject.SetActive(true);
-        //Global.SpawnInstruments(thisInstrument, spawnTime, instrumentReferenceList.instrumentStartPos);
+        Global.SpawnInstruments(thisInstrument, spawnTime, instrumentReferenceList.instrumentStartPos);
     }
 }

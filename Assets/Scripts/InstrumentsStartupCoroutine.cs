@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class InstrumentsStartupCoroutine : MonoBehaviour
 {
+    [SerializeField] private float radiusToOrigin = 5.0f;
+    [SerializeField] private int maxNInstruments = 10;
 
     private List<GameObject> instruments;
-    private List<Vector3> instrumentStartScales = new List<Vector3>(); 
-    [SerializeField] private float radiusToOrigin = 5.0f;
+    private List<Vector3> instrumentsStartPos = new List<Vector3>();
+
+    private InstrumentReferenceList instrumentReferenceList; 
 
     // Start is called before the first frame update
     void Start()
     {
-        instruments = GetComponent<InstrumentReferenceList>().instruments;
+        instrumentReferenceList = GetComponent<InstrumentReferenceList>();
 
+        instruments = instrumentReferenceList.instruments;
+       
         foreach (GameObject instrument in instruments)
         {
             foreach (Transform child in instrument.transform)
@@ -23,19 +28,23 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
                     // Debug.Log("Looking at " + child.GetChild(0).name);
                     // child.gameObject.GetComponent<Rigidbody>().useGravity = true;
                     child.GetChild(0).gameObject.AddComponent<ResetGravity>();
-                    instrumentStartScales.Add(child.transform.localScale);
+
+                    instrumentsStartPos.Add(child.GetChild(0).gameObject.transform.localPosition); 
                 }
             }
         }
+
+        instrumentReferenceList.instrumentStartPos = instrumentsStartPos; 
+        
         StartCoroutine(Startup());
     }
     IEnumerator Startup()
     {
         // disable all instruments, prevent Unity crashing
-        Global.DespawnInstruments(instruments);
+        Global.DespawnInstruments(instruments, 0.1f, true);
 
         // Space all instruments around the origin 
-        Global.SpaceEqually(instruments, radiusToOrigin);
+        Global.SpaceEqually(instruments, radiusToOrigin, maxNInstruments);
 
         // Make all instruments face origin
         Global.FaceInstrumentsToOrigin(instruments);
@@ -43,6 +52,6 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         // Respawn instruments;
-        Global.SpawnInstruments(instruments, instrumentStartScales);
+        Global.SpawnInstruments(instruments, 1.0f , instrumentsStartPos);
     }
 }

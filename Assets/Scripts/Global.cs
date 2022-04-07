@@ -21,9 +21,28 @@ public class Global : MonoBehaviour
         }
     }*/
 
-    public static void DespawnInstruments(List<GameObject> instruments)
+    public static void DespawnInstruments(List<GameObject> instruments,float despawnTime, bool disableGravity)
     {
         //Init();
+        foreach (GameObject instrument in instruments)
+        {
+            foreach (Transform child in instrument.transform)
+            {
+                if (child.tag == "Instrument")
+                {
+                    if (disableGravity) child.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                    GameObject target = child.GetChild(0).gameObject;
+                    // iTween.ScaleTo(target, Vector3.zero, 0.5f);
+                    iTween.ScaleTo(target, new Vector3(1e-5f, 1e-5f, 1e-5f), despawnTime);
+                }
+            }
+        }
+    }
+
+    public static void SpawnInstruments(List<GameObject> instruments, float spawnTime , List<Vector3> instrumentStartPos)
+    {
+        //Init();
+        int i = 0; 
         foreach (GameObject instrument in instruments)
         {
             foreach (Transform child in instrument.transform)
@@ -32,37 +51,27 @@ public class Global : MonoBehaviour
                 {
                     child.gameObject.GetComponent<Rigidbody>().useGravity = false;
                     GameObject target = child.GetChild(0).gameObject;
-                    // iTween.ScaleTo(target, Vector3.zero, 0.5f);
-                    iTween.ScaleTo(target, new Vector3(1e-5f, 1e-5f, 1e-5f), 0.5f);
+                    target.transform.localPosition = instrumentStartPos[i];
+                    iTween.ScaleTo(target, iTween.Hash("x", 1.0f, "y", 1.0f, "z", 1.0f, "time", spawnTime, "onComplete", "TurnGravityOn"));
+                    child.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                    i++;
                 }
             }
         }
     }
 
-    public static void SpawnInstruments(List<GameObject> instruments, List<Vector3> instrumentScales)
+    public static void SpaceEqually(List<GameObject> instruments, float radius, int maxNInstruments)
     {
-        //Init();
-        foreach (GameObject instrument in instruments)
+        if (instruments.Count > maxNInstruments) Debug.Log("Inserted instruments exceeding max number of instruments specified!");
+        float angleOffset = - Mathf.PI / (instruments.Count + 1);
+        for (int i = 0; i < maxNInstruments; i++)
         {
-            foreach (Transform child in instrument.transform)
+            float angle = i * Mathf.PI * 2f / maxNInstruments - angleOffset;
+            if (i < instruments.Count)
             {
-                if (child.tag == "Instrument")
-                {
-                    GameObject target = child.GetChild(0).gameObject;
-                    iTween.ScaleTo(target, iTween.Hash("x", 1.0f, "y", 1.0f, "z", 1.0f, "time", 0.5f, "onComplete", "TurnGravityOn"));
-                    // child.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                }
+                Vector3 newPos = new Vector3(Mathf.Cos(angle) * radius, 0.0f, Mathf.Sin(angle) * radius);
+                instruments[i].transform.localPosition = newPos;
             }
-        }
-    }
-
-    public static void SpaceEqually(List<GameObject> instruments, float radius)
-    {
-        for (int i = 0; i < instruments.Count; i++)
-        {
-            float angle = i * Mathf.PI * 2f / instruments.Count;
-            Vector3 newPos = new Vector3(Mathf.Cos(angle) * radius, 0.0f, Mathf.Sin(angle) * radius);
-            instruments[i].transform.localPosition = newPos;
         }
     }
 

@@ -5,11 +5,13 @@ using UnityEngine;
 public class InstrumentReferenceList : MonoBehaviour
 {
 
-    [HideInInspector] public List<GameObject> instruments = new List<GameObject>();
+    public List<GameObject> instruments; 
     [HideInInspector] public List<Vector3> instrumentStartPos = new List<Vector3>();
+    
     private void Awake()
     {
-        foreach(Transform child in transform)
+        instruments = new List<GameObject>();
+        foreach (Transform child in transform)
         {
             instruments.Add(child.gameObject);
         }
