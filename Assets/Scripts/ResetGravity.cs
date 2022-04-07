@@ -19,5 +19,6 @@ public class ResetGravity : MonoBehaviour
     public void TurnGravityOn()
     {
         gameObject.transform.parent.GetComponent<Rigidbody>().useGravity = true;
+        Debug.Log("Turning On Gravity");
     }
 }

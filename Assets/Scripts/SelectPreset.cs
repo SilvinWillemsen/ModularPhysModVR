@@ -1,6 +1,11 @@
+using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
 using UnityEngine;
+using System;
 using UnityEngine.Audio;
 
 
@@ -11,50 +16,27 @@ public class SelectPreset : MonoBehaviour
 
     public AudioMixer audioMixer;
 
-    public enum InstrumentType
-    {
-        Guitar,
-        Harp,
-        TwoStrings,
-        BanjoLele
-    }
-
-    [SerializeField] InstrumentType instrumentType;
+    [HideInInspector] public List<String> pluginList; 
+     
+    [Dropdown("pluginList")]//input the path of the list
+    public String instrumentType;
+    // [SerializeField] Global.InstrumentType instrumentType;
 
     // Start is called before the first frame update
     void Start()
     {
-        int nPresets = 4;
-
+        int nPresets = getNumPresets();
 
         // changing instrument preset
-        int chosenInstrument = 0;
-        switch (instrumentType)
+        if (gameObject.GetComponentInChildren<PlayAreaInteraction>() == null)
         {
-            case InstrumentType.Guitar:
-                chosenInstrument = (int)InstrumentType.Guitar;
-                break;
-
-            case InstrumentType.Harp:
-                //transform.GetChild(0).GetComponent<PlayAreaInteraction>().instrumentType = "Harp";
-                chosenInstrument = (int)InstrumentType.Harp;
-                break;
-
-            case InstrumentType.TwoStrings:
-                chosenInstrument = (int)InstrumentType.TwoStrings;
-                break;
-
-            case InstrumentType.BanjoLele:
-                chosenInstrument = (int)InstrumentType.BanjoLele;
-                break;
-            default:
-                Debug.Log("Please specify instrument type from inspector");
-                break;
+            Debug.LogWarning("There is no playarea in this instrument!");
         }
-
-
-        selectedPreset = (float)chosenInstrument / nPresets;
-        Debug.Log (chosenInstrument);
+        else
+        {
+            Debug.Log("The instrumentType is " + instrumentType);
+            transform.GetChild(0).GetComponent<PlayAreaInteraction>().SetInstrumentType (instrumentType);
+        }
     }
 
     // Update is called once per frame
@@ -78,10 +60,8 @@ public class SelectPreset : MonoBehaviour
         audioMixer.SetFloat("loadPreset", 0.0f);
     }
 
+    [DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
+    static extern int getNumPresets();
 
-    //[DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
-    //static extern IntPtr getPresetAt(int i);
 
-    //[DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
-    //static extern int getNumPresets();
 }

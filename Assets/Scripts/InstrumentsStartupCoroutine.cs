@@ -20,6 +20,8 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
             {
                 if (child.tag == "Instrument")
                 {
+                    // Debug.Log("Looking at " + child.GetChild(0).name);
+                    // child.gameObject.GetComponent<Rigidbody>().useGravity = true;
                     child.GetChild(0).gameObject.AddComponent<ResetGravity>();
                     instrumentStartScales.Add(child.transform.localScale);
                 }

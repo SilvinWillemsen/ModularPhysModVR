@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.Audio;
 
 public class PlayAreaInteraction : MonoBehaviour
@@ -12,7 +13,7 @@ public class PlayAreaInteraction : MonoBehaviour
     };
 
     [SerializeField] AudioMixer audioMixer;
-    [HideInInspector] public string instrumentType;
+    [HideInInspector] public String instrumentType;
 
     private GameObject excitationLoc;
     [SerializeField] private StringOrientation stringOrientation;
@@ -33,6 +34,12 @@ public class PlayAreaInteraction : MonoBehaviour
         
     }
 
+    public void SetInstrumentType(String instrumentTypeToSet)
+    {
+        Debug.Log("instrumentTypeToSet is " + instrumentTypeToSet);
+        instrumentType = instrumentTypeToSet;
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "ExciterArea")
@@ -46,25 +53,39 @@ public class PlayAreaInteraction : MonoBehaviour
 
             float xBounds = transform.localScale.x;
             float yBounds = transform.localScale.y;
+            // Debug.Log("x pos = " + localPos.x + "y pos = " + localPos.y);
+            // Debug.Log("xBbounds = " + xBounds + ", yBounds = " + yBounds);
+            // Debug.Log(excitationLoc.transform.localPosition.x + " " + excitationLoc.transform.localPosition.y);
+            // Debug.Log(transform.localScale);
 
-            //Debug.Log("x pos = " + localPos.x + "y pos = " + localPos.y);
-            //Debug.Log("xBbounds = " + xBounds + ", yBounds = " + yBounds);
+            // map & limit values, swap value for juce (Silvin: turns out it's always from -0.5 to 0.5)
+            float xPos = 1.0f - Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
+            float yPos = 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1);
 
-            // map & limit values, swap value for juce
-            float xPos = 1.0f - Global.Limit(Global.Map(localPos.x, -xBounds / 2, xBounds / 2, 0, 1), 0, 1);
-            float yPos = 1.0f - Global.Limit(Global.Map(localPos.y, -yBounds / 2, yBounds / 2, 0, 1), 0, 1);
+            // Debug.Log(Global.Map(localPos.x, -xBounds / 2, xBounds / 2, 0, 1) + " " + Global.Map(localPos.y, -yBounds / 2, yBounds / 2, 0, 1));
 
 
-            // map according to the string orientation
 
-            if (instrumentType == "Harp")
+            // These cases are hard-coded
+            if (instrumentType == "guitar")
+                Debug.Log("instrumentType is guitar!");
+
+            switch (instrumentType)
             {
-                Debug.Log("Harp is reached");
-            } else {
-                // Flip x and y positions if vertical
-                audioMixer.SetFloat("mouseX", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
-                audioMixer.SetFloat("mouseY", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
+                case "guitar":
+                    yPos = 0.75f * yPos;
+                    break;
+                case "Harp":
+                    Debug.Log("Harp is reached");
+                    break;
+                default:
+                    Debug.LogError("Please set instrumenttype");;
+                    break;
             }
+            // Map according to the string orientation
+            // Flip x and y positions if vertical
+            audioMixer.SetFloat("mouseX", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
+            audioMixer.SetFloat("mouseY", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
 
             // visual representation
             //excitelocIcon.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos * 10, yPos * 10);

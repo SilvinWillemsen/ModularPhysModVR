@@ -8,6 +8,7 @@ TagManager:
   - PlayArea
   - Exciter
   - ExciterArea
+  - Model
   layers:
   - Default
   - TransparentFX
