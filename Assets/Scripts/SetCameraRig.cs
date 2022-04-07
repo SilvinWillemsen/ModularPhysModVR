@@ -67,9 +67,6 @@ public class SetCameraRig : MonoBehaviour
 
 
         Debug.Log("Change the Tracked alias list");
-
-        var so = new SerializedObject(TrackedAliasObj);
-        so.FindProperty("m_LocalPosition")
         // Change the Tracked alias list
         TrackedAliasObj.GetComponent<TrackedAliasFacade>().CameraRigs.Clear();
         TrackedAliasObj.GetComponent<TrackedAliasFacade>().CameraRigs.Add(switchToOculus ? OculusCameraRig : SimulatorCameraRig);
