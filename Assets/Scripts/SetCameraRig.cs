@@ -4,6 +4,7 @@ using UnityEngine;
 using Tilia.CameraRigs.TrackedAlias;
 using Zinnia.Tracking.CameraRig;
 using Tilia.Interactions.Interactables.Interactors;
+using Tilia.Interactions.Interactables.Interactables;
 using Zinnia.Action;
 using System.Linq;
 using UnityEditor;
@@ -33,6 +34,8 @@ public class SetCameraRig : MonoBehaviour
     public BooleanAction OculusRightGrip;
     public BooleanAction SimulatorLeftGrip;
     public BooleanAction SimulatorRightGrip;
+
+    public GameObject instrumentDisplays;
 
     // Start is called before the first frame update
     void Start()
@@ -89,6 +92,19 @@ public class SetCameraRig : MonoBehaviour
         // trackedAliasSO.FindProperty("elements").objectReferenceValue = listTest;
         TrackedAliasObj.GetComponent<TrackedAliasFacade>().CameraRigs.Clear();
         TrackedAliasObj.GetComponent<TrackedAliasFacade>().CameraRigs.Add(switchToOculus ? OculusCameraRig : SimulatorCameraRig);
+
+        // foreach (Transform child in instrumentDisplays.transform)
+        // {
+        //     if (child.GetChild(0).tag == "Instrument")
+        //     {
+        //         child.GetChild(0).GetComponent<InteractorFacade>().GrabType = 0;
+        //         // var interactableSO = new SerializedObject(child.GetChild(0).GetComponent<InteractorFacade>());
+        //         // interactableSO.FindProperty("grabProviderIndex").intValue = switchToOculus ? 0 : 1;
+        //         // interactableSO.ApplyModifiedProperties();
+
+        //     }
+        // }
+
 
     }
 }
