@@ -518,7 +518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &211634701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5294,6 +5294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397fcd3762094f54f82048e71bc3f1d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBeforeDespawn: 1
   despawnTime: 1
   spawnTime: 1
   transitionTime: 0.5
@@ -5313,15 +5314,6 @@ MonoBehaviour:
   - {fileID: 1898775562}
   - {fileID: 1294716609}
   - {fileID: 729384171}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 1365743308}
   instrumentStartPos: []
   instrumentStartOrientation: []
 --- !u!114 &1758875475

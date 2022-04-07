@@ -6,6 +6,7 @@ public class ResetInstrumentPos : MonoBehaviour
 {
     InstrumentReferenceList instrumentReferenceList;
 
+    [SerializeField] private float timeBeforeDespawn = 1.0f;
     [SerializeField] private float despawnTime = 1.0f;
     [SerializeField] private float spawnTime = 1.0f;
     [SerializeField] private float transitionTime = 0.5f;
@@ -23,6 +24,7 @@ public class ResetInstrumentPos : MonoBehaviour
 
     IEnumerator StartResetCoroutine(List<GameObject> thisInstrument, float despawnTime, float spawnTime, float transitionTime)
     {
+        yield return new WaitForSeconds(timeBeforeDespawn);
         Global.DespawnInstruments(thisInstrument, despawnTime, false);
         yield return new WaitForSeconds(transitionTime + despawnTime); // wait for despawnTime + transition time before spawning agia
         thisInstrument[0].transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.transform.localScale = Vector3.zero;
