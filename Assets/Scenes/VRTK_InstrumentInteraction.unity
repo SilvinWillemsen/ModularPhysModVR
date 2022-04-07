@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 5842b2091ae0944dc8afb6ac60083661, type: 2}
-  instrumentType: 
+  instrumentType: 0
   stringOrientation: 0
 --- !u!1 &42725331
 GameObject:
@@ -3087,6 +3087,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Harp
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 072f3fff3761a47489567a6ae6de3627, type: 3}
+      propertyPath: m_TagString
+      value: Model
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 072f3fff3761a47489567a6ae6de3627, type: 3}
 --- !u!1 &963173551 stripped
@@ -3776,8 +3780,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 5842b2091ae0944dc8afb6ac60083661, type: 2}
-  NameList: []
-  MyName: 
+  NameList:
+  - guitar
+  - Harp
+  - TwoStringsOctave
+  - BanjoLele
+  MyName: Harp
   instrumentType: 1
 --- !u!114 &1236705428 stripped
 MonoBehaviour:
@@ -3949,6 +3957,10 @@ PrefabInstance:
     - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862883227734677280, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
@@ -4232,6 +4244,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instrumentDisplays: {fileID: 1758875468}
+  pluginNames:
+  - guitar
+  - Harp
+  - TwoStringsOctave
+  - BanjoLele
 --- !u!4 &1389746077
 Transform:
   m_ObjectHideFlags: 0
@@ -5255,7 +5272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083cd8e08d1d2e64994fac6b4e29859f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusToOrigin: 2
+  radiusToOrigin: 3
 --- !u!1 &1772398052 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: a8d53702db3c4f24db9805f2662d6c37, type: 3}
@@ -5274,7 +5291,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 5842b2091ae0944dc8afb6ac60083661, type: 2}
-  NameList: []
+  NameList:
+  - guitar_xml
+  - Harp_xml
+  - TwoStringsOctave_xml
+  - BanjoLele_xml
+  - guitar
+  - Harp
+  - TwoStringsOctave
+  - BanjoLele
   MyName: 
   instrumentType: 0
 --- !u!1001 &1795426337
@@ -5359,6 +5384,10 @@ PrefabInstance:
     - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862883227734677280, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}

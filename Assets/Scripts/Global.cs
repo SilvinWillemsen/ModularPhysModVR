@@ -39,8 +39,8 @@ public class Global : MonoBehaviour
                 {
                     child.gameObject.GetComponent<Rigidbody>().useGravity = false;
                     GameObject target = child.GetChild(0).gameObject;
-                    iTween.ScaleTo(target, Vector3.zero, 0.5f);
-                    ;
+                    // iTween.ScaleTo(target, Vector3.zero, 0.5f);
+                    iTween.ScaleTo(target, new Vector3(1e-5f, 1e-5f, 1e-5f), 0.5f);
                 }
             }
         }

@@ -16,7 +16,6 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
 
         foreach (GameObject instrument in instruments)
         {
-            Debug.Log("Looking at " + instrument.name);
             foreach (Transform child in instrument.transform)
             {
                 if (child.tag == "Instrument")

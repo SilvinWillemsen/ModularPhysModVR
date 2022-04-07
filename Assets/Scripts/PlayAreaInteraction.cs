@@ -12,7 +12,7 @@ public class PlayAreaInteraction : MonoBehaviour
     };
 
     [SerializeField] AudioMixer audioMixer;
-    [HideInInspector] public Global.InstrumentType instrumentType;
+    [HideInInspector] public string instrumentType;
 
     private GameObject excitationLoc;
     [SerializeField] private StringOrientation stringOrientation;
@@ -58,21 +58,21 @@ public class PlayAreaInteraction : MonoBehaviour
             // Debug.Log(Global.Map(localPos.x, -xBounds / 2, xBounds / 2, 0, 1) + " " + Global.Map(localPos.y, -yBounds / 2, yBounds / 2, 0, 1));
 
 
-            // map according to the string orientation
 
+            // These cases are hard-coded
             switch (instrumentType)
             {
-                case Global.InstrumentType.Guitar:
+                case "guitar":
                     yPos = 0.75f * yPos;
                     break;
-                case Global.InstrumentType.Harp:
+                case "Harp":
                     Debug.Log("Harp is reached");
                     break;
                 default:
                     Debug.LogError("Please set instrumenttype");;
                     break;
             }
-            
+            // Map according to the string orientation
             // Flip x and y positions if vertical
             audioMixer.SetFloat("mouseX", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
             audioMixer.SetFloat("mouseY", stringOrientation == StringOrientation.Vertical ? xPos : yPos);

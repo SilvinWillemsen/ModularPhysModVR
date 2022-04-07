@@ -15,11 +15,11 @@ public class SelectPreset : MonoBehaviour
 
     public AudioMixer audioMixer;
 
-    // public List<string> NameList; 
+    [HideInInspector] public List<string> pluginList; 
      
-    // [Dropdown("NameList")]//input the path of the list
-    //  public string MyName;
-    [SerializeField] Global.InstrumentType instrumentType;
+    [Dropdown("NameList")]//input the path of the list
+    public string instrumentType;
+    // [SerializeField] Global.InstrumentType instrumentType;
 
         // Start is called before the first frame update
     void Start()
@@ -55,8 +55,8 @@ public class SelectPreset : MonoBehaviour
         // }
 
 
-        selectedPreset = (float)instrumentType / nPresets;
-        Debug.Log ((int)instrumentType);
+        selectedPreset = pluginList.IndexOf (instrumentType) / nPresets;
+        Debug.Log (pluginList.IndexOf (instrumentType));
     }
 
     // Update is called once per frame
