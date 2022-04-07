@@ -5,7 +5,7 @@ using UnityEngine;
 public class InstrumentsStartupCoroutine : MonoBehaviour
 {
 
-    private GameObject[] instruments;
+    private List<GameObject> instruments;
     private List<Vector3> instrumentStartScales = new List<Vector3>(); 
     [SerializeField] private float radiusToOrigin = 5.0f;
 

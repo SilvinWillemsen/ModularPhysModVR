@@ -21,7 +21,7 @@ public class Global : MonoBehaviour
         }
     }*/
 
-    public static void DespawnInstruments(GameObject[] instruments)
+    public static void DespawnInstruments(List<GameObject> instruments)
     {
         //Init();
         foreach (GameObject instrument in instruments)
@@ -39,7 +39,7 @@ public class Global : MonoBehaviour
         }
     }
 
-    public static void SpawnInstruments(GameObject[] instruments, List<Vector3> instrumentScales)
+    public static void SpawnInstruments(List<GameObject> instruments, List<Vector3> instrumentScales)
     {
         //Init();
         foreach (GameObject instrument in instruments)
@@ -56,19 +56,19 @@ public class Global : MonoBehaviour
         }
     }
 
-    public static void SpaceEqually(GameObject[] instruments, float radius)
+    public static void SpaceEqually(List<GameObject> instruments, float radius)
     {
-        for (int i = 0; i < instruments.Length; i++)
+        for (int i = 0; i < instruments.Count; i++)
         {
-            float angle = i * Mathf.PI * 2f / instruments.Length;
+            float angle = i * Mathf.PI * 2f / instruments.Count;
             Vector3 newPos = new Vector3(Mathf.Cos(angle) * radius, 0.0f, Mathf.Sin(angle) * radius);
             instruments[i].transform.localPosition = newPos;
         }
     }
 
-    public static void FaceInstrumentsToOrigin(GameObject[] instruments)
+    public static void FaceInstrumentsToOrigin(List<GameObject> instruments)
     {
-        for (int i = 0; i < instruments.Length; i++)
+        for (int i = 0; i < instruments.Count; i++)
         {
             instruments[i].transform.LookAt(Vector3.zero, Vector3.up);
         }
