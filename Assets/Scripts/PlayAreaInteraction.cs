@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Audio;
+/*
+ Make sure that you scale the playarea transform, NOT the collider! That should have a scale of 1,1,1.
+ */
+
 
 public class PlayAreaInteraction : MonoBehaviour
 {
@@ -44,19 +48,12 @@ public class PlayAreaInteraction : MonoBehaviour
     {
         if (other.gameObject.tag == "ExciterArea")
         {
-            //Debug.Log("Excited");
 
             // calculate where on the instrument it's exciting:
             excitationLoc.transform.position = other.transform.position;
 
             Vector3 localPos = new Vector3(excitationLoc.transform.localPosition.x, excitationLoc.transform.localPosition.y, excitationLoc.transform.localPosition.z);
 
-            float xBounds = transform.localScale.x;
-            float yBounds = transform.localScale.y;
-            // Debug.Log("x pos = " + localPos.x + "y pos = " + localPos.y);
-            // Debug.Log("xBbounds = " + xBounds + ", yBounds = " + yBounds);
-            // Debug.Log(excitationLoc.transform.localPosition.x + " " + excitationLoc.transform.localPosition.y);
-            // Debug.Log(transform.localScale);
 
             // map & limit values, swap value for juce (Silvin: turns out it's always from -0.5 to 0.5)
             float xPos = 1.0f - Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
@@ -66,26 +63,24 @@ public class PlayAreaInteraction : MonoBehaviour
 
 
 
-            // These cases are hard-coded
-            if (instrumentType == "guitar")
-                Debug.Log("instrumentType is guitar!");
-
+            // Hard-coded mappings of the play area to the x and y positions
             switch (instrumentType)
             {
-                case "guitar":
+                case "Guitar":
                     yPos = 0.75f * yPos;
                     break;
                 case "Harp":
-                    Debug.Log("Harp is reached");
+                    xPos = 1.0f - xPos;
                     break;
                 default:
-                    Debug.LogError("Please set instrumenttype");;
+                    Debug.LogError("Please set instrumenttype"); ;
                     break;
             }
             // Map according to the string orientation
             // Flip x and y positions if vertical
             audioMixer.SetFloat("mouseX", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
             audioMixer.SetFloat("mouseY", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
+
 
             // visual representation
             //excitelocIcon.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos * 10, yPos * 10);
