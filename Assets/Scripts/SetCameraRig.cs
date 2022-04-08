@@ -93,17 +93,21 @@ public class SetCameraRig : MonoBehaviour
         TrackedAliasObj.GetComponent<TrackedAliasFacade>().CameraRigs.Clear();
         TrackedAliasObj.GetComponent<TrackedAliasFacade>().CameraRigs.Add(switchToOculus ? OculusCameraRig : SimulatorCameraRig);
 
-        // foreach (Transform child in instrumentDisplays.transform)
-        // {
-        //     if (child.GetChild(0).tag == "Instrument")
-        //     {
-        //         child.GetChild(0).GetComponent<InteractorFacade>().GrabType = 0;
-        //         // var interactableSO = new SerializedObject(child.GetChild(0).GetComponent<InteractorFacade>());
-        //         // interactableSO.FindProperty("grabProviderIndex").intValue = switchToOculus ? 0 : 1;
-        //         // interactableSO.ApplyModifiedProperties();
+        
+        foreach (Transform child in instrumentDisplays.transform)
+        {
+            if (child.GetChild(0).tag == "Instrument")
+            {                
+                var toggleVar = Tilia.Interactions.Interactables.Interactables.Grab.Receiver.GrabInteractableReceiver.ActiveType.Toggle;
+                var holdTillReleaseVar = Tilia.Interactions.Interactables.Interactables.Grab.Receiver.GrabInteractableReceiver.ActiveType.HoldTillRelease;
 
-        //     }
-        // }
+                var interactableSO = new SerializedObject(child.GetChild(0).GetComponent<InteractableFacade>());
+                interactableSO.FindProperty("grabType").enumValueIndex = switchToOculus ? 0 : 1;
+                Debug.Log(interactableSO.FindProperty("grabType").enumValueIndex);
+                interactableSO.ApplyModifiedProperties();
+
+            }
+        }
 
 
     }
