@@ -19,17 +19,36 @@ public class ResetExciterPos : MonoBehaviour
     }
     public void DespawnAndSpawnExciter(GameObject exciter)
     {
-        List<GameObject> thisInstrument = new List<GameObject>();
-        thisInstrument.Add(exciter);
-        StartCoroutine(StartResetCoroutine(thisInstrument, despawnTime, spawnTime, transitionTime));
+        // List<GameObject> thisExciter = new List<GameObject>();
+        // thisExciter.Add(exciter);
+        StartCoroutine(StartResetCoroutine(exciter, despawnTime, spawnTime, transitionTime));
     }
 
-    IEnumerator StartResetCoroutine(List<GameObject> thisInstrument, float despawnTime, float spawnTime, float transitionTime)
+    IEnumerator StartResetCoroutine(GameObject thisExciter, float despawnTime, float spawnTime, float transitionTime)
     {
         yield return new WaitForSeconds(timeBeforeDespawn);
-        Global.DespawnInstruments(thisInstrument, despawnTime, false);
+        Global.DespawnSingleInteractable(thisExciter.transform.GetChild(0), despawnTime, false);
         yield return new WaitForSeconds(transitionTime + despawnTime); // wait for despawnTime + transition time before spawning agia
-        thisInstrument[0].transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.transform.localScale = new Vector3 (1e-5f, 1e-5f, 1e-5f);
-        Global.SpawnInstruments(thisInstrument, spawnTime, exciterReferenceList.exciterStartPos, exciterReferenceList.exciterStartOrientation);
+        thisExciter.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.transform.localScale = new Vector3(1e-5f, 1e-5f, 1e-5f);
+
+        // Find index of instrument to spawn
+        int idx = -1;
+        int i = 0;
+        foreach (GameObject exciter in exciterReferenceList.exciters)
+        {
+            if (thisExciter == exciter)
+                idx = i;
+            ++i;
+        }
+
+        if (idx == -1)
+        {
+            Debug.LogError("exciterNotFound!");
+        } 
+        else 
+        {
+            Debug.Log("Index of model to spawn is " + idx);
+            Global.SpawnSingleInteractable(thisExciter.transform.GetChild(0), spawnTime, exciterReferenceList.exciterStartPos[idx], exciterReferenceList.exciterStartOrientation[idx]);
+        }
     }
 }

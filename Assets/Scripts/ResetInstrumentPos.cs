@@ -10,24 +10,42 @@ public class ResetInstrumentPos : MonoBehaviour
     [SerializeField] private float despawnTime = 1.0f;
     [SerializeField] private float spawnTime = 1.0f;
     [SerializeField] private float transitionTime = 0.5f;
-
     private void Start()
     {
         instrumentReferenceList = GetComponent<InstrumentReferenceList>();
     }
     public void DespawnAndSpawnInstrument(GameObject instrument)
     {
-        List<GameObject> thisInstrument = new List<GameObject>();
-        thisInstrument.Add(instrument);
-        StartCoroutine(StartResetCoroutine(thisInstrument, despawnTime, spawnTime, transitionTime)); 
+        // List<GameObject> thisInstrument = new List<GameObject>();
+        // thisInstrument.Add(instrument);
+        StartCoroutine(StartResetCoroutine(instrument, despawnTime, spawnTime, transitionTime)); 
     }
 
-    IEnumerator StartResetCoroutine(List<GameObject> thisInstrument, float despawnTime, float spawnTime, float transitionTime)
+    IEnumerator StartResetCoroutine(GameObject thisInstrument, float despawnTime, float spawnTime, float transitionTime)
     {
         yield return new WaitForSeconds(timeBeforeDespawn);
-        Global.DespawnInstruments(thisInstrument, despawnTime, false);
+        Global.DespawnSingleInteractable(thisInstrument.transform.GetChild(0), despawnTime, false);
         yield return new WaitForSeconds(transitionTime + despawnTime); // wait for despawnTime + transition time before spawning agia
-        thisInstrument[0].transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.transform.localScale = new Vector3(1e-5f, 1e-5f, 1e-5f);
-        Global.SpawnInstruments(thisInstrument, spawnTime, instrumentReferenceList.instrumentStartPos, instrumentReferenceList.instrumentStartOrientation);
+        thisInstrument.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.transform.localScale = new Vector3(1e-5f, 1e-5f, 1e-5f);
+
+        // Find index of instrument to spawn
+        int idx = -1;
+        int i = 0;
+        foreach (GameObject instrument in instrumentReferenceList.instruments)
+        {
+            if (thisInstrument == instrument)
+                idx = i;
+            ++i;
+        }
+
+        if (idx == -1)
+        {
+            Debug.LogError("instrumentNotFound!");
+        } 
+        else 
+        {
+            Debug.Log("Index of model to spawn is " + idx);
+            Global.SpawnSingleInteractable(thisInstrument.transform.GetChild(0), spawnTime, instrumentReferenceList.instrumentStartPos[idx], instrumentReferenceList.instrumentStartOrientation[idx]);
+        }
     }
 }

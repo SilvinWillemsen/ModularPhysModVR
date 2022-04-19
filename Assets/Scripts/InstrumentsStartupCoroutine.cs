@@ -43,7 +43,7 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
     IEnumerator Startup()
     {
         // disable all instruments, prevent Unity crashing
-        Global.DespawnInstruments(instruments, 0.1f, true);
+        Global.DespawnInteractables(instruments, 0.1f, true);
 
         // Space all instruments around the origin 
         Global.SpaceEqually(instruments, radiusToOrigin, maxNInstruments);
@@ -54,6 +54,6 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         // Respawn instruments;
-        Global.SpawnInstruments(instruments, 1.0f , instrumentStartPos, instrumentStartOrientation);
+        Global.SpawnInteractables(instruments, 1.0f , instrumentStartPos, instrumentStartOrientation);
     }
 }

@@ -57,6 +57,7 @@ public class SelectPreset : MonoBehaviour
 
     IEnumerator ChangePreset()
     {
+        Debug.Log("Selected preset is " + selectedPreset);
         Debug.Log(InstrumentType + " grabbed!"); 
         audioMixer.SetFloat("presetSelect", selectedPreset);
         yield return new WaitForSeconds(0.1f);

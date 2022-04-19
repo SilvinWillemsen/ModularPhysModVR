@@ -64,8 +64,8 @@ public class PlayAreaInteraction : MonoBehaviour
 
 
             // Hard-coded mappings of the play area to the x and y positions
-            double[3] yVec, yVecSq;
-            yVec = [xPos, yPos, 1.0];
+            double[] yVecSq = {0.0, 0.0, 0.0};
+            double[] yVec = {xPos, yPos, 1.0};
             switch (instrumentType)
             {
                 case "Guitar":
@@ -76,73 +76,76 @@ public class PlayAreaInteraction : MonoBehaviour
                     break;
                 case "Harp":
                     xPos = 1.0f - xPos;
-                    if (yPos > 0.6916)
-                    {
-                        Matrix33d m; // matrix 
-                        m(0, 0) = 15.6548;
-                        m(0, 1) = 0.0;
-                        m(0, 2) = 0.0;
-                        m(1, 0) = 10.1353;
-                        m(1, 1) = 1.0;
-                        m(1, 2) = 0.0;
-                        m(2, 0) = 14.6548;
-                        m(2, 1) = 0.0;
-                        m(2, 2) = 1.0;
+                    // if (yPos > 0.6916)
+                    // {
+                    //     Matrix33d m; // matrix 
+                    //     m(0, 0) = 15.6548;
+                    //     m(0, 1) = 0.0;
+                    //     m(0, 2) = 0.0;
+                    //     m(1, 0) = 10.1353;
+                    //     m(1, 1) = 1.0;
+                    //     m(1, 2) = 0.0;
+                    //     m(2, 0) = 14.6548;
+                    //     m(2, 1) = 0.0;
+                    //     m(2, 2) = 1.0;
 
-                        double det = m(0, 0) * (m(1, 1) * m(2, 2) - m(2, 1) * m(1, 2)) -
-                            m(0, 1) * (m(1, 0) * m(2, 2) - m(1, 2) * m(2, 0)) +
-                            m(0, 2) * (m(1, 0) * m(2, 1) - m(1, 1) * m(2, 0));
+                    //     double det = m(0, 0) * (m(1, 1) * m(2, 2) - m(2, 1) * m(1, 2)) -
+                    //         m(0, 1) * (m(1, 0) * m(2, 2) - m(1, 2) * m(2, 0)) +
+                    //         m(0, 2) * (m(1, 0) * m(2, 1) - m(1, 1) * m(2, 0));
 
-                        double invdet = 1 / det;
+                    //     double invdet = 1 / det;
 
-                        Matrix33d minv; // inverse of matrix m
-                        minv(0, 0) = (m(1, 1) * m(2, 2) - m(2, 1) * m(1, 2)) * invdet;
-                        minv(0, 1) = (m(0, 2) * m(2, 1) - m(0, 1) * m(2, 2)) * invdet;
-                        minv(0, 2) = (m(0, 1) * m(1, 2) - m(0, 2) * m(1, 1)) * invdet;
-                        minv(1, 0) = (m(1, 2) * m(2, 0) - m(1, 0) * m(2, 2)) * invdet;
-                        minv(1, 1) = (m(0, 0) * m(2, 2) - m(0, 2) * m(2, 0)) * invdet;
-                        minv(1, 2) = (m(1, 0) * m(0, 2) - m(0, 0) * m(1, 2)) * invdet;
-                        minv(2, 0) = (m(1, 0) * m(2, 1) - m(2, 0) * m(1, 1)) * invdet;
-                        minv(2, 1) = (m(2, 0) * m(0, 1) - m(0, 0) * m(2, 1)) * invdet;
-                        minv(2, 2) = (m(0, 0) * m(1, 1) - m(1, 0) * m(0, 1)) * invdet;
+                    //     Matrix33d minv; // inverse of matrix m
+                    //     minv(0, 0) = (m(1, 1) * m(2, 2) - m(2, 1) * m(1, 2)) * invdet;
+                    //     minv(0, 1) = (m(0, 2) * m(2, 1) - m(0, 1) * m(2, 2)) * invdet;
+                    //     minv(0, 2) = (m(0, 1) * m(1, 2) - m(0, 2) * m(1, 1)) * invdet;
+                    //     minv(1, 0) = (m(1, 2) * m(2, 0) - m(1, 0) * m(2, 2)) * invdet;
+                    //     minv(1, 1) = (m(0, 0) * m(2, 2) - m(0, 2) * m(2, 0)) * invdet;
+                    //     minv(1, 2) = (m(1, 0) * m(0, 2) - m(0, 0) * m(1, 2)) * invdet;
+                    //     minv(2, 0) = (m(1, 0) * m(2, 1) - m(2, 0) * m(1, 1)) * invdet;
+                    //     minv(2, 1) = (m(2, 0) * m(0, 1) - m(0, 0) * m(2, 1)) * invdet;
+                    //     minv(2, 2) = (m(0, 0) * m(1, 1) - m(1, 0) * m(0, 1)) * invdet;
 
-                        yVecSq = minv * yVec;
-                        yPos = yVecSq[1] / yVecSq[2];
-                    }
-                    else if (xPos > 0.1 && yPos <= 0.6916)
-                    {
-                        Matrix33d m; // matrix 
-                        m(0, 0) = 15.6548;
-                        m(0, 1) = 0.0;
-                        m(0, 2) = 0.0;
-                        m(1, 0) = 10.1353;
-                        m(1, 1) = 1.0;
-                        m(1, 2) = 0.0;
-                        m(2, 0) = 14.6548;
-                        m(2, 1) = 0.0;
-                        m(2, 2) = 1.0;
+                    //     yVecSq = minv * yVec;
+                    //     yPos = yVecSq[1] / yVecSq[2];
+                    // }
+                    // else if (xPos > 0.1 && yPos <= 0.6916)
+                    // {
+                    //     Matrix33d m; // matrix 
+                    //     m(0, 0) = 15.6548;
+                    //     m(0, 1) = 0.0;
+                    //     m(0, 2) = 0.0;
+                    //     m(1, 0) = 10.1353;
+                    //     m(1, 1) = 1.0;
+                    //     m(1, 2) = 0.0;
+                    //     m(2, 0) = 14.6548;
+                    //     m(2, 1) = 0.0;
+                    //     m(2, 2) = 1.0;
 
-                        double det = m(0, 0) * (m(1, 1) * m(2, 2) - m(2, 1) * m(1, 2)) -
-                            m(0, 1) * (m(1, 0) * m(2, 2) - m(1, 2) * m(2, 0)) +
-                            m(0, 2) * (m(1, 0) * m(2, 1) - m(1, 1) * m(2, 0));
+                    //     double det = m(0, 0) * (m(1, 1) * m(2, 2) - m(2, 1) * m(1, 2)) -
+                    //         m(0, 1) * (m(1, 0) * m(2, 2) - m(1, 2) * m(2, 0)) +
+                    //         m(0, 2) * (m(1, 0) * m(2, 1) - m(1, 1) * m(2, 0));
 
-                        double invdet = 1 / det;
+                    //     double invdet = 1 / det;
 
-                        Matrix33d minv; // inverse of matrix m
-                        minv(0, 0) = (m(1, 1) * m(2, 2) - m(2, 1) * m(1, 2)) * invdet;
-                        minv(0, 1) = (m(0, 2) * m(2, 1) - m(0, 1) * m(2, 2)) * invdet;
-                        minv(0, 2) = (m(0, 1) * m(1, 2) - m(0, 2) * m(1, 1)) * invdet;
-                        minv(1, 0) = (m(1, 2) * m(2, 0) - m(1, 0) * m(2, 2)) * invdet;
-                        minv(1, 1) = (m(0, 0) * m(2, 2) - m(0, 2) * m(2, 0)) * invdet;
-                        minv(1, 2) = (m(1, 0) * m(0, 2) - m(0, 0) * m(1, 2)) * invdet;
-                        minv(2, 0) = (m(1, 0) * m(2, 1) - m(2, 0) * m(1, 1)) * invdet;
-                        minv(2, 1) = (m(2, 0) * m(0, 1) - m(0, 0) * m(2, 1)) * invdet;
-                        minv(2, 2) = (m(0, 0) * m(1, 1) - m(1, 0) * m(0, 1)) * invdet;
+                    //     Matrix33d minv; // inverse of matrix m
+                    //     minv(0, 0) = (m(1, 1) * m(2, 2) - m(2, 1) * m(1, 2)) * invdet;
+                    //     minv(0, 1) = (m(0, 2) * m(2, 1) - m(0, 1) * m(2, 2)) * invdet;
+                    //     minv(0, 2) = (m(0, 1) * m(1, 2) - m(0, 2) * m(1, 1)) * invdet;
+                    //     minv(1, 0) = (m(1, 2) * m(2, 0) - m(1, 0) * m(2, 2)) * invdet;
+                    //     minv(1, 1) = (m(0, 0) * m(2, 2) - m(0, 2) * m(2, 0)) * invdet;
+                    //     minv(1, 2) = (m(1, 0) * m(0, 2) - m(0, 0) * m(1, 2)) * invdet;
+                    //     minv(2, 0) = (m(1, 0) * m(2, 1) - m(2, 0) * m(1, 1)) * invdet;
+                    //     minv(2, 1) = (m(2, 0) * m(0, 1) - m(0, 0) * m(2, 1)) * invdet;
+                    //     minv(2, 2) = (m(0, 0) * m(1, 1) - m(1, 0) * m(0, 1)) * invdet;
 
-                        yVecSq = minv * yVec;
-                        yPos = yVecSq[1] / yVecSq[2];
-                    }
+                    //     yVecSq = minv * yVec;
+                    //     yPos = yVecSq[1] / yVecSq[2];
+                    // }
                     break;
+                    case "BanjoLele":
+                        yPos = 0.66f * yPos;
+                        break;
                 default:
                     Debug.LogError("Please set instrumenttype"); ;
                     break;
