@@ -29,7 +29,7 @@ public class ResetExciterPos : MonoBehaviour
         yield return new WaitForSeconds(timeBeforeDespawn);
         Global.DespawnInstruments(thisInstrument, despawnTime, false);
         yield return new WaitForSeconds(transitionTime + despawnTime); // wait for despawnTime + transition time before spawning agia
-        thisInstrument[0].transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.transform.localScale = Vector3.zero;
+        thisInstrument[0].transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.transform.localScale = new Vector3 (1e-5f, 1e-5f, 1e-5f);
         Global.SpawnInstruments(thisInstrument, spawnTime, exciterReferenceList.exciterStartPos, exciterReferenceList.exciterStartOrientation);
     }
 }
