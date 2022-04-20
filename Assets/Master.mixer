@@ -23,7 +23,7 @@ AudioMixerController:
   - guid: 13783b9c7d0704503957cd230a990883
     name: excite
   - guid: 00f14f25de2d0406d9ef674f150e07b8
-    name: exctiationType
+    name: excitationType
   - guid: a604f19d3e74f4324aca45e131fdeb2c
     name: useVelocity
   - guid: 2806ba1f808b4422f986f6f1dc8e2954
