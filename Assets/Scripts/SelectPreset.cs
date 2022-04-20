@@ -30,7 +30,8 @@ public class SelectPreset : MonoBehaviour
         // changing instrument preset
         if (gameObject.GetComponentInChildren<PlayAreaInteraction>() == null)
         {
-            Debug.LogWarning("There is no playarea in this instrument!");
+            Debug.LogWarning("There is no playarea in this instrument! (and if there is it doesn't have a playareainteraction script..)");
+            Debug.Log(this.name);
         }
         else
         {
