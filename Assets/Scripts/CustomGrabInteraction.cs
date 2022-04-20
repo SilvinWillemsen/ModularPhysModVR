@@ -56,7 +56,7 @@ public class CustomGrabInteraction : MonoBehaviour
     {
         thisGameObject = grabbedObjectExtractor.Source.gameObject;
 
-        instrumentChild= thisGameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
+        instrumentChild = thisGameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
         
         if (instrumentChild.GetComponent<CustomGrabAttachment>().grabAndFollow)
         {
@@ -77,10 +77,7 @@ public class CustomGrabInteraction : MonoBehaviour
             thisGameObjectParent = thisGameObject.transform.parent.gameObject;
             thisGameObject.GetComponent<Rigidbody>().isKinematic = true;
             startPos = thisGameObject.transform.position;
-
-
             MoveToFixedPosition();
-            //StartCoroutine(MoveToFixedPosition(thisGameObject, false));
         }
         else
         {
@@ -92,17 +89,16 @@ public class CustomGrabInteraction : MonoBehaviour
     void GrabAndFollow()
     {
         //thisGameObject = grabbedObjectExtractor.Source.gameObject;
-        if (!!instrumentChild.GetComponent<CustomGrabAttachment>().isGrabbed)
+        if (!instrumentChild.GetComponent<CustomGrabAttachment>().isGrabbed)
         {
             instrumentChild.GetComponent<CustomGrabAttachment>().isGrabbed = true;
             thisGameObjectParent = thisGameObject.transform.parent.gameObject;
 
             //Quaternion objectRot = thisGameObject.transform.rotation;
-            //newOrientation = new Quaternion
+            //newOrientation = new Quaternions
             thisGameObject.GetComponent<Rigidbody>().isKinematic = true;
             startPos = thisGameObject.transform.position;
             MoveToAndStartFollowing();
-            
         }
         else
         {
@@ -116,7 +112,7 @@ public class CustomGrabInteraction : MonoBehaviour
     void MoveToFixedPosition()
     {
         Vector3 playerFrontPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, distFromPlayerFixed));
-        Vector3 movePos = new Vector3(playerFrontPos.x, 0.0f, playerFrontPos.z);
+        Vector3 movePos = new Vector3(playerFrontPos.x, thisGameObject.transform.position.y, playerFrontPos.z);
         float distance = Vector3.Distance(movePos, thisGameObject.transform.position);
         transitionTime = distance / moveSpeed; // ensure transition always goes with the same speed
 
