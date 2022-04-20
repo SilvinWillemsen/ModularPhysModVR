@@ -21,45 +21,55 @@ public class Global : MonoBehaviour
         }
     }*/
 
-    public static void DespawnInstruments(List<GameObject> instruments, float despawnTime, bool disableGravity)
+    // interactables here can be instuments or exciters
+    public static void DespawnInteractables(List<GameObject> interactables, float despawnTime, bool disableGravity)
     {
-        foreach (GameObject instrument in instruments)
+        foreach (GameObject interactable in interactables)
         {
-            foreach (Transform child in instrument.transform)
+            foreach (Transform child in interactable.transform)
             {
                 if (child.tag == "Instrument" || child.tag == "Exciter")
                 {
-                    if (disableGravity) child.gameObject.GetComponent<Rigidbody>().useGravity = false;
-                    GameObject target = child.GetChild(0).gameObject;
-                    // iTween.ScaleTo(target, Vector3.zero, 0.5f);
-                    iTween.ScaleTo(target, iTween.Hash("x", 1e-5f, "y", 1e-5f, "z", 1e-5f, "time", despawnTime, "onComplete", "OnDespawn"));
+                    DespawnSingleInteractable(child, despawnTime, disableGravity);
+                }
+            }
+        }
+    }
+    public static void DespawnSingleInteractable(Transform child, float despawnTime, bool disableGravity)
+    {
+        if (disableGravity) child.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        GameObject target = child.GetChild(0).gameObject;
+        // iTween.ScaleTo(target, Vector3.zero, 0.5f);
+        iTween.ScaleTo(target, iTween.Hash("x", 1e-5f, "y", 1e-5f, "z", 1e-5f, "time", despawnTime, "onComplete", "OnDespawn"));
+    }
+
+    public static void SpawnInteractables(List<GameObject> interactables, float spawnTime, List<Vector3> interactableStartPos, List<Quaternion> interactableStartOrientation)
+    {
+        //Init();
+        int i = 0;
+        foreach (GameObject interactable in interactables)
+        {
+            foreach (Transform child in interactable.transform)
+            {
+                if (child.tag == "Instrument" || child.tag == "Exciter")
+                {
+                    SpawnSingleInteractable (child, spawnTime, interactableStartPos[i], interactableStartOrientation[i]);
+                    i++;
                 }
             }
         }
     }
 
-    public static void SpawnInstruments(List<GameObject> instruments, float spawnTime, List<Vector3> instrumentStartPos, List<Quaternion> instrumentStartOrientation)
+    public static void SpawnSingleInteractable(Transform child, float spawnTime, Vector3 interactableStartPos, Quaternion interactableStartOrientation)
     {
-        //Init();
-        int i = 0;
-        foreach (GameObject instrument in instruments)
-        {
-            foreach (Transform child in instrument.transform)
-            {
-                if (child.tag == "Instrument" || child.tag == "Exciter")
-                {
-                    child.gameObject.GetComponent<Rigidbody>().useGravity = false;
-                    child.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
-                    child.gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0f, 0f, 0f);
-                    child.gameObject.transform.localPosition = instrumentStartPos[i];
-                    child.gameObject.transform.localRotation = instrumentStartOrientation[i];
-                    GameObject target = child.GetChild(0).gameObject;
-                    iTween.ScaleTo(target, iTween.Hash("x", 1.0f, "y", 1.0f, "z", 1.0f, "time", spawnTime, "onComplete", "OnSpawn"));
-                    child.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                    i++;
-                }
-            }
-        }
+        child.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        child.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
+        child.gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0f, 0f, 0f);
+        child.gameObject.transform.localPosition = interactableStartPos;
+        child.gameObject.transform.localRotation = interactableStartOrientation;
+        GameObject target = child.GetChild(0).gameObject;
+        iTween.ScaleTo(target, iTween.Hash("x", 1.0f, "y", 1.0f, "z", 1.0f, "time", spawnTime, "onComplete", "OnSpawn"));
+        child.gameObject.GetComponent<Rigidbody>().useGravity = true;
     }
 
     public static void SpaceEqually(List<GameObject> instruments, float radius, int maxNInstruments)
@@ -73,6 +83,7 @@ public class Global : MonoBehaviour
             {
                 Vector3 newPos = new Vector3(Mathf.Cos(angle) * radius, 0.0f, Mathf.Sin(angle) * radius);
                 instruments[i].transform.localPosition = newPos;
+                Debug.Log(instruments[i].name + " gets position " + newPos);
             }
         }
     }

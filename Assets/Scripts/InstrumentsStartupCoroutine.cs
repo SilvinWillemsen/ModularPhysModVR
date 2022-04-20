@@ -26,8 +26,7 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
             {
                 if (child.tag == "Instrument")
                 {
-                    //child.gameObject.AddComponent<IsGrabbed>(); // add grab script for custom grab interaction
-                    // Debug.Log("Looking at " + child.GetChild(0).name);
+                    Debug.Log("Looking at " + child.name);
                     // child.gameObject.GetComponent<Rigidbody>().useGravity = true;
                     child.GetChild(0).gameObject.AddComponent<AnimationCallBack>();
 
@@ -44,7 +43,7 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
     IEnumerator Startup()
     {
         // disable all instruments, prevent Unity crashing
-        Global.DespawnInstruments(instruments, 0.1f, true);
+        Global.DespawnInteractables(instruments, 0.1f, true);
 
         // Space all instruments around the origin 
         Global.SpaceEqually(instruments, radiusToOrigin, maxNInstruments);
@@ -55,6 +54,6 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         // Respawn instruments;
-        Global.SpawnInstruments(instruments, 1.0f , instrumentStartPos, instrumentStartOrientation);
+        Global.SpawnInteractables(instruments, 1.0f , instrumentStartPos, instrumentStartOrientation);
     }
 }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 546567304124180385}
   - component: {fileID: 546567304124180384}
   - component: {fileID: 546567304124180415}
-  - component: {fileID: 546567304124180414}
   m_Layer: 0
   m_Name: ExciterArea
   m_TagString: ExciterArea
@@ -96,17 +95,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &546567304124180414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 546567304124180412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59be9ee045b39d14480c83dd0ec6d019, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 5842b2091ae0944dc8afb6ac60083661, type: 2}
-  excitationType: 0

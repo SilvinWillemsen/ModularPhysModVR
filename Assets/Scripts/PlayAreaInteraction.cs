@@ -64,6 +64,10 @@ public class PlayAreaInteraction : MonoBehaviour
 
 
             // Hard-coded mappings of the play area to the x and y positions
+
+            double[] yVec = new double[3] { xPos, yPos, 1.0 };
+            double[] locOnSquare = new double[3];
+            
             switch (instrumentType)
             {
                 case "Guitar":
@@ -74,7 +78,65 @@ public class PlayAreaInteraction : MonoBehaviour
                     break;
                 case "Harp":
                     xPos = 1.0f - xPos;
+                    if (yPos > 0.6916)
+                    {
+                        double[,] m = new double[3, 3] { { 15.6548, 0.0, 0.0 }, { 10.1353, 1.0, 0.0 }, { 14.6548, 0.0, 1.0 } };
+
+                        double det = m[0,0] * (m[1,1] * m[2,2] - m[2,1] * m[1,2]) -
+                            m[0,1] * (m[1,0] * m[2,2] - m[1,2] * m[2,0]) +
+                            m[0,2] * (m[1,0] * m[2,1] - m[1,1] * m[2,0]);
+
+                        double invdet = 1 / det;
+                        
+                        double[,] minv= new double[3,3]; // inverse of matrix m
+                        minv[0,0] = (m[1,1] * m[2,2] - m[2,1] * m[1,2]) * invdet;
+                        minv[0,1] = (m[0,2] * m[2,1] - m[0,1] * m[2,2]) * invdet;
+                        minv[0,2] = (m[0,1] * m[1,2] - m[0,2] * m[1,1]) * invdet;
+                        minv[1,0] = (m[1,2] * m[2,0] - m[1,0] * m[2,2]) * invdet;
+                        minv[1,1] = (m[0,0] * m[2,2] - m[0,2] * m[2,0]) * invdet;
+                        minv[1,2] = (m[1,0] * m[0,2] - m[0,0] * m[1,2]) * invdet;
+                        minv[2,0] = (m[1,0] * m[2,1] - m[2,0] * m[1,1]) * invdet;
+                        minv[2,1] = (m[2,0] * m[0,1] - m[0,0] * m[2,1]) * invdet;
+                        minv[2,2] = (m[0,0] * m[1,1] - m[1,0] * m[0,1]) * invdet;
+
+                        locOnSquare[0] = minv[0,0] * yVec[0] + minv[1,0] * yVec[1] + minv[2,0] * yVec[2];
+                        locOnSquare[1] = minv[0,1] * yVec[0] + minv[1,1] * yVec[1] + minv[2,1] * yVec[2];
+                        locOnSquare[2] = minv[0,2] * yVec[0] + minv[1,2] * yVec[1] + minv[2,2] * yVec[2];
+
+                        yPos = (float)(locOnSquare[1] / locOnSquare[2]);
+                    }
+                    else if (xPos > 0.1 && yPos <= 0.6916)
+                    {
+                        double[,] m = new double[3,3] { { -34.0625, 0.0, 3.1875 }, { -22.0448, -2.1875, 2.2045 }, { -31.8750, 0.0, 1.0 } };
+
+
+                        double det = m[0,0] * (m[1,1] * m[2,2] - m[2,1] * m[1,2]) -
+                            m[0,1] * (m[1,0] * m[2,2] - m[1,2] * m[2,0]) +
+                            m[0,2] * (m[1,0] * m[2,1] - m[1,1] * m[2,0]);
+
+                        double invdet = 1 / det;
+
+                        double[,] minv = new double[3,3]; // inverse of matrix m
+                        minv[0,0] = (m[1,1] * m[2,2] - m[2,1] * m[1,2]) * invdet;
+                        minv[0,1] = (m[0,2] * m[2,1] - m[0,1] * m[2,2]) * invdet;
+                        minv[0,2] = (m[0,1] * m[1,2] - m[0,2] * m[1,1]) * invdet;
+                        minv[1,0] = (m[1,2] * m[2,0] - m[1,0] * m[2,2]) * invdet;
+                        minv[1,1] = (m[0,0] * m[2,2] - m[0,2] * m[2,0]) * invdet;
+                        minv[1,2] = (m[1,0] * m[0,2] - m[0,0] * m[1,2]) * invdet;
+                        minv[2,0] = (m[1,0] * m[2,1] - m[2,0] * m[1,1]) * invdet;
+                        minv[2,1] = (m[2,0] * m[0,1] - m[0,0] * m[2,1]) * invdet;
+                        minv[2,2] = (m[0,0] * m[1,1] - m[1,0] * m[0,1]) * invdet;
+
+                        locOnSquare[0] = minv[0,0] * yVec[0] + minv[1,0] * yVec[1] + minv[2,0] * yVec[2];
+                        locOnSquare[1] = minv[0,1] * yVec[0] + minv[1,1] * yVec[1] + minv[2,1] * yVec[2];
+                        locOnSquare[2] = minv[0,2] * yVec[0] + minv[1,2] * yVec[1] + minv[2,2] * yVec[2];
+
+                        yPos = (float)(locOnSquare[1] / locOnSquare[2]);
+                    }
                     break;
+                    case "BanjoLele":
+                        yPos = 0.66f * yPos;
+                        break;
                 default:
                     Debug.LogError("Please set instrumenttype"); ;
                     break;
