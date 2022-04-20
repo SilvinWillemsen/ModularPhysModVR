@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Audio;
+
 /*
  Make sure that you scale the playarea transform, NOT the collider! That should have a scale of 1,1,1.
  */
@@ -104,6 +105,7 @@ public class PlayAreaInteraction : MonoBehaviour
                         locOnSquare[2] = minv[0,2] * yVec[0] + minv[1,2] * yVec[1] + minv[2,2] * yVec[2];
 
                         yPos = (float)(locOnSquare[1] / locOnSquare[2]);
+                        // Debug.Log("calculated area B");
                     }
                     else if (xPos > 0.1 && yPos <= 0.6916)
                     {
@@ -132,13 +134,14 @@ public class PlayAreaInteraction : MonoBehaviour
                         locOnSquare[2] = minv[0,2] * yVec[0] + minv[1,2] * yVec[1] + minv[2,2] * yVec[2];
 
                         yPos = (float)(locOnSquare[1] / locOnSquare[2]);
+                        // Debug.Log("calculated area C");
                     }
                     break;
                     case "BanjoLele":
                         yPos = 0.66f * yPos;
                         break;
                 default:
-                    Debug.LogError("Please set instrumenttype"); ;
+                    Debug.LogError("Please set instrument type");
                     break;
             }
             // Map according to the string orientation
