@@ -26,6 +26,7 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
             {
                 if (child.tag == "Instrument")
                 {
+                    //child.gameObject.AddComponent<IsGrabbed>(); // add grab script for custom grab interaction
                     // Debug.Log("Looking at " + child.GetChild(0).name);
                     // child.gameObject.GetComponent<Rigidbody>().useGravity = true;
                     child.GetChild(0).gameObject.AddComponent<AnimationCallBack>();
