@@ -35,7 +35,9 @@ public class SelectPreset : MonoBehaviour
         else
         {
             Debug.Log("The instrumentType is " + InstrumentType);
-            transform.GetChild(0).GetComponent<PlayAreaInteraction>().SetInstrumentType (InstrumentType);
+            for (int i = 0; i < transform.childCount; ++i)
+                if (transform.GetChild(i).tag == "PlayArea")
+                    transform.GetChild(i).GetComponent<PlayAreaInteraction>().SetInstrumentType (InstrumentType);
 
             selectedPreset = (pluginList.IndexOf(InstrumentType) + 0.5f) / getNumPresets();
             Debug.Log("The selected preset f-value of " + InstrumentType + " is " + selectedPreset);
