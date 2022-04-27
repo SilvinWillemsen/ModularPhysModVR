@@ -81,7 +81,7 @@ public class PlayAreaInteraction : MonoBehaviour
                     xPos = 1.0f - xPos;
                     if (yPos > 0.6916)
                     {
-                        double[,] m = new double[3, 3] { { 15.6548, 0.0, 0.0 }, { 10.1353, 1.0, 0.0 }, { 14.6548, 0.0, 1.0 } };
+                        double[,] m = new double[3, 3] { { 10.6214, 0.0, 0.0 }, { 7.1381, 1.0, 0.0 }, { 9.6214, 0.0, 1.0 } };
 
                         double det = m[0,0] * (m[1,1] * m[2,2] - m[2,1] * m[1,2]) -
                             m[0,1] * (m[1,0] * m[2,2] - m[1,2] * m[2,0]) +
@@ -109,7 +109,7 @@ public class PlayAreaInteraction : MonoBehaviour
                     }
                     else if (xPos > 0.1 && yPos <= 0.6916)
                     {
-                        double[,] m = new double[3,3] { { -34.0625, 0.0, 3.1875 }, { -22.0448, -2.1875, 2.2045 }, { -31.8750, 0.0, 1.0 } };
+                        double[,] m = new double[3,3] { { -8.9858, 0.0, 1.1706 }, { -6.5399, -0.1706, 0.8685 }, { -8.8151, 0.0 1.0 } };
 
 
                         double det = m[0,0] * (m[1,1] * m[2,2] - m[2,1] * m[1,2]) -
