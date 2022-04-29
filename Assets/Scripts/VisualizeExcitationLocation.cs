@@ -11,25 +11,26 @@ public class VisualizeExcitationLocation : MonoBehaviour
     private float mouseY;
 
     Vector3 mousePosition = Vector3.zero;
-
+    Vector3 startPos;
     RectTransform icon; 
 
     // Start is called before the first frame update
     void Start()
     {
+        startPos = transform.position;
         icon = GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        bool resultX = audioMixer.GetFloat("MouseX", out mouseX);
+        bool resultX = audioMixer.GetFloat("mouseX", out mouseX);
         if (resultX)
         {
             mousePosition.x = mouseX * 10.0f; 
         }
 
-        bool resultY = audioMixer.GetFloat("MouseX", out mouseY);
+        bool resultY = audioMixer.GetFloat("mouseY", out mouseY);
         if (resultY)
         {
             mousePosition.y = mouseY * 10.0f;

@@ -100,8 +100,10 @@ public class PlayAreaInteraction : MonoBehaviour
                     yPos = Global.Limit(Global.Map(yPos, 0, 0.75f, -(1.0f - xPos) * range, 0.75f + (1.0f - xPos) * range), 0, 1);
                     break;
                 case "Harp":
-                    xPos = 1.0f - xPos;
-                    if (yPos > 0.6916)
+                    //float yPosN = xPos; 
+                    yPos = 1 - yPos;
+                    xPos = xPos;
+                    if (yPos > 0.7419)
                     {
                         double[,] m = new double[3, 3] { { 10.6214, 0.0, 0.0 }, { 7.1381, 1.0, 0.0 }, { 9.6214, 0.0, 1.0 } };
 
@@ -127,9 +129,14 @@ public class PlayAreaInteraction : MonoBehaviour
                         locOnSquare[2] = minv[0,2] * yVec[0] + minv[1,2] * yVec[1] + minv[2,2] * yVec[2];
 
                         yPos = (float)(locOnSquare[1] / locOnSquare[2]);
-                        // Debug.Log("calculated area B");
+                        //if (yPos > 1 || xPos > 1)
+                        //{
+                        //    yPos = 0;
+                        //    xPos = 0;
+                        //}
+                        Debug.Log("calculated area B");
                     }
-                    else if (xPos > 0.1 && yPos <= 0.6916)
+                    else if (xPos > 0.1328 && yPos <= 0.7419)
                     {
                         double[,] m = new double[3,3] { { -8.9858, 0.0, 1.1706 }, { -6.5399, -0.1706, 0.8685 }, { -8.8151, 0.0, 1.0 } };
 
@@ -156,8 +163,14 @@ public class PlayAreaInteraction : MonoBehaviour
                         locOnSquare[2] = minv[0,2] * yVec[0] + minv[1,2] * yVec[1] + minv[2,2] * yVec[2];
 
                         yPos = (float)(locOnSquare[1] / locOnSquare[2]);
-                        // Debug.Log("calculated area C");
+                        //if (yPos > 1 || xPos > 1)
+                        //{
+                        //    yPos = 0;
+                        //    xPos = 0;
+                        //}
+                        Debug.Log("calculated area C");
                     }
+                    else Debug.Log("calculated area A");
                     break;
                     case "BanjoLele":
                         yPos = 0.66f * yPos;
