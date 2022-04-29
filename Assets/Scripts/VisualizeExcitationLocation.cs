@@ -29,7 +29,6 @@ public class VisualizeExcitationLocation : MonoBehaviour
         {
             mousePosition.x = mouseX * 10.0f; 
         }
-
         bool resultY = audioMixer.GetFloat("mouseY", out mouseY);
         if (resultY)
         {
