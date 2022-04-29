@@ -57,14 +57,18 @@ public class CustomGrabInteraction : MonoBehaviour
         thisGameObject = grabbedObjectExtractor.Source.gameObject;
 
         instrumentChild = thisGameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
-        
-        if (instrumentChild.GetComponent<CustomGrabAttachment>().grabAndFollow)
+
+        // check if instrument is grabbed and not exciter
+        if (instrumentChild.GetComponent<CustomGrabAttachment>() != null)
         {
-            GrabAndFollow();
-        }
-        else
-        {
-            GrabFixed();
+            if (instrumentChild.GetComponent<CustomGrabAttachment>().grabAndFollow)
+            {
+                GrabAndFollow();
+            }
+            else
+            {
+                GrabFixed();
+            }
         }
     }
 
