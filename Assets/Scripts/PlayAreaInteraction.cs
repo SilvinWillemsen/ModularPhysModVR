@@ -45,6 +45,23 @@ public class PlayAreaInteraction : MonoBehaviour
         instrumentType = instrumentTypeToSet;
     }
 
+    private void OnTriggerEnter (Collider other)
+    {
+        if (other.gameObject.tag == "ExciterArea" && other.transform.parent.name == "Hammer")
+        {
+            Debug.Log("Hammer triggered");
+            StartCoroutine(triggerHammer());
+        }
+    }
+
+    IEnumerator triggerHammer()
+    {
+        audioMixer.SetFloat("trigger", 1.0f);
+        yield return new WaitForSeconds(0.1f);
+
+        audioMixer.SetFloat("trigger", 0.0f);
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "ExciterArea")
