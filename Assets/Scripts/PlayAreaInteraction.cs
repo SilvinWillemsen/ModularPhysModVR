@@ -23,7 +23,7 @@ public class PlayAreaInteraction : MonoBehaviour
     private GameObject excitationLoc;
     [SerializeField] private StringOrientation stringOrientation;
 
-
+    private float hammerVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -39,10 +39,32 @@ public class PlayAreaInteraction : MonoBehaviour
         
     }
 
+
     public void SetInstrumentType(String instrumentTypeToSet)
     {
         Debug.Log("instrumentTypeToSet is " + instrumentTypeToSet);
         instrumentType = instrumentTypeToSet;
+    }
+
+    private void OnTriggerEnter (Collider other)
+    {
+        if (other.gameObject.tag == "ExciterArea" && other.transform.parent.name == "Hammer")
+        {
+            hammerVelocity = Global.Limit (other.transform.parent.GetComponent<HammerVelocityTracker>().getVelocity().magnitude / 4.0f, 0.0f, 1.0f);
+            StartCoroutine(triggerHammer());
+        }
+    }
+
+    IEnumerator triggerHammer()
+    {
+        Debug.Log (hammerVelocity);
+        audioMixer.SetFloat("hammerVelocity", hammerVelocity);
+        yield return new WaitForSeconds(0.1f);
+
+        audioMixer.SetFloat("trigger", 1.0f);
+        yield return new WaitForSeconds(0.1f);
+
+        audioMixer.SetFloat("trigger", 0.0f);
     }
 
     private void OnTriggerStay(Collider other)
@@ -140,7 +162,11 @@ public class PlayAreaInteraction : MonoBehaviour
                     case "BanjoLele":
                         yPos = 0.66f * yPos;
                         break;
+                    case "Timpani":
+                        yPos = 0.66f * yPos;
+                        break;
                 default:
+                    Debug.Log("Instrument Type is currently " + instrumentType);
                     Debug.LogError("Please set instrument type");
                     break;
             }

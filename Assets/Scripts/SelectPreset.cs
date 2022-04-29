@@ -54,20 +54,24 @@ public class SelectPreset : MonoBehaviour
 
     public void InstrumentGrabbed()
     {
-        StartCoroutine(ChangePreset());
-    }
-
-
-    IEnumerator ChangePreset()
-    {
+        // StartCoroutine(ChangePreset());
         Debug.Log("Selected preset is " + selectedPreset);
         Debug.Log(InstrumentType + " grabbed!"); 
         audioMixer.SetFloat("presetSelect", selectedPreset);
-        yield return new WaitForSeconds(0.1f);
-        audioMixer.SetFloat("loadPreset", 1.0f);
-        yield return new WaitForSeconds(0.1f);
-        audioMixer.SetFloat("loadPreset", 0.0f);
+
     }
+
+
+    // IEnumerator ChangePreset()
+    // {
+    //     Debug.Log("Selected preset is " + selectedPreset);
+    //     Debug.Log(InstrumentType + " grabbed!"); 
+    //     audioMixer.SetFloat("presetSelect", selectedPreset);
+    //     // yield return new WaitForSeconds(0.1f);
+    //     // audioMixer.SetFloat("loadPreset", 1.0f);
+    //     // yield return new WaitForSeconds(0.1f);
+    //     // audioMixer.SetFloat("loadPreset", 0.0f);
+    // }
 
     [DllImport("audioPlugin_ModularVST", CallingConvention = CallingConvention.Cdecl)]
     static extern int getNumPresets();

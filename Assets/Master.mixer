@@ -1,5 +1,41 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-3168784542153313213
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 8a592141773ab4252a65def6013adeeb
+  m_EffectName: audioplugin_ModularVST
+  m_MixLevel: fed382f001909443d97041fadc5e3995
+  m_Parameters:
+  - m_ParameterName: Mouse X
+    m_GUID: e4dd802b303864b1ab06a6530e798f0b
+  - m_ParameterName: Mouse Y
+    m_GUID: 4817faf4a55204ee4af1739d0f1c1487
+  - m_ParameterName: Smooth
+    m_GUID: 65eee36d254b4458b8609cd43570ef69
+  - m_ParameterName: Smoothness
+    m_GUID: a87749e3135364abbaafc7d686812ae5
+  - m_ParameterName: Excite
+    m_GUID: 8d8a4a7c6ef7c4f99bf5ea32c6966248
+  - m_ParameterName: Excitation Type
+    m_GUID: fb1cc15e569924b8aa4db476b256c6d4
+  - m_ParameterName: Use Velocity
+    m_GUID: 5a4ae10ada25540ed9c902992f604f60
+  - m_ParameterName: Hammer Velocity
+    m_GUID: ee3a6114b53e84a4f899ba88790d1f69
+  - m_ParameterName: Trigger
+    m_GUID: 088decc4972c54a77b0306229597dd0d
+  - m_ParameterName: Preset Select
+    m_GUID: 5c335c6625d0746e8a9d5264941e8302
+  - m_ParameterName: Load preset
+    m_GUID: 613f0513bc811489582f6aa31a9e5bac
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -16,24 +52,26 @@ AudioMixerController:
   m_EnableSuspend: 0
   m_UpdateMode: 1
   m_ExposedParameters:
-  - guid: e6dc7fe82586a432786da5fec9fa348b
+  - guid: e4dd802b303864b1ab06a6530e798f0b
     name: mouseX
-  - guid: de601e9534ba2465391b807d3d1209c2
+  - guid: 4817faf4a55204ee4af1739d0f1c1487
     name: mouseY
-  - guid: 13783b9c7d0704503957cd230a990883
+  - guid: 65eee36d254b4458b8609cd43570ef69
+    name: smooth
+  - guid: a87749e3135364abbaafc7d686812ae5
+    name: smoothness
+  - guid: 8d8a4a7c6ef7c4f99bf5ea32c6966248
     name: excite
-  - guid: 00f14f25de2d0406d9ef674f150e07b8
+  - guid: fb1cc15e569924b8aa4db476b256c6d4
     name: excitationType
-  - guid: a604f19d3e74f4324aca45e131fdeb2c
+  - guid: 5a4ae10ada25540ed9c902992f604f60
     name: useVelocity
-  - guid: 2806ba1f808b4422f986f6f1dc8e2954
+  - guid: ee3a6114b53e84a4f899ba88790d1f69
     name: hammerVelocity
-  - guid: ef6124124acc2471c8e7eb257b5a6496
+  - guid: 088decc4972c54a77b0306229597dd0d
     name: trigger
-  - guid: 352ba492f6b4549d78d5d5aa39e38955
+  - guid: 5c335c6625d0746e8a9d5264941e8302
     name: presetSelect
-  - guid: 5a3dd906f9671436f846fbf374add7ed
-    name: loadPreset
   m_AudioMixerGroupViews:
   - guids:
     - a467cd9e32e9f419ba48f107a96416b4
@@ -55,7 +93,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
-  - {fileID: 3573147949904397100}
+  - {fileID: -3168784542153313213}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -85,6 +123,7 @@ AudioMixerSnapshotController:
   m_SnapshotID: c871f84b9623b4377852cd42e0ed6aa8
   m_FloatValues:
     5db04090d6f7d417d8289ed06900b91e: 1
+    ceb99f31ff9ab416e9da57c4bb4fe13d: 1
     4f6d42f3d0629a74ab50cb2fffe04e44: 0
     43fd74551458c3147a57e38fb568c3ae: 0.412
     1ff7bb756c971444bb637113f7140262: 0.407
@@ -97,39 +136,3 @@ AudioMixerSnapshotController:
     ae238d8d9a5764df78a425f9853c2c0d: 0
     ac0658ad054fe4623b617da2f16c1fa9: 0
   m_TransitionOverrides: {}
---- !u!244 &3573147949904397100
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: 4f1dc695cf5bc44599f3015176283de2
-  m_EffectName: audioplugin_ModularVST
-  m_MixLevel: 9e6ed74e3ea8946b7816f810e2395212
-  m_Parameters:
-  - m_ParameterName: Mouse X
-    m_GUID: e6dc7fe82586a432786da5fec9fa348b
-  - m_ParameterName: Mouse Y
-    m_GUID: de601e9534ba2465391b807d3d1209c2
-  - m_ParameterName: Smooth
-    m_GUID: c2c1724659dc046d9857f67177c0493e
-  - m_ParameterName: Smoothness
-    m_GUID: 5f2adbd648a9944fbadd975aff0f3b99
-  - m_ParameterName: Excite
-    m_GUID: 13783b9c7d0704503957cd230a990883
-  - m_ParameterName: Excitation Type
-    m_GUID: 00f14f25de2d0406d9ef674f150e07b8
-  - m_ParameterName: Use Velocity
-    m_GUID: a604f19d3e74f4324aca45e131fdeb2c
-  - m_ParameterName: Hammer Velocity
-    m_GUID: 2806ba1f808b4422f986f6f1dc8e2954
-  - m_ParameterName: Trigger
-    m_GUID: ef6124124acc2471c8e7eb257b5a6496
-  - m_ParameterName: Preset Select
-    m_GUID: 352ba492f6b4549d78d5d5aa39e38955
-  - m_ParameterName: Load preset
-    m_GUID: 5a3dd906f9671436f846fbf374add7ed
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
