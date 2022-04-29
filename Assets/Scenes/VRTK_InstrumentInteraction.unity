@@ -553,7 +553,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: grabType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: validInteractionTypes
@@ -700,6 +700,117 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1175574273613369320, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
   m_PrefabInstance: {fileID: 152809055}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &165710137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 165710138}
+  - component: {fileID: 165710142}
+  - component: {fileID: 165710141}
+  - component: {fileID: 165710140}
+  - component: {fileID: 165710139}
+  m_Layer: 0
+  m_Name: PlayArea (1)
+  m_TagString: PlayArea
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &165710138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165710137}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.16, y: 3.05, z: -0}
+  m_LocalScale: {x: 2, y: 2, z: 0.26}
+  m_Children: []
+  m_Father: {fileID: 941744649}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &165710139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165710137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d482c8b15dfe4e458dc5dd5b5180487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 5842b2091ae0944dc8afb6ac60083661, type: 2}
+  instrumentType: 
+  stringOrientation: 1
+--- !u!65 &165710140
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165710137}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &165710141
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165710137}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &165710142
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165710137}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &189983351 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7533518594582477156, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
@@ -831,7 +942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3425589306487620505, guid: c83d63619306b0845a841dd3cc213a70, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3908322436372368397, guid: c83d63619306b0845a841dd3cc213a70, type: 3}
       propertyPath: m_Enabled
@@ -1728,7 +1839,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: grabType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: Ungrabbed.m_PersistentCalls.m_Calls.Array.size
@@ -2267,7 +2378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2764921037832162238, guid: 0b5f198c853b9794680bf089e64daf28, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2764921037832162239, guid: 0b5f198c853b9794680bf089e64daf28, type: 3}
       propertyPath: m_RootOrder
@@ -2600,7 +2711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad59f78779f178146834982094182e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xrSetup: 1
+  xrSetup: 0
   TrackedAliasObj: {fileID: 1380103482}
   OculusCameraRig: {fileID: 1261161337}
   SimulatorCameraRig: {fileID: 576308780}
@@ -2759,7 +2870,7 @@ PrefabInstance:
     - target: {fileID: 5839046843648530548, guid: f8e0d2a59209d854b91b04b5db7df9ca, type: 3}
       propertyPath: grabAction
       value: 
-      objectReference: {fileID: 1939896251}
+      objectReference: {fileID: 757004074}
     - target: {fileID: 5839046843648530548, guid: f8e0d2a59209d854b91b04b5db7df9ca, type: 3}
       propertyPath: velocityTracker
       value: 
@@ -3237,7 +3348,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: grabType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: Ungrabbed.m_PersistentCalls.m_Calls.Array.size
@@ -4472,7 +4583,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: grabType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: Ungrabbed.m_PersistentCalls.m_Calls.Array.size
@@ -4815,7 +4926,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: grabType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: validInteractionTypes
@@ -5550,7 +5661,7 @@ PrefabInstance:
     - target: {fileID: 5839046843648530548, guid: f8e0d2a59209d854b91b04b5db7df9ca, type: 3}
       propertyPath: grabAction
       value: 
-      objectReference: {fileID: 361667168}
+      objectReference: {fileID: 1303848141}
     - target: {fileID: 5839046843648530548, guid: f8e0d2a59209d854b91b04b5db7df9ca, type: 3}
       propertyPath: velocityTracker
       value: 
@@ -6666,7 +6777,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: grabType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: validInteractionTypes
@@ -7106,7 +7217,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: grabType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: validInteractionTypes
@@ -7565,7 +7676,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: grabType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
       propertyPath: validInteractionTypes
