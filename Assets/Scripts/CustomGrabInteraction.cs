@@ -23,7 +23,6 @@ public class CustomGrabInteraction : MonoBehaviour
     private Quaternion newOrientation;
     private GameObject instrumentChild;
 
-    
 
     // Start is called before the first frame update
     void Start()
@@ -54,9 +53,13 @@ public class CustomGrabInteraction : MonoBehaviour
 
     public void CustomGrab(Tilia.Interactions.Interactables.Interactables.Operation.Extraction.InteractableFacadeExtractor grabbedObjectExtractor)
     {
-        thisGameObject = grabbedObjectExtractor.Source.gameObject;
 
+        thisGameObject = grabbedObjectExtractor.Source.gameObject;
         instrumentChild = thisGameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
+
+        // despawn instrument when grabbed
+        DespawnCheck(instrumentChild);
+       
 
         // check if instrument is grabbed and not exciter
         if (instrumentChild.GetComponent<CustomGrabAttachment>() != null)
@@ -138,6 +141,27 @@ public class CustomGrabInteraction : MonoBehaviour
         holdOn = true;
         Quaternion rot = Camera.main.transform.rotation;
         iTween.RotateTo(thisGameObject, rot.eulerAngles, transitionTime);
+    }
+
+    void DespawnCheck(GameObject instrumentToExclude)
+    {
+        foreach (GameObject child in GetComponent<InstrumentReferenceList>().instruments)
+        {
+            foreach(Transform childTransf in child.transform)
+            {
+                if (childTransf.tag == "Instrument")
+                {
+                    GameObject instrumentChild = childTransf.GetChild(0).gameObject.transform.GetChild(1).gameObject;
+                    if (instrumentChild.GetComponent<CustomGrabAttachment>().isGrabbed && instrumentChild != instrumentToExclude)
+                    {
+                        holdOn = false;
+                        childTransf.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                        instrumentChild.GetComponent<CustomGrabAttachment>().isGrabbed = false;
+                        GetComponent<ResetInstrumentPos>().DespawnAndSpawnInstrument(child);
+                    }
+                }
+            }
+        }
     }
 
 }
