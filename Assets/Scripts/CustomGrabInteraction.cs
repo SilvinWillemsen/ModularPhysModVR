@@ -58,12 +58,13 @@ public class CustomGrabInteraction : MonoBehaviour
         instrumentChild = thisGameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
 
         // despawn instrument when grabbed
-        DespawnCheck(instrumentChild);
+       
        
 
         // check if instrument is grabbed and not exciter
         if (instrumentChild.GetComponent<CustomGrabAttachment>() != null)
         {
+            DespawnCheck(instrumentChild);
             if (instrumentChild.GetComponent<CustomGrabAttachment>().grabAndFollow)
             {
                 GrabAndFollow();
