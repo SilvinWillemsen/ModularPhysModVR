@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2757,6 +2757,7 @@ MonoBehaviour:
   - BanjoLele
   - Timpani
   - Cello
+  - Marimba
   InstrumentType: Timpani
 --- !u!114 &646731376
 MonoBehaviour:
@@ -3165,6 +3166,7 @@ MonoBehaviour:
   - BanjoLele
   - Timpani
   - Cello
+  - Marimba
   InstrumentType: Cello
 --- !u!65 &714361970
 BoxCollider:
@@ -3767,6 +3769,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e31ddf5ca7950534fb66684149b566b0, type: 3}
+--- !u!1 &940057599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 940057600}
+  m_Layer: 0
+  m_Name: Marimba
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &940057600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940057599}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4, y: 0, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1964225918}
+  - {fileID: 1793865751}
+  m_Father: {fileID: 1758875469}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &941744648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3858,6 +3892,66 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1458957959020712, guid: 114b3c3ce4645364a97c8f0803bed65b, type: 3}
   m_PrefabInstance: {fileID: 1380103481}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &973489298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 973489299}
+  - component: {fileID: 973489301}
+  - component: {fileID: 973489300}
+  m_Layer: 0
+  m_Name: PlayArea
+  m_TagString: PlayArea
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &973489299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973489298}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.897, z: 0}
+  m_LocalScale: {x: 1.36, y: 0.1, z: 0.64}
+  m_Children: []
+  m_Father: {fileID: 1561178277}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &973489300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973489298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d482c8b15dfe4e458dc5dd5b5180487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 5842b2091ae0944dc8afb6ac60083661, type: 2}
+  instrumentType: 
+  stringOrientation: 1
+--- !u!65 &973489301
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973489298}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &977015176 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
@@ -4486,6 +4580,7 @@ MonoBehaviour:
   - BanjoLele
   - Timpani
   - Cello
+  - Marimba
   InstrumentType: BanjoLele
 --- !u!114 &1104981246
 MonoBehaviour:
@@ -4932,6 +5027,7 @@ MonoBehaviour:
   - BanjoLele
   - Timpani
   - Cello
+  - Marimba
   InstrumentType: Harp
 --- !u!1 &1261161333 stripped
 GameObject:
@@ -5803,6 +5899,7 @@ MonoBehaviour:
   - BanjoLele
   - Timpani
   - Cello
+  - Marimba
 --- !u!4 &1389746077
 Transform:
   m_ObjectHideFlags: 0
@@ -5859,6 +5956,87 @@ Transform:
   m_Father: {fileID: 1060865654}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1449476138
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 940057600}
+    m_Modifications:
+    - target: {fileID: 785982709505707726, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: grabType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630000796974167091, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774344186399642229, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_Name
+      value: Interactions.Interactable_SM_Xylophone_LODS
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774344186399642229, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_TagString
+      value: Instrument
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.337
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
 --- !u!4 &1493651481 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
@@ -6139,6 +6317,142 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbaf3558ca247b54c95c270c714485be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1561178276
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1856402298}
+    m_Modifications:
+    - target: {fileID: 5104335407266742382, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6983416259567992645, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_Name
+      value: SM_Xylophone_LODS
+      objectReference: {fileID: 0}
+    - target: {fileID: 6983416259567992645, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_TagString
+      value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+--- !u!4 &1561178277 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7755696336528008703, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+  m_PrefabInstance: {fileID: 1561178276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1561178278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6983416259567992645, guid: bc1ed36e700b75c449d88d2ce08a74a2, type: 3}
+  m_PrefabInstance: {fileID: 1561178276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1561178279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561178278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7da4aadb75628948821e2361cb121b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 5842b2091ae0944dc8afb6ac60083661, type: 2}
+  pluginList:
+  - Guitar
+  - Harp
+  - BanjoLele
+  - Timpani
+  - Cello
+  - Marimba
+  InstrumentType: Marimba
+--- !u!64 &1561178280
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561178278}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!114 &1561178283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561178278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966fefc1416b0f247a4c2b5685afc522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabAndFollow: 0
+  isGrabbed: 0
 --- !u!1001 &1561236206
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6755,6 +7069,7 @@ Transform:
   - {fileID: 729384172}
   - {fileID: 1103620153}
   - {fileID: 1365743309}
+  - {fileID: 940057600}
   m_Father: {fileID: 1158235975}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6859,6 +7174,7 @@ MonoBehaviour:
   - BanjoLele
   - Timpani
   - Cello
+  - Marimba
   InstrumentType: Guitar
 --- !u!114 &1772398054
 MonoBehaviour:
@@ -6874,6 +7190,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabAndFollow: 1
   isGrabbed: 0
+--- !u!1001 &1793865750
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 940057600}
+    m_Modifications:
+    - target: {fileID: 1866034871780828409, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_text
+      value: 'MARIMBA
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951048442053126596, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_Name
+      value: Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+--- !u!4 &1793865751 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6951048442053126603, guid: 16c3d6c4ed8a8034d87cb10534c6740c, type: 3}
+  m_PrefabInstance: {fileID: 1793865750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1795426337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7219,6 +7603,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
   m_PrefabInstance: {fileID: 1289143248}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1856402298 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1175574273613369320, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+  m_PrefabInstance: {fileID: 1449476138}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1898775562
 GameObject:
   m_ObjectHideFlags: 0
@@ -7501,6 +7890,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa56b03b7690cea40aac6e338ff999f8, type: 3}
+--- !u!4 &1964225918 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8090891674275893548, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}
+  m_PrefabInstance: {fileID: 1449476138}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2004875757 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7774344186399642229, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a, type: 3}

@@ -176,11 +176,13 @@ public class PlayAreaInteraction : MonoBehaviour
                         yPos = 0.66f * yPos;
                         break;
                     case "Timpani":
-                        yPos = 0.66f * yPos;
+                        Debug.Log (xPos + " " + yPos);
+                        break;
+                    case "Marimba":
                         break;
                 default:
                     Debug.Log("Instrument Type is currently " + instrumentType);
-                    Debug.LogError("Please set instrument type");
+                    Debug.LogWarning("No custom playarea defined");
                     break;
             }
             // Map according to the string orientation
