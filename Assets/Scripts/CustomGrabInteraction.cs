@@ -33,7 +33,7 @@ public class CustomGrabInteraction : MonoBehaviour
     {
 
         //grabbedObjectExtractorLeft = distanceGrabberExtractorLeft.GetComponent<Tilia.Interactions.Interactables.Interactables.Operation.Extraction.InteractableFacadeExtractor>();
-        //grabbedObjectExtractorLeft = distanceGrabberExtractorRight.GetComponent<Tilia.Interactions.Interactables.Interactables.Operation.Extraction.InteractableFacadeExtractor>();
+        //grabbedObjectExtractorRight = distanceGrabberExtractorRight.GetComponent<Tilia.Interactions.Interactables.Interactables.Operation.Extraction.InteractableFacadeExtractor>();
     }
 
     // Update is called once per frame

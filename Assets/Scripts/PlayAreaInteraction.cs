@@ -25,6 +25,9 @@ public class PlayAreaInteraction : MonoBehaviour
 
     private float hammerVelocity;
 
+    private bool outOfBounds1 = false;
+    private bool outOfBounds2 = false;
+
     // Start is called before the first frame update
     void Start()
     {        
@@ -48,23 +51,74 @@ public class PlayAreaInteraction : MonoBehaviour
 
     private void OnTriggerEnter (Collider other)
     {
-        if (other.gameObject.tag == "ExciterArea" && other.transform.parent.name == "Hammer")
+        // Code to determine whether play area is triggered
+        if (other.gameObject.tag == "ExciterArea")
         {
-            hammerVelocity = Global.Limit (other.transform.parent.GetComponent<HammerVelocityTracker>().getVelocity().magnitude / 4.0f, 0.0f, 1.0f);
-            StartCoroutine(triggerHammer());
+
+            // calculate where on the instrument it's exciting:
+            excitationLoc.transform.position = other.transform.position;
+
+            Vector3 localPos = new Vector3(excitationLoc.transform.localPosition.x, excitationLoc.transform.localPosition.y, excitationLoc.transform.localPosition.z);
+
+
+            // map & limit values, swap value for juce (Silvin: turns out it's always from -0.5 to 0.5)
+            float xPos = Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
+            float yPos = 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1);
+
+            switch (instrumentType)
+            {
+                case "Marimba":
+                    if (other.transform.parent.name == "Hammer1")
+                        outOfBounds1 = yPos < 0.5 ? false : true;
+                    else if (other.transform.parent.name == "Hammer2")
+                        outOfBounds2 = yPos < 0.5 ? false : true;
+
+                    break;
+                case "Timpani":
+                    float xNormalised = (xPos - 0.5f) * 2.0f;
+                    float yNormalised = (yPos - 0.5f) * 2.0f;
+                    if (other.transform.parent.name == "Hammer1")
+                        outOfBounds1 = (xNormalised * xNormalised + yNormalised * yNormalised >= 1);
+                    else if (other.transform.parent.name == "Hammer2")
+                        outOfBounds2 = (xNormalised * xNormalised + yNormalised * yNormalised >= 1);
+                    Debug.Log(xNormalised + " " + yNormalised);
+                    break;
+                default:
+                    
+                    break;
+            }
+
+            if (other.transform.parent.name == "Hammer1" || other.transform.parent.name == "Hammer2")
+            {
+                hammerVelocity = Global.Limit(other.GetComponent<HammerVelocityTracker>().getVelocity().magnitude / 4.0f, 0.0f, 1.0f);
+                StartCoroutine(triggerHammer(other.transform.parent.name == "Hammer1"));
+            }
         }
     }
 
-    IEnumerator triggerHammer()
+    IEnumerator triggerHammer(bool leftHammer)
     {
-        Debug.Log (hammerVelocity);
         audioMixer.SetFloat("hammerVelocity", hammerVelocity);
         yield return new WaitForSeconds(0.1f);
 
-        audioMixer.SetFloat("trigger1", 1.0f);
-        yield return new WaitForSeconds(0.1f);
+        if (leftHammer)
+        {
+            if (!outOfBounds1)
+                audioMixer.SetFloat("trigger1", 1.0f);
 
-        audioMixer.SetFloat("trigger1", 0.0f);
+            yield return new WaitForSeconds(0.1f);
+
+            audioMixer.SetFloat("trigger1", 0.0f);
+        } 
+        else
+        {
+            if (!outOfBounds2)
+                audioMixer.SetFloat("trigger2", 1.0f);
+            yield return new WaitForSeconds(0.1f);
+
+            audioMixer.SetFloat("trigger2", 0.0f);
+
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -90,7 +144,7 @@ public class PlayAreaInteraction : MonoBehaviour
 
             double[] yVec = new double[3] { xPos, yPos, 1.0 };
             double[] locOnSquare = new double[3];
-            
+
             switch (instrumentType)
             {
                 case "Guitar":
@@ -107,26 +161,26 @@ public class PlayAreaInteraction : MonoBehaviour
                     {
                         double[,] m = new double[3, 3] { { 10.6214, 0.0, 0.0 }, { 7.1381, 1.0, 0.0 }, { 9.6214, 0.0, 1.0 } };
 
-                        double det = m[0,0] * (m[1,1] * m[2,2] - m[2,1] * m[1,2]) -
-                            m[0,1] * (m[1,0] * m[2,2] - m[1,2] * m[2,0]) +
-                            m[0,2] * (m[1,0] * m[2,1] - m[1,1] * m[2,0]);
+                        double det = m[0, 0] * (m[1, 1] * m[2, 2] - m[2, 1] * m[1, 2]) -
+                            m[0, 1] * (m[1, 0] * m[2, 2] - m[1, 2] * m[2, 0]) +
+                            m[0, 2] * (m[1, 0] * m[2, 1] - m[1, 1] * m[2, 0]);
 
                         double invdet = 1 / det;
-                        
-                        double[,] minv= new double[3,3]; // inverse of matrix m
-                        minv[0,0] = (m[1,1] * m[2,2] - m[2,1] * m[1,2]) * invdet;
-                        minv[0,1] = (m[0,2] * m[2,1] - m[0,1] * m[2,2]) * invdet;
-                        minv[0,2] = (m[0,1] * m[1,2] - m[0,2] * m[1,1]) * invdet;
-                        minv[1,0] = (m[1,2] * m[2,0] - m[1,0] * m[2,2]) * invdet;
-                        minv[1,1] = (m[0,0] * m[2,2] - m[0,2] * m[2,0]) * invdet;
-                        minv[1,2] = (m[1,0] * m[0,2] - m[0,0] * m[1,2]) * invdet;
-                        minv[2,0] = (m[1,0] * m[2,1] - m[2,0] * m[1,1]) * invdet;
-                        minv[2,1] = (m[2,0] * m[0,1] - m[0,0] * m[2,1]) * invdet;
-                        minv[2,2] = (m[0,0] * m[1,1] - m[1,0] * m[0,1]) * invdet;
 
-                        locOnSquare[0] = minv[0,0] * yVec[0] + minv[1,0] * yVec[1] + minv[2,0] * yVec[2];
-                        locOnSquare[1] = minv[0,1] * yVec[0] + minv[1,1] * yVec[1] + minv[2,1] * yVec[2];
-                        locOnSquare[2] = minv[0,2] * yVec[0] + minv[1,2] * yVec[1] + minv[2,2] * yVec[2];
+                        double[,] minv = new double[3, 3]; // inverse of matrix m
+                        minv[0, 0] = (m[1, 1] * m[2, 2] - m[2, 1] * m[1, 2]) * invdet;
+                        minv[0, 1] = (m[0, 2] * m[2, 1] - m[0, 1] * m[2, 2]) * invdet;
+                        minv[0, 2] = (m[0, 1] * m[1, 2] - m[0, 2] * m[1, 1]) * invdet;
+                        minv[1, 0] = (m[1, 2] * m[2, 0] - m[1, 0] * m[2, 2]) * invdet;
+                        minv[1, 1] = (m[0, 0] * m[2, 2] - m[0, 2] * m[2, 0]) * invdet;
+                        minv[1, 2] = (m[1, 0] * m[0, 2] - m[0, 0] * m[1, 2]) * invdet;
+                        minv[2, 0] = (m[1, 0] * m[2, 1] - m[2, 0] * m[1, 1]) * invdet;
+                        minv[2, 1] = (m[2, 0] * m[0, 1] - m[0, 0] * m[2, 1]) * invdet;
+                        minv[2, 2] = (m[0, 0] * m[1, 1] - m[1, 0] * m[0, 1]) * invdet;
+
+                        locOnSquare[0] = minv[0, 0] * yVec[0] + minv[1, 0] * yVec[1] + minv[2, 0] * yVec[2];
+                        locOnSquare[1] = minv[0, 1] * yVec[0] + minv[1, 1] * yVec[1] + minv[2, 1] * yVec[2];
+                        locOnSquare[2] = minv[0, 2] * yVec[0] + minv[1, 2] * yVec[1] + minv[2, 2] * yVec[2];
 
                         yPos = (float)(locOnSquare[1] / locOnSquare[2]);
                         //if (yPos > 1 || xPos > 1)
@@ -138,29 +192,29 @@ public class PlayAreaInteraction : MonoBehaviour
                     }
                     else if (xPos > 0.1328 && yPos <= 0.7419)
                     {
-                        double[,] m = new double[3,3] { { -8.9858, 0.0, 1.1706 }, { -6.5399, -0.1706, 0.8685 }, { -8.8151, 0.0, 1.0 } };
+                        double[,] m = new double[3, 3] { { -8.9858, 0.0, 1.1706 }, { -6.5399, -0.1706, 0.8685 }, { -8.8151, 0.0, 1.0 } };
 
 
-                        double det = m[0,0] * (m[1,1] * m[2,2] - m[2,1] * m[1,2]) -
-                            m[0,1] * (m[1,0] * m[2,2] - m[1,2] * m[2,0]) +
-                            m[0,2] * (m[1,0] * m[2,1] - m[1,1] * m[2,0]);
+                        double det = m[0, 0] * (m[1, 1] * m[2, 2] - m[2, 1] * m[1, 2]) -
+                            m[0, 1] * (m[1, 0] * m[2, 2] - m[1, 2] * m[2, 0]) +
+                            m[0, 2] * (m[1, 0] * m[2, 1] - m[1, 1] * m[2, 0]);
 
                         double invdet = 1 / det;
 
-                        double[,] minv = new double[3,3]; // inverse of matrix m
-                        minv[0,0] = (m[1,1] * m[2,2] - m[2,1] * m[1,2]) * invdet;
-                        minv[0,1] = (m[0,2] * m[2,1] - m[0,1] * m[2,2]) * invdet;
-                        minv[0,2] = (m[0,1] * m[1,2] - m[0,2] * m[1,1]) * invdet;
-                        minv[1,0] = (m[1,2] * m[2,0] - m[1,0] * m[2,2]) * invdet;
-                        minv[1,1] = (m[0,0] * m[2,2] - m[0,2] * m[2,0]) * invdet;
-                        minv[1,2] = (m[1,0] * m[0,2] - m[0,0] * m[1,2]) * invdet;
-                        minv[2,0] = (m[1,0] * m[2,1] - m[2,0] * m[1,1]) * invdet;
-                        minv[2,1] = (m[2,0] * m[0,1] - m[0,0] * m[2,1]) * invdet;
-                        minv[2,2] = (m[0,0] * m[1,1] - m[1,0] * m[0,1]) * invdet;
+                        double[,] minv = new double[3, 3]; // inverse of matrix m
+                        minv[0, 0] = (m[1, 1] * m[2, 2] - m[2, 1] * m[1, 2]) * invdet;
+                        minv[0, 1] = (m[0, 2] * m[2, 1] - m[0, 1] * m[2, 2]) * invdet;
+                        minv[0, 2] = (m[0, 1] * m[1, 2] - m[0, 2] * m[1, 1]) * invdet;
+                        minv[1, 0] = (m[1, 2] * m[2, 0] - m[1, 0] * m[2, 2]) * invdet;
+                        minv[1, 1] = (m[0, 0] * m[2, 2] - m[0, 2] * m[2, 0]) * invdet;
+                        minv[1, 2] = (m[1, 0] * m[0, 2] - m[0, 0] * m[1, 2]) * invdet;
+                        minv[2, 0] = (m[1, 0] * m[2, 1] - m[2, 0] * m[1, 1]) * invdet;
+                        minv[2, 1] = (m[2, 0] * m[0, 1] - m[0, 0] * m[2, 1]) * invdet;
+                        minv[2, 2] = (m[0, 0] * m[1, 1] - m[1, 0] * m[0, 1]) * invdet;
 
-                        locOnSquare[0] = minv[0,0] * yVec[0] + minv[1,0] * yVec[1] + minv[2,0] * yVec[2];
-                        locOnSquare[1] = minv[0,1] * yVec[0] + minv[1,1] * yVec[1] + minv[2,1] * yVec[2];
-                        locOnSquare[2] = minv[0,2] * yVec[0] + minv[1,2] * yVec[1] + minv[2,2] * yVec[2];
+                        locOnSquare[0] = minv[0, 0] * yVec[0] + minv[1, 0] * yVec[1] + minv[2, 0] * yVec[2];
+                        locOnSquare[1] = minv[0, 1] * yVec[0] + minv[1, 1] * yVec[1] + minv[2, 1] * yVec[2];
+                        locOnSquare[2] = minv[0, 2] * yVec[0] + minv[1, 2] * yVec[1] + minv[2, 2] * yVec[2];
 
                         yPos = (float)(locOnSquare[1] / locOnSquare[2]);
                         //if (yPos > 1 || xPos > 1)
@@ -172,14 +226,23 @@ public class PlayAreaInteraction : MonoBehaviour
                     }
                     else Debug.Log("calculated area A");
                     break;
-                    case "BanjoLele":
-                        yPos = 0.66f * yPos;
-                        break;
-                    case "Timpani":
-                        break;
-                    case "Marimba":
-                        Debug.Log(xPos + " " + yPos);
-                        break;
+                case "BanjoLele":
+                    yPos = 0.66f * yPos;
+                    break;
+                case "Timpani":
+                    break;
+                case "Marimba":                    
+                    if (yPos < 0.5)
+                        yPos = yPos * 2;
+
+                    yPos = Global.Map(yPos, 0.5f * xPos, 1, 0, 1);
+                    if (other.transform.parent.name == "Hammer1" && yPos < 0)
+                        outOfBounds1 = true;
+                    else if (other.transform.parent.name == "Hammer2" && yPos < 0)
+                        outOfBounds2 = true;
+                    Debug.Log(yPos);
+
+                    break;
                 default:
                     Debug.Log("Instrument Type is currently " + instrumentType);
                     Debug.LogWarning("No custom playarea defined");
@@ -187,8 +250,16 @@ public class PlayAreaInteraction : MonoBehaviour
             }
             // Map according to the string orientation
             // Flip x and y positions if vertical
-            audioMixer.SetFloat("mouseX1", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
-            audioMixer.SetFloat("mouseY1", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
+            if (other.transform.parent.name == "Hammer2")
+            {
+                audioMixer.SetFloat("mouseX2", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
+                audioMixer.SetFloat("mouseY2", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
+            }
+            else
+            {
+                audioMixer.SetFloat("mouseX1", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
+                audioMixer.SetFloat("mouseY1", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
+            }
 
 
             // visual representation
