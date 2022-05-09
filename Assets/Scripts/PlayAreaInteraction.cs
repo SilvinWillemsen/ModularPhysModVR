@@ -61,10 +61,10 @@ public class PlayAreaInteraction : MonoBehaviour
         audioMixer.SetFloat("hammerVelocity", hammerVelocity);
         yield return new WaitForSeconds(0.1f);
 
-        audioMixer.SetFloat("trigger", 1.0f);
+        audioMixer.SetFloat("trigger1", 1.0f);
         yield return new WaitForSeconds(0.1f);
 
-        audioMixer.SetFloat("trigger", 0.0f);
+        audioMixer.SetFloat("trigger1", 0.0f);
     }
 
     private void OnTriggerStay(Collider other)
@@ -187,8 +187,8 @@ public class PlayAreaInteraction : MonoBehaviour
             }
             // Map according to the string orientation
             // Flip x and y positions if vertical
-            audioMixer.SetFloat("mouseX", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
-            audioMixer.SetFloat("mouseY", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
+            audioMixer.SetFloat("mouseX1", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
+            audioMixer.SetFloat("mouseY1", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
 
 
             // visual representation
