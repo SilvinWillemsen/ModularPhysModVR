@@ -145,10 +145,10 @@ public class PickScript : MonoBehaviour
     }
     IEnumerator triggerHammer()
     {
-        audioMixer.SetFloat ("trigger", 1.0f);
+        audioMixer.SetFloat ("trigger1", 1.0f);
         yield return new WaitForSeconds (0.1f);
 
-        audioMixer.SetFloat ("trigger", 0.0f);
+        audioMixer.SetFloat ("trigger1", 0.0f);
         debugText.GetComponent<DebugTextScript>().setDebugText ("Hammer triggered");
     }
 
