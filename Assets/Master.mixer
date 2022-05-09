@@ -61,7 +61,7 @@ AudioMixerController:
   - guid: 77c187b0b97434e818c2fb301687146c
     name: mouseY1
   - guid: a443bfd527f2d4c2fb3a84715038e8ff
-    name: mouxeX2
+    name: mouseX2
   - guid: 9b751a81981d547479abd3e80ece8e03
     name: mouseY2
   - guid: 7a22cfd8cf82d4153b3c4a53f2361bc9
