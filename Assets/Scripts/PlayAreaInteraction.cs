@@ -176,9 +176,9 @@ public class PlayAreaInteraction : MonoBehaviour
                         yPos = 0.66f * yPos;
                         break;
                     case "Timpani":
-                        Debug.Log (xPos + " " + yPos);
                         break;
                     case "Marimba":
+                        Debug.Log(xPos + " " + yPos);
                         break;
                 default:
                     Debug.Log("Instrument Type is currently " + instrumentType);

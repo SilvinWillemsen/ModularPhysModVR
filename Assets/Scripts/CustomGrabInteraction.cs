@@ -9,6 +9,10 @@ public class CustomGrabInteraction : MonoBehaviour
     [SerializeField] private float distFromPlayerFollowed= 0.2f;
     [SerializeField] private float moveSpeed = 0.5f;
     [SerializeField] private float instrumentHoldHeight = 1.0f;
+    [SerializeField] private float fixedYOffset = 0.0f;
+
+    [SerializeField] private GameObject stage;
+    [SerializeField] public bool moveToStage;
 
     private float currentTime;
     private float transitionTime; 
@@ -120,12 +124,21 @@ public class CustomGrabInteraction : MonoBehaviour
     void MoveToFixedPosition()
     {
         Vector3 playerFrontPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, distFromPlayerFixed));
-        Vector3 movePos = new Vector3(playerFrontPos.x, thisGameObject.transform.position.y, playerFrontPos.z);
+        Vector3 movePos;
+        if (moveToStage)
+            movePos = new Vector3(stage.transform.position.x, stage.transform.position.y + thisGameObject.transform.position.y + fixedYOffset, stage.transform.position.z);
+        else
+            movePos = new Vector3(playerFrontPos.x, thisGameObject.transform.position.y + fixedYOffset, playerFrontPos.z);
+
         float distance = Vector3.Distance(movePos, thisGameObject.transform.position);
         transitionTime = distance / moveSpeed; // ensure transition always goes with the same speed
 
         iTween.MoveTo(thisGameObject, movePos, transitionTime);
-        
+        if (moveToStage)
+        {
+            Quaternion rot = stage.transform.rotation;
+            iTween.RotateTo(thisGameObject, rot.eulerAngles, transitionTime);
+        }
         //objectToMove.GetComponent<Rigidbody>().isKinematic = false;
     }
 
