@@ -154,77 +154,82 @@ public class PlayAreaInteraction : MonoBehaviour
                     yPos = Global.Limit(Global.Map(yPos, 0, 0.75f, -(1.0f - xPos) * range, 0.75f + (1.0f - xPos) * range), 0, 1);
                     break;
                 case "Harp":
-                    //float yPosN = xPos; 
-                    yPos = 1 - yPos;
-                    xPos = xPos;
-                    if (yPos > 0.7419)
-                    {
-                        double[,] m = new double[3, 3] { { 10.6214, 0.0, 0.0 }, { 7.1381, 1.0, 0.0 }, { 9.6214, 0.0, 1.0 } };
 
-                        double det = m[0, 0] * (m[1, 1] * m[2, 2] - m[2, 1] * m[1, 2]) -
-                            m[0, 1] * (m[1, 0] * m[2, 2] - m[1, 2] * m[2, 0]) +
-                            m[0, 2] * (m[1, 0] * m[2, 1] - m[1, 1] * m[2, 0]);
+                    yPos = Global.Map(yPos, 0.22f*xPos, (1.0f-0.74f*xPos), 0.0f, 1.0f);;
+                    outOfBounds1 = (yPos >= 0 && yPos < 1) ? false : true;
+                    audioMixer.SetFloat("excite", outOfBounds1 ? 0.0f : 1.0f);
 
-                        double invdet = 1 / det;
+                    // //float yPosN = xPos; 
+                    // yPos = 1 - yPos;
+                    // xPos = xPos;
+                    // if (yPos > 0.7419)
+                    // {
+                    //     double[,] m = new double[3, 3] { { 10.6214, 0.0, 0.0 }, { 7.1381, 1.0, 0.0 }, { 9.6214, 0.0, 1.0 } };
 
-                        double[,] minv = new double[3, 3]; // inverse of matrix m
-                        minv[0, 0] = (m[1, 1] * m[2, 2] - m[2, 1] * m[1, 2]) * invdet;
-                        minv[0, 1] = (m[0, 2] * m[2, 1] - m[0, 1] * m[2, 2]) * invdet;
-                        minv[0, 2] = (m[0, 1] * m[1, 2] - m[0, 2] * m[1, 1]) * invdet;
-                        minv[1, 0] = (m[1, 2] * m[2, 0] - m[1, 0] * m[2, 2]) * invdet;
-                        minv[1, 1] = (m[0, 0] * m[2, 2] - m[0, 2] * m[2, 0]) * invdet;
-                        minv[1, 2] = (m[1, 0] * m[0, 2] - m[0, 0] * m[1, 2]) * invdet;
-                        minv[2, 0] = (m[1, 0] * m[2, 1] - m[2, 0] * m[1, 1]) * invdet;
-                        minv[2, 1] = (m[2, 0] * m[0, 1] - m[0, 0] * m[2, 1]) * invdet;
-                        minv[2, 2] = (m[0, 0] * m[1, 1] - m[1, 0] * m[0, 1]) * invdet;
+                    //     double det = m[0, 0] * (m[1, 1] * m[2, 2] - m[2, 1] * m[1, 2]) -
+                    //         m[0, 1] * (m[1, 0] * m[2, 2] - m[1, 2] * m[2, 0]) +
+                    //         m[0, 2] * (m[1, 0] * m[2, 1] - m[1, 1] * m[2, 0]);
 
-                        locOnSquare[0] = minv[0, 0] * yVec[0] + minv[1, 0] * yVec[1] + minv[2, 0] * yVec[2];
-                        locOnSquare[1] = minv[0, 1] * yVec[0] + minv[1, 1] * yVec[1] + minv[2, 1] * yVec[2];
-                        locOnSquare[2] = minv[0, 2] * yVec[0] + minv[1, 2] * yVec[1] + minv[2, 2] * yVec[2];
+                    //     double invdet = 1 / det;
 
-                        yPos = (float)(locOnSquare[1] / locOnSquare[2]);
-                        //if (yPos > 1 || xPos > 1)
-                        //{
-                        //    yPos = 0;
-                        //    xPos = 0;
-                        //}
-                        Debug.Log("calculated area B");
-                    }
-                    else if (xPos > 0.1328 && yPos <= 0.7419)
-                    {
-                        double[,] m = new double[3, 3] { { -8.9858, 0.0, 1.1706 }, { -6.5399, -0.1706, 0.8685 }, { -8.8151, 0.0, 1.0 } };
+                    //     double[,] minv = new double[3, 3]; // inverse of matrix m
+                    //     minv[0, 0] = (m[1, 1] * m[2, 2] - m[2, 1] * m[1, 2]) * invdet;
+                    //     minv[0, 1] = (m[0, 2] * m[2, 1] - m[0, 1] * m[2, 2]) * invdet;
+                    //     minv[0, 2] = (m[0, 1] * m[1, 2] - m[0, 2] * m[1, 1]) * invdet;
+                    //     minv[1, 0] = (m[1, 2] * m[2, 0] - m[1, 0] * m[2, 2]) * invdet;
+                    //     minv[1, 1] = (m[0, 0] * m[2, 2] - m[0, 2] * m[2, 0]) * invdet;
+                    //     minv[1, 2] = (m[1, 0] * m[0, 2] - m[0, 0] * m[1, 2]) * invdet;
+                    //     minv[2, 0] = (m[1, 0] * m[2, 1] - m[2, 0] * m[1, 1]) * invdet;
+                    //     minv[2, 1] = (m[2, 0] * m[0, 1] - m[0, 0] * m[2, 1]) * invdet;
+                    //     minv[2, 2] = (m[0, 0] * m[1, 1] - m[1, 0] * m[0, 1]) * invdet;
+
+                    //     locOnSquare[0] = minv[0, 0] * yVec[0] + minv[1, 0] * yVec[1] + minv[2, 0] * yVec[2];
+                    //     locOnSquare[1] = minv[0, 1] * yVec[0] + minv[1, 1] * yVec[1] + minv[2, 1] * yVec[2];
+                    //     locOnSquare[2] = minv[0, 2] * yVec[0] + minv[1, 2] * yVec[1] + minv[2, 2] * yVec[2];
+
+                    //     yPos = (float)(locOnSquare[1] / locOnSquare[2]);
+                    //     //if (yPos > 1 || xPos > 1)
+                    //     //{
+                    //     //    yPos = 0;
+                    //     //    xPos = 0;
+                    //     //}
+                    //     Debug.Log("calculated area B");
+                    // }
+                    // else if (xPos > 0.1328 && yPos <= 0.7419)
+                    // {
+                    //     double[,] m = new double[3, 3] { { -8.9858, 0.0, 1.1706 }, { -6.5399, -0.1706, 0.8685 }, { -8.8151, 0.0, 1.0 } };
 
 
-                        double det = m[0, 0] * (m[1, 1] * m[2, 2] - m[2, 1] * m[1, 2]) -
-                            m[0, 1] * (m[1, 0] * m[2, 2] - m[1, 2] * m[2, 0]) +
-                            m[0, 2] * (m[1, 0] * m[2, 1] - m[1, 1] * m[2, 0]);
+                    //     double det = m[0, 0] * (m[1, 1] * m[2, 2] - m[2, 1] * m[1, 2]) -
+                    //         m[0, 1] * (m[1, 0] * m[2, 2] - m[1, 2] * m[2, 0]) +
+                    //         m[0, 2] * (m[1, 0] * m[2, 1] - m[1, 1] * m[2, 0]);
 
-                        double invdet = 1 / det;
+                    //     double invdet = 1 / det;
 
-                        double[,] minv = new double[3, 3]; // inverse of matrix m
-                        minv[0, 0] = (m[1, 1] * m[2, 2] - m[2, 1] * m[1, 2]) * invdet;
-                        minv[0, 1] = (m[0, 2] * m[2, 1] - m[0, 1] * m[2, 2]) * invdet;
-                        minv[0, 2] = (m[0, 1] * m[1, 2] - m[0, 2] * m[1, 1]) * invdet;
-                        minv[1, 0] = (m[1, 2] * m[2, 0] - m[1, 0] * m[2, 2]) * invdet;
-                        minv[1, 1] = (m[0, 0] * m[2, 2] - m[0, 2] * m[2, 0]) * invdet;
-                        minv[1, 2] = (m[1, 0] * m[0, 2] - m[0, 0] * m[1, 2]) * invdet;
-                        minv[2, 0] = (m[1, 0] * m[2, 1] - m[2, 0] * m[1, 1]) * invdet;
-                        minv[2, 1] = (m[2, 0] * m[0, 1] - m[0, 0] * m[2, 1]) * invdet;
-                        minv[2, 2] = (m[0, 0] * m[1, 1] - m[1, 0] * m[0, 1]) * invdet;
+                    //     double[,] minv = new double[3, 3]; // inverse of matrix m
+                    //     minv[0, 0] = (m[1, 1] * m[2, 2] - m[2, 1] * m[1, 2]) * invdet;
+                    //     minv[0, 1] = (m[0, 2] * m[2, 1] - m[0, 1] * m[2, 2]) * invdet;
+                    //     minv[0, 2] = (m[0, 1] * m[1, 2] - m[0, 2] * m[1, 1]) * invdet;
+                    //     minv[1, 0] = (m[1, 2] * m[2, 0] - m[1, 0] * m[2, 2]) * invdet;
+                    //     minv[1, 1] = (m[0, 0] * m[2, 2] - m[0, 2] * m[2, 0]) * invdet;
+                    //     minv[1, 2] = (m[1, 0] * m[0, 2] - m[0, 0] * m[1, 2]) * invdet;
+                    //     minv[2, 0] = (m[1, 0] * m[2, 1] - m[2, 0] * m[1, 1]) * invdet;
+                    //     minv[2, 1] = (m[2, 0] * m[0, 1] - m[0, 0] * m[2, 1]) * invdet;
+                    //     minv[2, 2] = (m[0, 0] * m[1, 1] - m[1, 0] * m[0, 1]) * invdet;
 
-                        locOnSquare[0] = minv[0, 0] * yVec[0] + minv[1, 0] * yVec[1] + minv[2, 0] * yVec[2];
-                        locOnSquare[1] = minv[0, 1] * yVec[0] + minv[1, 1] * yVec[1] + minv[2, 1] * yVec[2];
-                        locOnSquare[2] = minv[0, 2] * yVec[0] + minv[1, 2] * yVec[1] + minv[2, 2] * yVec[2];
+                    //     locOnSquare[0] = minv[0, 0] * yVec[0] + minv[1, 0] * yVec[1] + minv[2, 0] * yVec[2];
+                    //     locOnSquare[1] = minv[0, 1] * yVec[0] + minv[1, 1] * yVec[1] + minv[2, 1] * yVec[2];
+                    //     locOnSquare[2] = minv[0, 2] * yVec[0] + minv[1, 2] * yVec[1] + minv[2, 2] * yVec[2];
 
-                        yPos = (float)(locOnSquare[1] / locOnSquare[2]);
-                        //if (yPos > 1 || xPos > 1)
-                        //{
-                        //    yPos = 0;
-                        //    xPos = 0;
-                        //}
-                        Debug.Log("calculated area C");
-                    }
-                    else Debug.Log("calculated area A");
+                    //     yPos = (float)(locOnSquare[1] / locOnSquare[2]);
+                    //     //if (yPos > 1 || xPos > 1)
+                    //     //{
+                    //     //    yPos = 0;
+                    //     //    xPos = 0;
+                    //     //}
+                    //     Debug.Log("calculated area C");
+                    // }
+                    // else Debug.Log("calculated area A");
                     break;
                 case "BanjoLele":
                     yPos = 0.66f * yPos;
