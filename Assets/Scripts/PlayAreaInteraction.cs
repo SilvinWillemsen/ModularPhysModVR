@@ -154,10 +154,13 @@ public class PlayAreaInteraction : MonoBehaviour
                     yPos = Global.Limit(Global.Map(yPos, 0, 0.75f, -(1.0f - xPos) * range, 0.75f + (1.0f - xPos) * range), 0, 1);
                     break;
                 case "Harp":
-
-                    yPos = Global.Map(yPos, 0.22f*xPos, (1.0f-0.74f*xPos), 0.0f, 1.0f);;
+                    // top of harp is at at y-coordinate 0, bottom is y-coordinate 1
+                    float upperBound = -0.5288f * xPos * xPos + 0.7488f * xPos; // matlab cftool
+                    float lowerBound = (1.0f-0.74f*xPos);
+                    yPos = Global.Map(yPos, upperBound, lowerBound, 0.0f, 1.0f);;
                     outOfBounds1 = (yPos >= 0 && yPos < 1) ? false : true;
                     audioMixer.SetFloat("excite", outOfBounds1 ? 0.0f : 1.0f);
+                    Debug.Log(xPos + " " + yPos);
 
                     // //float yPosN = xPos; 
                     // yPos = 1 - yPos;
