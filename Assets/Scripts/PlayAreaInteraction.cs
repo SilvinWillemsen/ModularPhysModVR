@@ -68,10 +68,16 @@ public class PlayAreaInteraction : MonoBehaviour
             switch (instrumentType)
             {
                 case "Marimba":
+                    bool outOfBoundsBlackNotes = mapMarimba(ref xPos, ref yPos);
                     if (other.transform.parent.name == "Hammer1")
-                        outOfBounds1 = yPos < 0.5 ? false : true;
+                        outOfBounds1 = outOfBoundsBlackNotes;
                     else if (other.transform.parent.name == "Hammer2")
-                        outOfBounds2 = yPos < 0.5 ? false : true;
+                        outOfBounds2 = outOfBoundsBlackNotes;
+                    int idx = (int)Math.Floor(xPos * 49);
+                    xPos = (float)idx / 49.0f + 0.5f/49.0f;
+                    Debug.Log(xPos * 49);
+                    if (!outOfBoundsBlackNotes)
+                        checkMarimbaOutOfBounds(yPos, other.transform.parent.name);
 
                     break;
                 case "Timpani":
@@ -87,21 +93,40 @@ public class PlayAreaInteraction : MonoBehaviour
                     
                     break;
             }
-
             if (other.transform.parent.name == "Hammer1" || other.transform.parent.name == "Hammer2")
             {
                 hammerVelocity = Global.Limit(other.GetComponent<HammerVelocityTracker>().getVelocity().magnitude / 4.0f, 0.0f, 1.0f);
-                StartCoroutine(triggerHammer(other.transform.parent.name == "Hammer1"));
+                StartCoroutine(triggerHammer(xPos, yPos, other.transform.parent.name));
             }
         }
     }
+    private void checkMarimbaOutOfBounds(float yPos, string name)
+    {
+        if (name == "Hammer1")
+            outOfBounds1 = (yPos >= 0 && yPos < 1) ? false : true;
+        else if (name == "Hammer2")
+            outOfBounds2 = (yPos >= 0 && yPos < 1) ? false : true;
+    }
 
-    IEnumerator triggerHammer(bool leftHammer)
+    IEnumerator triggerHammer(float xPos, float yPos, string name)
     {
         audioMixer.SetFloat("hammerVelocity", hammerVelocity);
+
+        if (name == "Hammer1")
+        {
+            audioMixer.SetFloat("mouseX1", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
+            audioMixer.SetFloat("mouseY1", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
+        }
+        else if (name == "Hammer2")
+        {
+            audioMixer.SetFloat("mouseX2", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
+            audioMixer.SetFloat("mouseY2", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
+        }
+
         yield return new WaitForSeconds(0.1f);
 
-        if (leftHammer)
+
+        if (name == "Hammer1")
         {
             if (!outOfBounds1)
                 audioMixer.SetFloat("trigger1", 1.0f);
@@ -110,7 +135,7 @@ public class PlayAreaInteraction : MonoBehaviour
 
             audioMixer.SetFloat("trigger1", 0.0f);
         } 
-        else
+        else if (name == "Hammer2")
         {
             if (!outOfBounds2)
                 audioMixer.SetFloat("trigger2", 1.0f);
@@ -239,17 +264,17 @@ public class PlayAreaInteraction : MonoBehaviour
                     break;
                 case "Timpani":
                     break;
-                case "Marimba":                    
-                    if (yPos < 0.5)
-                        yPos = yPos * 2;
+                case "Marimba":
+                    // only do hammers (in OnTriggerEnter)
+                    // bool outOfBoundsBlackNotes = mapMarimba (ref xPos, ref yPos);
+                    // if (other.transform.parent.name == "Hammer1")
+                    //     outOfBounds1 = outOfBoundsBlackNotes;
+                    // else if (other.transform.parent.name == "Hammer2")
+                    //     outOfBounds2 = outOfBoundsBlackNotes;
 
-                    yPos = Global.Map(yPos, 0.5f * xPos, 1, 0, 1);
-                    if (other.transform.parent.name == "Hammer1" && yPos < 0)
-                        outOfBounds1 = true;
-                    else if (other.transform.parent.name == "Hammer2" && yPos < 0)
-                        outOfBounds2 = true;
-                    Debug.Log(yPos);
-
+                    // if (!outOfBoundsBlackNotes)
+                    //     checkMarimbaOutOfBounds(yPos, other.transform.parent.name);
+                    return;
                     break;
                 default:
                     Debug.Log("Instrument Type is currently " + instrumentType);
@@ -269,12 +294,64 @@ public class PlayAreaInteraction : MonoBehaviour
                 audioMixer.SetFloat("mouseY1", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
             }
 
-
             // visual representation
             //excitelocIcon.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPos * 10, yPos * 10);
 
         }
     }
+    private bool mapMarimba (ref float xPos, ref float yPos)
+    {
+        // the "white" notes             
+        if (yPos < 0.5f)
+        {
+            // mapping of the slope of the white notes
+            yPos = yPos * 2;
+            yPos = Global.Map(yPos, 0.5f * xPos, 1, 0, 1);
+            // 49 notes, only select the first 29
+            xPos *= 29.0f/49.0f;
+        }
+        else  // the "black" notes             
+        {        
+            // mapping of the slope of the black notes
+            yPos = (yPos - 0.5f) * 2;
+            yPos = Global.Map(yPos, 0, (1-0.5f * xPos), 0, 1);
 
+            // exclude the "holes" between the black notes
+            float barWidth = 1.0f/29.0f; // the width of a bar as the ratio of the playarea
+
+
+            // the index of the bar which is (including the holes)
+            int idx = (int)Math.Floor((xPos - 0.5f * barWidth) / barWidth); // notice that the xPos is shifted to start at the first note (half a barwidth)
+
+            // the holes have index 2 and 6 in the octave (0: C#, 1: D#, 2: <hole>, 3: F#, etc.)
+            if (idx % 7 == 2 || idx % 7 == 6 || idx < 0 || idx > 48)
+            {
+                Debug.Log("outOfBoundsBlackNotes!");
+                return true;
+            }
+            
+
+            // Map xPos to plugin. As the holes are not included in the plugin, these need to be subtracted from the xPos
+            float barWidthsTakenAway = 2.0f * (float)Math.Floor(idx / 7.0f); // for every octave take away two barWidths
+            // take away an extra barWidth if the idx is that of a F#, G# or A#
+            if (idx % 7 > 2)
+                barWidthsTakenAway += 1;
+
+            // Debug.Log("Top Bar idx: " + (idx - barWidthsTakenAway));
+
+            // // always reduced by one half at left side of the play area
+            // barWidthsTakenAway += 0.5f; 
+
+            // // scale xPos between 0 and 1
+            // xPos = (xPos - barWidth * barWidthsTakenAway) / (1.0f - barWidth * barWidthsTakenAway); // NEED TO LOOK AT THIS
+
+            // The last 20 out of 49 notes are the black ones
+            // xPos *= 20.0f/49.0f;
+            // xPos += 29.0f/49.0f;
+            
+            xPos = (29.0f + (idx - barWidthsTakenAway) + 0.5f) / 49.0f;
+        }
+        return false;
+    }
 
 }
