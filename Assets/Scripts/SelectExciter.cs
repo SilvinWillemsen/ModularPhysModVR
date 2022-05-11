@@ -36,7 +36,7 @@ public class SelectExciter : MonoBehaviour
         Debug.Log("ExciterGrabbed");
 
         // Turn on excite in the plugin once exciter is grabbed
-        audioMixer.SetFloat("excite", 1.0f);
+        // audioMixer.SetFloat("excite", 1.0f);
 
         Debug.Log (excitationType);
 
