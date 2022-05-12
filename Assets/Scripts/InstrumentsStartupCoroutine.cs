@@ -54,6 +54,6 @@ public class InstrumentsStartupCoroutine : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         // Respawn instruments;
-        Global.SpawnInteractables(instruments, 1.0f , instrumentStartPos, instrumentStartOrientation);
+        Global.SpawnInteractables(instruments, 1.0f , instrumentStartPos, instrumentStartOrientation, false);
     }
 }

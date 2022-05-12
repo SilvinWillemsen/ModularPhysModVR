@@ -48,7 +48,7 @@ public class ResetExciterPos : MonoBehaviour
         else 
         {
             Debug.Log("Index of model to spawn is " + idx);
-            Global.SpawnSingleInteractable(thisExciter.transform.GetChild(0), spawnTime, exciterReferenceList.exciterStartPos[idx], exciterReferenceList.exciterStartOrientation[idx]);
+            Global.SpawnSingleInteractable(thisExciter.transform.GetChild(0), spawnTime, exciterReferenceList.exciterStartPos[idx], exciterReferenceList.exciterStartOrientation[idx], false);
         }
     }
 }

@@ -29,7 +29,7 @@ public class CustomGrabInteraction : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+   /* void Start()
     {
 
         //grabbedObjectExtractorLeft = distanceGrabberExtractorLeft.GetComponent<Tilia.Interactions.Interactables.Interactables.Operation.Extraction.InteractableFacadeExtractor>();
@@ -65,7 +65,7 @@ public class CustomGrabInteraction : MonoBehaviour
        
        
 
-        // check if instrument is grabbed and not exciter
+        *//*// check if instrument is grabbed and not exciter
         if (instrumentChild.GetComponent<CustomGrabAttachment>() != null)
         {
             //DespawnCheck(instrumentChild);
@@ -77,7 +77,7 @@ public class CustomGrabInteraction : MonoBehaviour
             {
                 GrabFixed();
             }
-        }
+        }*//*
     }
 
     void GrabFixed()
@@ -157,7 +157,7 @@ public class CustomGrabInteraction : MonoBehaviour
         iTween.RotateTo(thisGameObject, rot.eulerAngles, transitionTime);
     }
 
-    /*void DespawnCheck(GameObject instrumentToExclude)
+    void DespawnCheck(GameObject instrumentToExclude)
     {
         foreach (GameObject child in GetComponent<InstrumentReferenceList>().instruments)
         {

@@ -15,7 +15,6 @@ public class SelectPreset : MonoBehaviour
     private float selectedPreset = 0.0f;
 
     public AudioMixer audioMixer;
-
     [HideInInspector] public List<String> pluginList; 
      
     [Dropdown("pluginList")]//input the path of the list

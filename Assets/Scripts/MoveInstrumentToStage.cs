@@ -19,16 +19,35 @@ public class MoveInstrumentToStage : MonoBehaviour
     }
     public void MoveInstrument(GameObject instrument)
     {
-        
-        if(currentInstrument == null)
+
+        if (currentInstrument == null)
         {
             currentInstrument = instrument;
+            foreach (Transform child in instrument.transform)
+            {
+                if (child.tag == "Instrument")
+                {
+                    child.transform.GetChild(0).transform.GetChild(1).GetComponent<CustomGrabAttachment>().moveToStageWhenGrabbed = true;
+                }
+            }
+            Vector3 moveSpot = new Vector3(stagePos.x, stagePos.y + instrument.transform.position.y, stagePos.z);
             StartCoroutine(DelayBeforeUngrab(currentInstrument));
         }
         else
         {
-            currentInstrument = null; 
-            
+            currentInstrument = null;
+
+            foreach (Transform child in instrument.transform)
+            {
+                if (child.tag == "Instrument")
+                {
+                    child.transform.GetChild(0).transform.GetChild(1).GetComponent<CustomGrabAttachment>().moveToStageWhenGrabbed = false;
+                }
+            }
+            Vector3 moveSpot = new Vector3(stagePos.x, stagePos.y + instrument.transform.position.y, stagePos.z);
+            StartCoroutine(DelayBeforeUngrab(currentInstrument));
+
+
             //instrumentDisplays.GetComponent<ResetInstrumentPos>().DespawnAndSpawnInstrument(instrument);
         }
 
@@ -50,13 +69,14 @@ public class MoveInstrumentToStage : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
        
+        
         interactor.GetComponent<Tilia.Interactions.Interactables.Interactors.InteractorFacade>().Ungrab();
-        GameObject instrumentChild = instrument.transform.GetChild(0).gameObject;
-        instrumentChild.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>().Ungrab(instrumentChild);
+        //GameObject instrumentChild = instrument.transform.GetChild(0).gameObject;
+        //instrumentChild.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>().Ungrab(instrumentChild);
 
-        instrumentChild.GetComponent<Rigidbody>().isKinematic = true;
-        yield return new WaitForSeconds(0.1f);
-        instrumentChild.transform.position = stagePos;
+        //instrumentChild.GetComponent<Rigidbody>().isKinematic = true;
+        //yield return new WaitForSeconds(0.1f);
+        //instrumentChild.transform.position = moveSpot;
         
     }
 

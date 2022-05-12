@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class CustomGrabAttachment : MonoBehaviour
 {
-    public bool grabAndFollow = false;
-    public bool isGrabbed = false;
+   [HideInInspector] public bool moveToStageWhenGrabbed = false; 
 }
