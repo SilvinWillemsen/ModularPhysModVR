@@ -64,7 +64,7 @@ public class CustomGrabInteraction : MonoBehaviour
         // check if instrument is grabbed and not exciter
         if (instrumentChild.GetComponent<CustomGrabAttachment>() != null)
         {
-            DespawnCheck(instrumentChild);
+            //DespawnCheck(instrumentChild);
             if (instrumentChild.GetComponent<CustomGrabAttachment>().grabAndFollow)
             {
                 GrabAndFollow();
@@ -144,7 +144,7 @@ public class CustomGrabInteraction : MonoBehaviour
         iTween.RotateTo(thisGameObject, rot.eulerAngles, transitionTime);
     }
 
-    void DespawnCheck(GameObject instrumentToExclude)
+    /*void DespawnCheck(GameObject instrumentToExclude)
     {
         foreach (GameObject child in GetComponent<InstrumentReferenceList>().instruments)
         {
@@ -163,6 +163,6 @@ public class CustomGrabInteraction : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
 }
