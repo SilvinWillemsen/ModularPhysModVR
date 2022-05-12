@@ -5,22 +5,20 @@ using UnityEngine;
 public class HammerVelocityTracker : MonoBehaviour
 {
 
-    [SerializeField] private GameObject hammerInteractable;
-
     private Vector3 prevPosition;
     private Vector3 curVelocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        prevPosition = hammerInteractable.transform.position;
+        prevPosition = transform.position;
     }
 
     // FixedUpdate is called once per frame
     void FixedUpdate()
     {
-        curVelocity = (hammerInteractable.transform.position - prevPosition) / Time.fixedDeltaTime;
-        prevPosition = hammerInteractable.transform.position;
+        curVelocity = (transform.position - prevPosition) / Time.fixedDeltaTime;
+        prevPosition = transform.position;
     }
 
     public Vector3 getVelocity()

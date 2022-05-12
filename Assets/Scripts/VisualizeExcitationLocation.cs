@@ -24,12 +24,12 @@ public class VisualizeExcitationLocation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool resultX = audioMixer.GetFloat("mouseX", out mouseX);
+        bool resultX = audioMixer.GetFloat("mouseX1", out mouseX);
         if (resultX)
         {
             mousePosition.x = mouseX * 10.0f; 
         }
-        bool resultY = audioMixer.GetFloat("mouseY", out mouseY);
+        bool resultY = audioMixer.GetFloat("mouseY1", out mouseY);
         if (resultY)
         {
             mousePosition.y = mouseY * 10.0f;

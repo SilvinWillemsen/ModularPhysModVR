@@ -45,12 +45,16 @@ public class SelectExciter : MonoBehaviour
         {
             case ExcitationType.Pick:
                 excitationTypeValue = 0.1f;
+                audioMixer.SetFloat("smooth", 1.0f);
                 break;
             case ExcitationType.Hammer:
                 excitationTypeValue = 0.5f;
+                audioMixer.SetFloat("smooth", 0.0f); // don't use smoothing when using hammer excitation
                 break;
             case ExcitationType.Bow:
+                audioMixer.SetFloat("excite", 0.0f);
                 excitationTypeValue = 0.76f;
+                audioMixer.SetFloat("smooth", 1.0f);
                 break;
         }
 
