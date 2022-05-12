@@ -337,12 +337,11 @@ public class PlayAreaInteraction : MonoBehaviour
             // exclude the "holes" between the black notes
             float barWidth = 1.0f/29.0f; // the width of a bar as the ratio of the playarea
 
-
-            // the index of the bar which is (including the holes)
+            // the index of the bar which is hit (including the holes)
             int idx = (int)Math.Floor((xPos - 0.5f * barWidth) / barWidth); // notice that the xPos is shifted to start at the first note (half a barwidth)
 
             // the holes have index 2 and 6 in the octave (0: C#, 1: D#, 2: <hole>, 3: F#, etc.)
-            if (idx % 7 == 2 || idx % 7 == 6 || idx < 0 || idx > 48)
+            if (idx % 7 == 2 || idx % 7 == 6 || idx < 0 || idx > 21) // check whether this should be 20 instead
             {
                 outOfBoundsBlackNotes = true;
             }

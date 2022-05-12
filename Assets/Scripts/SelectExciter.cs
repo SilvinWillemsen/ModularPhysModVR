@@ -36,7 +36,7 @@ public class SelectExciter : MonoBehaviour
         Debug.Log("ExciterGrabbed");
 
         // Turn on excite in the plugin once exciter is grabbed
-        // audioMixer.SetFloat("excite", 1.0f);
+        audioMixer.SetFloat("excite", 1.0f);
 
         Debug.Log (excitationType);
 
@@ -52,6 +52,7 @@ public class SelectExciter : MonoBehaviour
                 audioMixer.SetFloat("smooth", 0.0f); // don't use smoothing when using hammer excitation
                 break;
             case ExcitationType.Bow:
+                audioMixer.SetFloat("excite", 0.0f);
                 excitationTypeValue = 0.76f;
                 audioMixer.SetFloat("smooth", 1.0f);
                 break;
