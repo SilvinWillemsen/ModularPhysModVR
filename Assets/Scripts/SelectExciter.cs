@@ -48,6 +48,9 @@ public class SelectExciter : MonoBehaviour
                 audioMixer.SetFloat("smooth", 1.0f);
                 break;
             case ExcitationType.Hammer:
+                if (transform.name == "Hammer2")
+                    audioMixer.SetFloat("activateSecondExciter", 1.0f); // don't use smoothing when using hammer excitation
+
                 excitationTypeValue = 0.5f;
                 audioMixer.SetFloat("smooth", 0.0f); // don't use smoothing when using hammer excitation
                 break;
@@ -65,6 +68,9 @@ public class SelectExciter : MonoBehaviour
     {
         // Turn off excite in the plugin once exciter is released
         audioMixer.SetFloat("excite", 0.0f);
+        if (transform.name == "Hammer2")
+            audioMixer.SetFloat("activateSecondExciter", 0.0f); // don't use smoothing when using hammer excitation
+
     }
 
 }

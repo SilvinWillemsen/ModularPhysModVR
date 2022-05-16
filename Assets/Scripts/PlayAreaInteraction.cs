@@ -23,7 +23,7 @@ public class PlayAreaInteraction : MonoBehaviour
     private GameObject excitationLoc;
     [SerializeField] private StringOrientation stringOrientation;
 
-    private float hammerVelocity;
+    private float velocity;
 
     private bool outOfBounds1 = false;
     private bool outOfBounds2 = false;
@@ -95,7 +95,7 @@ public class PlayAreaInteraction : MonoBehaviour
             }
             if (other.transform.parent.name == "Hammer1" || other.transform.parent.name == "Hammer2")
             {
-                hammerVelocity = Global.Limit (other.GetComponent<HammerVelocityTracker>().getVelocity().magnitude / 4.0f, 0.0f, 1.0f);
+                velocity = Global.Limit (other.GetComponent<VelocityTracker>().getVelocity().magnitude / 4.0f, 0.0f, 1.0f);
                 StartCoroutine (triggerHammer (xPos, yPos, exciterName));
             }
 
@@ -114,7 +114,7 @@ public class PlayAreaInteraction : MonoBehaviour
 
     IEnumerator triggerHammer(float xPos, float yPos, string name)
     {
-        audioMixer.SetFloat("hammerVelocity", hammerVelocity);
+        audioMixer.SetFloat("velocity", velocity);
 
         if (name == "Hammer1")
         {
@@ -272,7 +272,10 @@ public class PlayAreaInteraction : MonoBehaviour
                     // else Debug.Log("calculated area A");
                     break;
                 case "BanjoLele":
-                    yPos = 0.66f * yPos;
+                    yPos = 0.66f * yPos; // 4/6 are strings 
+                    break;
+                case "Shamisen":
+                    yPos = 0.6f * yPos; // 3/5 resonators are strings
                     break;
                 case "Timpani":
                     break;
@@ -290,8 +293,9 @@ public class PlayAreaInteraction : MonoBehaviour
                     if (!outOfBoundsBlackNotes)
                         checkMarimbaOutOfBounds(yPos, exciterName);
                     break;
+                case "Cello":
+                    break;
                 default:
-                    Debug.Log("Instrument Type is currently " + instrumentType);
                     Debug.LogWarning("No custom playarea defined");
                     break;
             }
@@ -304,6 +308,13 @@ public class PlayAreaInteraction : MonoBehaviour
             }
             else
             {
+                if (exciterName == "Bow")
+                {
+                    Vector3 vel = other.GetComponent<VelocityTracker>().getVelocity();
+                    float velToMixer = Math.Sign(vel.x) * vel.magnitude / 2.0f + 0.5f;
+                    audioMixer.SetFloat("velocity", Global.Limit(velToMixer, 0.0f, 1.0f));
+                    
+                }
                 audioMixer.SetFloat("mouseX1", stringOrientation == StringOrientation.Vertical ? yPos : xPos);
                 audioMixer.SetFloat("mouseY1", stringOrientation == StringOrientation.Vertical ? xPos : yPos);
             }

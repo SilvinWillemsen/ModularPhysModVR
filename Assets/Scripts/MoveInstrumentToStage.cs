@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Tilia; 
-
+using Tilia;
+using Zinnia.Action;
 
 public class MoveInstrumentToStage : MonoBehaviour
 {
     public GameObject interactor;
     public GameObject instrumentDisplays;
     Vector3 stagePos;
-
-    GameObject currentInstrument; 
-
+    GameObject currentInstrument;
+    public GameObject distanceGrabber;
 
     private void Start()
     {
@@ -51,9 +50,9 @@ public class MoveInstrumentToStage : MonoBehaviour
             //instrumentDisplays.GetComponent<ResetInstrumentPos>().DespawnAndSpawnInstrument(instrument);
         }
 
-      
 
-        
+
+
         /*foreach(Transform child in instrument.transform)
         {
             if(child.tag == "Instrument")
@@ -68,17 +67,37 @@ public class MoveInstrumentToStage : MonoBehaviour
     {
 
         yield return new WaitForSeconds(0.1f);
-       
-        
+
+
         interactor.GetComponent<Tilia.Interactions.Interactables.Interactors.InteractorFacade>().Ungrab();
+
         //GameObject instrumentChild = instrument.transform.GetChild(0).gameObject;
         //instrumentChild.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>().Ungrab(instrumentChild);
 
         //instrumentChild.GetComponent<Rigidbody>().isKinematic = true;
         //yield return new WaitForSeconds(0.1f);
         //instrumentChild.transform.position = moveSpot;
-        
+
     }
 
-    
+    // All of the following just used for testing.. Not working!
+    public void BeforeGrabbedTest(GameObject harp)
+    {
+        Debug.Log("Before Grabbed");
+        Debug.Log(harp.GetComponent<Rigidbody>());
+        Debug.Log("Current interactable: " + distanceGrabber.GetComponent<Tilia.Interactions.PointerInteractors.DistanceGrabberFacade>());
+
+
+        //distanceGrabber.GetComponent<Tilia.Interactions.PointerInteractors.DistanceGrabberFacade>().GrabCanceled.Invoke(harp.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>());
+        Debug.Log("Invoke cancelgrab");
+
+        //interactor.GetComponent<Tilia.Interactions.Interactables.Interactors.InteractorFacade>().GrabAction.GetComponent<BooleanAction>().Deactivated.Invoke(false);
+        //interactor.GetComponent<Tilia.Interactions.Interactables.Interactors.InteractorFacade>().Ungrab();
+
+    }
+    public void AfterGrabbedTest()
+    {
+        //Debug.Log("Current interactable: " + distanceGrabber.GetComponent<Tilia.Interactions.PointerInteractors.DistanceGrabberFacade>().CurrentInteractable);
+        Debug.Log("CancelInvoke");
+    }
 }

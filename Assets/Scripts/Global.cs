@@ -82,7 +82,9 @@ public class Global : MonoBehaviour
     public static void SpaceEqually(List<GameObject> instruments, float radius, int maxNInstruments)
     {
         if (instruments.Count > maxNInstruments) Debug.Log("Inserted instruments exceeding max number of instruments specified!");
-        float angleOffset = - Mathf.PI / (instruments.Count + 1);
+        //float angleOffset = - Mathf.PI / (instruments.Count + 1);
+        //float angleOffset = 2.0f * Mathf.PI / maxNInstruments * instruments.Count / 2.0f;
+        float angleOffset = 0;
         for (int i = 0; i < maxNInstruments; i++)
         {
             float angle = i * Mathf.PI * 2f / maxNInstruments - angleOffset;
