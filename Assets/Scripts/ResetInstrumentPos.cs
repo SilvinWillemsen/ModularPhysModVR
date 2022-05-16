@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,15 +25,18 @@ public class ResetInstrumentPos : MonoBehaviour
 
         bool moveToStage = false;
         // check if need to be moved to stage
+        int idx = 0;
         foreach(Transform child in instrument.transform)
         {
             if(child.tag=="Instrument")
             {
-                if (child.transform.GetChild(0).transform.GetChild(1).GetComponent<CustomGrabAttachment>() != null)
+                if (child.transform.GetChild(idx).transform.GetChild(1).GetComponent<CustomGrabAttachment>() != null)
                 {
                     moveToStage = child.transform.GetChild(0).transform.GetChild(1).GetComponent<CustomGrabAttachment>().moveToStageWhenGrabbed;
                 }
             }    
+            ++idx;
+
         }
         
         StartCoroutine(StartResetCoroutine(instrument, despawnTime, spawnTime, transitionTime, moveToStage)); 
