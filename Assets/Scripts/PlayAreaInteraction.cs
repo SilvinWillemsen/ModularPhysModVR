@@ -161,6 +161,14 @@ public class PlayAreaInteraction : MonoBehaviour
     {
         if (other.gameObject.tag == "ExciterArea")
         {
+            // Debug.Log(transform.GetComponent<Collider>().ClosestPoint(other.transform.position));
+            // other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position)
+            
+            
+            transform.GetChild(0).transform.position = transform.GetComponent<Collider>().ClosestPoint(other.transform.GetComponent<Collider>().ClosestPoint(transform.position));
+
+            // transform.GetChild(0).transform.position = other.transform.GetComponent<Collider>().ClosestPoint(transform.position);
+
             string exciterName = other.transform.parent.name;
 
             // Debug.Log (transform.localPosition);
@@ -172,7 +180,7 @@ public class PlayAreaInteraction : MonoBehaviour
             Vector3 localPos = new Vector3(excitationLoc.transform.localPosition.x, excitationLoc.transform.localPosition.y, excitationLoc.transform.localPosition.z);
 
             // Debug.Log("localPoses: " + localPos.x + " " + localPos.y);
-            Debug.Log("exciter pos: " + excitationLoc.transform.position +  " exciter local pos: " + excitationLoc.transform.localPosition);
+            // Debug.Log("exciter pos: " + excitationLoc.transform.position +  " exciter local pos: " + excitationLoc.transform.localPosition);
             
 
             // map & limit values, swap value for juce (Silvin: turns out it's always from -0.5 to 0.5)
@@ -391,12 +399,6 @@ public class PlayAreaInteraction : MonoBehaviour
         if (other.transform.parent.name == "Pick")
             audioMixer.SetFloat("smooth", 0.0f);
 
-    }
-
-    private void OnCollisionEnter (Collision collision)
-    {
-        Debug.Log("Collision enter!");
-        Debug.Log(collision.contacts[0].point);
     }
 
 }
