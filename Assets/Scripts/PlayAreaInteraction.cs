@@ -163,19 +163,23 @@ public class PlayAreaInteraction : MonoBehaviour
         {
             string exciterName = other.transform.parent.name;
 
-            // calculate where on the instrument it's exciting:
+            // Debug.Log (transform.localPosition);
+            // Debug.Log ("Guitar Pos: " + transform.position + ", Pick pos:" + other.transform.position);
+            
+            //// calculate where on the instrument it's exciting: ////
             excitationLoc.transform.position = other.transform.position;
 
             Vector3 localPos = new Vector3(excitationLoc.transform.localPosition.x, excitationLoc.transform.localPosition.y, excitationLoc.transform.localPosition.z);
 
+            // Debug.Log("localPoses: " + localPos.x + " " + localPos.y);
+            Debug.Log("exciter pos: " + excitationLoc.transform.position +  " exciter local pos: " + excitationLoc.transform.localPosition);
+            
 
             // map & limit values, swap value for juce (Silvin: turns out it's always from -0.5 to 0.5)
             float xPos = Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
             float yPos = 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1);
 
             // Debug.Log(Global.Map(localPos.x, -xBounds / 2, xBounds / 2, 0, 1) + " " + Global.Map(localPos.y, -yBounds / 2, yBounds / 2, 0, 1));
-
-
 
             // Hard-coded mappings of the play area to the x and y positions
 
@@ -197,7 +201,6 @@ public class PlayAreaInteraction : MonoBehaviour
                     yPos = Global.Map(yPos, upperBound, lowerBound, 0.0f, 1.0f);;
                     outOfBounds1 = (yPos >= 0 && yPos < 1) ? false : true;
                     audioMixer.SetFloat("excite", outOfBounds1 ? 0.0f : 1.0f);
-                    Debug.Log(xPos + " " + yPos);
 
                     // //float yPosN = xPos; 
                     // yPos = 1 - yPos;
@@ -390,5 +393,10 @@ public class PlayAreaInteraction : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter (Collision collision)
+    {
+        Debug.Log("Collision enter!");
+        Debug.Log(collision.contacts[0].point);
+    }
 
 }
