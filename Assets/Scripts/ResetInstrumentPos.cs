@@ -15,6 +15,7 @@ public class ResetInstrumentPos : MonoBehaviour
 
     [SerializeField] private float timeBeforeDespawnStageInstrument = 0.0f;
     [SerializeField] private float transitionTimeStage= 0.2f;
+
     private void Start()
     {
         instrumentReferenceList = GetComponent<InstrumentReferenceList>();
@@ -81,9 +82,9 @@ public class ResetInstrumentPos : MonoBehaviour
             Debug.Log("Index of model to spawn is " + idx);
             if(moveToStage)
             {
-                Global.SpawnSingleInteractable(thisInstrument.transform.GetChild(0), spawnTime, instrumentStageLoc , instrumentReferenceList.instrumentStartOrientation[idx], true);
+                Global.SpawnSingleInteractable(thisInstrument.transform.GetChild(0), spawnTime, instrumentStageLoc, instrumentStage.transform.rotation, true);
                 //thisInstrument.GetComponent<Rigidbody>().isKinematic = true;
-
+                Debug.Log(instrumentStage.transform.localRotation);
             }
             else
             {
