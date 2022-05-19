@@ -181,22 +181,27 @@ public class PlayAreaInteraction : MonoBehaviour
             // Debug.Log("localPoses: " + localPos.x + " " + localPos.y);
             // Debug.Log("exciter pos: " + excitationLoc.transform.position +  " exciter local pos: " + excitationLoc.transform.localPosition);
 
-            //if (useBow)
-            //{
-            //    // THIS IS SEMI CORRECT FOR THE HEIGHT (position along the string of the cello)
-            //    transform.GetChild(0).transform.position = other.transform.GetComponent<Collider>().ClosestPoint(transform.position);
+            if (useBow)
+            {
+                // THIS IS SEMI CORRECT FOR THE HEIGHT (position along the string of the cello)
+                transform.GetChild(0).transform.position = other.transform.GetComponent<Collider>().ClosestPoint(transform.position);
 
-            //    //Debug.Log("Transform diff: " + (transform.GetComponent<Collider>().transform.position - other.transform.position) + " Scale exciter area: " + other.gameObject.transform.lossyScale + " Scale play area: " + transform.lossyScale);
-            //    float diff = stringOrientation == StringOrientation.Vertical ? (transform.GetComponent<Collider>().transform.position.x - other.transform.position.x) : (transform.GetComponent<Collider>().transform.position.y - other.transform.position.y);
-            //    //Debug.Log("Transform diff perpendicular to strings: " + diff);
-            //    //Debug.Log("Normalised difference " + (diff / other.gameObject.transform.lossyScale.z + 0.5f));
-            //    xPos = (diff / other.gameObject.transform.lossyScale.z + 0.5f);
-            //    yPos = stringOrientation == StringOrientation.Vertical ? 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1) : Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
-            //} else {
+                //Debug.Log("Transform diff: " + (transform.GetComponent<Collider>().transform.position - other.transform.position) + " Scale exciter area: " + other.gameObject.transform.lossyScale + " Scale play area: " + transform.lossyScale);
+                float diff = stringOrientation == StringOrientation.Vertical ? (transform.GetComponent<Collider>().transform.position.x - other.transform.position.x) : (transform.GetComponent<Collider>().transform.position.y - other.transform.position.y);
+                //Debug.Log("Transform diff perpendicular to strings: " + diff);
+                //Debug.Log("Normalised difference " + (diff / other.gameObject.transform.lossyScale.z + 0.5f));
+                //xPos = (diff / other.gameObject.transform.lossyScale.z + 0.5f);
+
+                // not sure why we're doing the 1.0f - y
+                xPos = stringOrientation == StringOrientation.Vertical ? Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1) : 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1);
+                yPos = stringOrientation == StringOrientation.Vertical ? 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1) : Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
+            }
+            else
+            {
                 // map & limit values, swap value for juce (Silvin: turns out it's always from -0.5 to 0.5)
-            xPos = Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
-            yPos = 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1);
-            //}
+                xPos = Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
+                yPos = 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1);
+            }
 
             // Debug.Log(Global.Map(localPos.x, -xBounds / 2, xBounds / 2, 0, 1) + " " + Global.Map(localPos.y, -yBounds / 2, yBounds / 2, 0, 1));
 
