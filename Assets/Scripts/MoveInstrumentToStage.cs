@@ -6,7 +6,10 @@ using Zinnia.Action;
 
 public class MoveInstrumentToStage : MonoBehaviour
 {
-    public GameObject interactor;
+    //public GameObject[] interactors;
+
+    public Tilia.Interactions.Interactables.Interactables.Operation.Extraction.InteractableFacadeExtractor[] interactorExtractors;
+
     public GameObject instrumentDisplays;
     Vector3 stagePos;
     GameObject currentInstrument;
@@ -66,24 +69,38 @@ public class MoveInstrumentToStage : MonoBehaviour
     {
 
         yield return new WaitForSeconds(0.1f);
-        interactor.GetComponent<Tilia.Interactions.Interactables.Interactors.InteractorFacade>().Ungrab();
 
-       /* int idx = 0;
-        foreach (Transform child in instrument.transform)
+        // Get the instrument to despawn
+        for(int i = 0; i < interactorExtractors.Length; i ++)
         {
-            if (child.tag == "Instrument")
+            //Debug.Log(interactors[i].GetComponent<Tilia.Interactions.PointerInteractors.DistanceGrabberFacade>().CurrentInteractable.gameObject);
+            if (interactorExtractors[i].Source != null)
             {
-               child.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>().Ungrab(instrument);
-              
+                GameObject grabbedObject = interactorExtractors[i].Source.gameObject;
+                if (grabbedObject.tag == "Instrument")
+                {
+                    grabbedObject.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>().Ungrab();
+                }
             }
-            ++idx;
+            /*if (interactors[i].GetComponent<Tilia.Interactions.PointerInteractors.DistanceGrabberFacade>().CurrentInteractable.gameObject != null)
+            {
+                GameObject grabbedObject = interactors[i].GetComponent<Tilia.Interactions.PointerInteractors.DistanceGrabberFacade>().CurrentInteractable.gameObject;
+                if (grabbedObject.tag == "Instrument")
+                {
+                    interactors[i].GetComponent<Tilia.Interactions.Interactables.Interactors.InteractorFacade>().Ungrab();
+                }
+            }*/
 
-        }*/
+  
+        }
+        
 
-       /* GameObject instrumentChild = instrument.transform.GetChild(0).gameObject;
-        instrument.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>().Ungrab(instrument);
+
+       /* interactorLeft.GetComponent<Tilia.Interactions.Interactables.Interactors.InteractorFacade>().Ungrab();
+        interactorRight.GetComponent<Tilia.Interactions.Interactables.Interactors.InteractorFacade>().Ungrab();
 */
-       
+        // GameObject instrumentChild = instrument.transform.GetChild(0).gameObject;
+        // instrument.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>().Ungrab(instrument);
         //yield return new WaitForSeconds(0.1f);
         //instrumentChild.transform.position = moveSpot;
 

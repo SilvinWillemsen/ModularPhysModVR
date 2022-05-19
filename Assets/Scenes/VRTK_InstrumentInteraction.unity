@@ -789,7 +789,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9139332730f1424f9aec71b04796a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactor: {fileID: 1232077167}
+  interactorExtractors:
+  - {fileID: 189983351}
+  - {fileID: 1590148694}
   instrumentDisplays: {fileID: 1758875468}
   distanceGrabber: {fileID: 207963143}
 --- !u!1001 &152809055
