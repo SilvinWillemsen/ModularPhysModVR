@@ -163,17 +163,16 @@ public class PlayAreaInteraction : MonoBehaviour
         {
             // Debug.Log(transform.GetComponent<Collider>().ClosestPoint(other.transform.position));
             // other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position)
-            
-            
-            transform.GetChild(0).transform.position = transform.GetComponent<Collider>().ClosestPoint(other.transform.GetComponent<Collider>().ClosestPoint(transform.position));
 
+
+            //transform.GetChild(0).transform.position = transform.GetComponent<Collider>().ClosestPoint(other.transform.GetComponent<Collider>().ClosestPoint(transform.position));
             // transform.GetChild(0).transform.position = other.transform.GetComponent<Collider>().ClosestPoint(transform.position);
-
             string exciterName = other.transform.parent.name;
+            bool useBow = exciterName == "Bow";
 
-            // Debug.Log (transform.localPosition);
-            // Debug.Log ("Guitar Pos: " + transform.position + ", Pick pos:" + other.transform.position);
-            
+            float xPos;
+            float yPos;
+
             //// calculate where on the instrument it's exciting: ////
             excitationLoc.transform.position = other.transform.position;
 
@@ -181,11 +180,23 @@ public class PlayAreaInteraction : MonoBehaviour
 
             // Debug.Log("localPoses: " + localPos.x + " " + localPos.y);
             // Debug.Log("exciter pos: " + excitationLoc.transform.position +  " exciter local pos: " + excitationLoc.transform.localPosition);
-            
 
-            // map & limit values, swap value for juce (Silvin: turns out it's always from -0.5 to 0.5)
-            float xPos = Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
-            float yPos = 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1);
+            //if (useBow)
+            //{
+            //    // THIS IS SEMI CORRECT FOR THE HEIGHT (position along the string of the cello)
+            //    transform.GetChild(0).transform.position = other.transform.GetComponent<Collider>().ClosestPoint(transform.position);
+
+            //    //Debug.Log("Transform diff: " + (transform.GetComponent<Collider>().transform.position - other.transform.position) + " Scale exciter area: " + other.gameObject.transform.lossyScale + " Scale play area: " + transform.lossyScale);
+            //    float diff = stringOrientation == StringOrientation.Vertical ? (transform.GetComponent<Collider>().transform.position.x - other.transform.position.x) : (transform.GetComponent<Collider>().transform.position.y - other.transform.position.y);
+            //    //Debug.Log("Transform diff perpendicular to strings: " + diff);
+            //    //Debug.Log("Normalised difference " + (diff / other.gameObject.transform.lossyScale.z + 0.5f));
+            //    xPos = (diff / other.gameObject.transform.lossyScale.z + 0.5f);
+            //    yPos = stringOrientation == StringOrientation.Vertical ? 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1) : Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
+            //} else {
+                // map & limit values, swap value for juce (Silvin: turns out it's always from -0.5 to 0.5)
+            xPos = Global.Limit(Global.Map(localPos.x, -0.5f, 0.5f, 0, 1), 0, 1);
+            yPos = 1.0f - Global.Limit(Global.Map(localPos.y, -0.5f, 0.5f, 0, 1), 0, 1);
+            //}
 
             // Debug.Log(Global.Map(localPos.x, -xBounds / 2, xBounds / 2, 0, 1) + " " + Global.Map(localPos.y, -yBounds / 2, yBounds / 2, 0, 1));
 
@@ -310,6 +321,9 @@ public class PlayAreaInteraction : MonoBehaviour
                     Debug.LogWarning("No custom playarea defined");
                     break;
             }
+
+            //Debug.Log("xPos: " + xPos +" ypos: " + yPos);
+
             // Map according to the string orientation
             // Flip x and y positions if vertical
             if (exciterName == "Hammer2")
@@ -321,8 +335,13 @@ public class PlayAreaInteraction : MonoBehaviour
             {
                 if (exciterName == "Bow")
                 {
-                    Vector3 vel = other.GetComponent<VelocityTracker>().getVelocity();
-                    float velToMixer = Math.Sign(vel.x) * vel.magnitude / 2.0f + 0.5f;
+                    Vector3 velInteractable = (GetComponent<VelocityTracker>() == null) ? Vector3.zero : GetComponent<VelocityTracker>().getVelocity();
+                    Vector3 vel = other.GetComponent<VelocityTracker>().getVelocity() - velInteractable;
+                    //vel *= 1.5f;
+                    Debug.Log("Vel interactable: " + velInteractable + " " + " Bow velocity " + other.GetComponent<VelocityTracker>().getVelocity());
+                    //Debug.Log(vel);
+
+                    float velToMixer = Global.Limit(Math.Sign(vel.x) * vel.magnitude + 0.5f, 0, 1);
                     audioMixer.SetFloat("velocity", Global.Limit(velToMixer, 0.0f, 1.0f));
                     
                 }
