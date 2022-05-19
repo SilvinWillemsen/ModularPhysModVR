@@ -67,6 +67,7 @@ public class Global : MonoBehaviour
         child.gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0f, 0f, 0f);
         if (moveToStage)
         {
+            child.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             child.gameObject.transform.position = interactableStartPos;
         }
         else 

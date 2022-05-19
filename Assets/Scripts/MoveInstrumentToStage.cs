@@ -35,7 +35,6 @@ public class MoveInstrumentToStage : MonoBehaviour
         else
         {
             currentInstrument = null;
-
             foreach (Transform child in instrument.transform)
             {
                 if (child.tag == "Instrument")
@@ -67,14 +66,24 @@ public class MoveInstrumentToStage : MonoBehaviour
     {
 
         yield return new WaitForSeconds(0.1f);
-
-
         interactor.GetComponent<Tilia.Interactions.Interactables.Interactors.InteractorFacade>().Ungrab();
 
-        //GameObject instrumentChild = instrument.transform.GetChild(0).gameObject;
-        //instrumentChild.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>().Ungrab(instrumentChild);
+       /* int idx = 0;
+        foreach (Transform child in instrument.transform)
+        {
+            if (child.tag == "Instrument")
+            {
+               child.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>().Ungrab(instrument);
+              
+            }
+            ++idx;
 
-        //instrumentChild.GetComponent<Rigidbody>().isKinematic = true;
+        }*/
+
+       /* GameObject instrumentChild = instrument.transform.GetChild(0).gameObject;
+        instrument.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>().Ungrab(instrument);
+*/
+       
         //yield return new WaitForSeconds(0.1f);
         //instrumentChild.transform.position = moveSpot;
 
