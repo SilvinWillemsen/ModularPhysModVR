@@ -8,13 +8,13 @@ public class ResetInstrumentPos : MonoBehaviour
     [SerializeField] GameObject instrumentStage;
 
     Vector3 instrumentStageLoc; 
-    [SerializeField] private float timeBeforeDespawn = 1.0f;
-    [SerializeField] private float despawnTime = 1.0f;
-    [SerializeField] private float spawnTime = 1.0f;
-    [SerializeField] private float transitionTime = 0.5f;
+    [SerializeField] public float timeBeforeDespawn = 1.0f;
+    [SerializeField] public float despawnTime = 1.0f;
+    [SerializeField] public float spawnTime = 1.0f;
+    [SerializeField] public float transitionTime = 0.5f;
 
-    [SerializeField] private float timeBeforeDespawnStageInstrument = 0.0f;
-    [SerializeField] private float transitionTimeStage= 0.2f;
+    [SerializeField] public float timeBeforeDespawnStageInstrument = 0.0f;
+    [SerializeField] public float transitionTimeStage= 0.2f;
 
     private void Start()
     {
@@ -56,7 +56,7 @@ public class ResetInstrumentPos : MonoBehaviour
         StartCoroutine(StartResetCoroutine(instrument, timeBeforeDespawnStageInstrument, transitionTimeStage, moveToStage));
     }
 
-    IEnumerator StartResetCoroutine(GameObject thisInstrument, float timeBeforeDespawn, float transitionTime, bool moveToStage)
+    public IEnumerator StartResetCoroutine(GameObject thisInstrument, float timeBeforeDespawn, float transitionTime, bool moveToStage)
     {
         yield return new WaitForSeconds(timeBeforeDespawn);
         Global.DespawnSingleInteractable(thisInstrument.transform.GetChild(0), despawnTime, false);
