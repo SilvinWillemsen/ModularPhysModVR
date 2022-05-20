@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1105,6 +1105,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7533518594173930138, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
   m_PrefabInstance: {fileID: 1086279379}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &207963147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207963143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f9979abf8824c7fa03300f4cea5192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instrumentDisplays: {fileID: 1758875468}
+  exciters: {fileID: 1060865653}
 --- !u!1 &211634700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2084,7 +2098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: GrabCanceled.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: BeforeGrabbed.m_PersistentCalls.m_Calls.Array.size
@@ -2092,7 +2106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: GrabCanceled.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: BeforeGrabbed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -2105,7 +2119,7 @@ PrefabInstance:
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: GrabCanceled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1618232452}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: BeforeGrabbed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2128,7 +2142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: GrabCanceled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangePreset
+      value: DespawnInteractable
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: BeforeGrabbed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -2140,7 +2154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: GrabCanceled.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CustomGrabChangePreset, Assembly-CSharp
+      value: CancelGrab, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: BeforeGrabbed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -2153,7 +2167,7 @@ PrefabInstance:
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: GrabCanceled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 1590148694}
+      objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: BeforeGrabbed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
@@ -2164,8 +2178,7 @@ PrefabInstance:
       objectReference: {fileID: 1590148694}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: GrabCanceled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Tilia.Interactions.Interactables.Interactables.Operation.Extraction.InteractableFacadeExtractor,
-        Tilia.Interactions.Interactables.Unity.Runtime
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: BeforeGrabbed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5615,7 +5628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: GrabCanceled.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: BeforeGrabbed.m_PersistentCalls.m_Calls.Array.size
@@ -5644,7 +5657,7 @@ PrefabInstance:
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: GrabCanceled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 207963143}
+      objectReference: {fileID: 207963147}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: BeforeGrabbed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -5674,6 +5687,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
+      propertyPath: GrabCanceled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DespawnInteractable
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: BeforeGrabbed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: BeforeGrabbedTest
       objectReference: {fileID: 0}
@@ -5684,6 +5701,10 @@ PrefabInstance:
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: AfterGrabbed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MoveInstrumentToStage, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
+      propertyPath: GrabCanceled.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CancelGrab, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: BeforeGrabbed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -5703,6 +5724,10 @@ PrefabInstance:
       objectReference: {fileID: 189983351}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
       propertyPath: AfterGrabbed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
+      propertyPath: GrabCanceled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7533518594173930136, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
@@ -8259,6 +8284,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600039878}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1618232448 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7533518594173930138, guid: 24fb25e1fad4826418ce7be5c1cb2b9f, type: 3}
+  m_PrefabInstance: {fileID: 339287160}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1618232452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618232448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f9979abf8824c7fa03300f4cea5192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instrumentDisplays: {fileID: 1758875468}
+  exciters: {fileID: 1060865653}
 --- !u!1 &1627198198
 GameObject:
   m_ObjectHideFlags: 0
