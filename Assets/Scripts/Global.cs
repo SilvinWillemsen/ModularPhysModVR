@@ -67,13 +67,16 @@ public class Global : MonoBehaviour
         child.gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0f, 0f, 0f);
         if (moveToStage)
         {
+            child.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             child.gameObject.transform.position = interactableStartPos;
+            child.gameObject.transform.rotation = interactableStartOrientation;
+
         }
         else 
         {
             child.gameObject.transform.localPosition = interactableStartPos;
+            child.gameObject.transform.localRotation = interactableStartOrientation;
         }
-        child.gameObject.transform.localRotation = interactableStartOrientation;
         GameObject target = child.GetChild(0).gameObject;
         iTween.ScaleTo(target, iTween.Hash("x", 1.0f, "y", 1.0f, "z", 1.0f, "time", spawnTime, "onComplete", "OnSpawn"));
         child.gameObject.GetComponent<Rigidbody>().useGravity = true;
