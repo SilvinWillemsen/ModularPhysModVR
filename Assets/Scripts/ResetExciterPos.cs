@@ -8,10 +8,10 @@ public class ResetExciterPos : MonoBehaviour
 
     ExciterReferenceList exciterReferenceList;
 
-    [SerializeField] public float timeBeforeDespawn = 1.0f;
-    [SerializeField] public float despawnTime = 1.0f;
-    [SerializeField] public float spawnTime = 1.0f;
-    [SerializeField] public float transitionTime = 0.5f;
+    [SerializeField] private float timeBeforeDespawn = 1.0f;
+    [SerializeField] private float despawnTime = 1.0f;
+    [SerializeField] private float spawnTime = 1.0f;
+    [SerializeField] private float transitionTime = 0.5f;
 
     void Start()
     {
@@ -24,7 +24,7 @@ public class ResetExciterPos : MonoBehaviour
         StartCoroutine(StartResetCoroutine(exciter, despawnTime, spawnTime, transitionTime));
     }
 
-    public IEnumerator StartResetCoroutine(GameObject thisExciter, float despawnTime, float spawnTime, float transitionTime)
+    IEnumerator StartResetCoroutine(GameObject thisExciter, float despawnTime, float spawnTime, float transitionTime)
     {
         yield return new WaitForSeconds(timeBeforeDespawn);
         Global.DespawnSingleInteractable(thisExciter.transform.GetChild(0), despawnTime, false);

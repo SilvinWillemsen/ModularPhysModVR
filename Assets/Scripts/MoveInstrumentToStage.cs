@@ -6,10 +6,7 @@ using Zinnia.Action;
 
 public class MoveInstrumentToStage : MonoBehaviour
 {
-    //public GameObject[] interactors;
-
-    public Tilia.Interactions.Interactables.Interactables.Operation.Extraction.InteractableFacadeExtractor[] interactorExtractors;
-
+    public GameObject interactor;
     public GameObject instrumentDisplays;
     Vector3 stagePos;
     GameObject currentInstrument;
@@ -21,86 +18,66 @@ public class MoveInstrumentToStage : MonoBehaviour
     }
     public void MoveInstrument(GameObject instrument)
     {
-        // if there is no instrument on stage, place new instrument
+
         if (currentInstrument == null)
         {
             currentInstrument = instrument;
-            
-            PlaceInstrument(currentInstrument);
-        }
-
-        // if there is already an instrument, remove old instrument
-        else if (currentInstrument != null)
-        {
-
-            if (currentInstrument != instrument)
+            foreach (Transform child in instrument.transform)
             {
-                RemoveInstrument(currentInstrument, true);
-                currentInstrument = instrument;
-                PlaceInstrument(currentInstrument);
+                if (child.tag == "Instrument")
+                {
+                    child.transform.GetChild(0).transform.GetChild(1).GetComponent<CustomGrabAttachment>().moveToStageWhenGrabbed = true;
+                }
             }
-            else
-            {
-                RemoveInstrument(currentInstrument.gameObject, false);
-                currentInstrument = null;
-            }
-        }
-    }
-
-
-    void PlaceInstrument(GameObject instrument)
-    {
-        foreach (Transform child in instrument.transform)
-        {
-            if (child.tag == "Instrument")
-            {
-                child.transform.GetChild(0).transform.GetChild(1).GetComponent<CustomGrabAttachment>().moveToStageWhenGrabbed = true;
-            }
-        }
-        //Vector3 moveSpot = new Vector3(stagePos.x, stagePos.y + instrument.transform.position.y, stagePos.z);
-        StartCoroutine(DelayBeforeUngrab(instrument));
-    }
-
-
-    void RemoveInstrument(GameObject instrument, bool removeWithoutGrabbing)
-    {
-        foreach (Transform child in instrument.transform)
-        {
-            if (child.tag == "Instrument")
-            {
-                child.transform.GetChild(0).transform.GetChild(1).GetComponent<CustomGrabAttachment>().moveToStageWhenGrabbed = false;
-            }
-        }
-        //Vector3 moveSpot = new Vector3(stagePos.x, stagePos.y + instrument.transform.position.y, stagePos.z);
-
-        if (removeWithoutGrabbing)
-        {
-            instrumentDisplays.GetComponent<ResetInstrumentPos>().DespawnAndSpawnInstrument(instrument);
+            Vector3 moveSpot = new Vector3(stagePos.x, stagePos.y + instrument.transform.position.y, stagePos.z);
+            StartCoroutine(DelayBeforeUngrab(currentInstrument));
         }
         else
         {
-            StartCoroutine(DelayBeforeUngrab(instrument));
-        }
-    }
+            currentInstrument = null;
 
-    
+            foreach (Transform child in instrument.transform)
+            {
+                if (child.tag == "Instrument")
+                {
+                    child.transform.GetChild(0).transform.GetChild(1).GetComponent<CustomGrabAttachment>().moveToStageWhenGrabbed = false;
+                }
+            }
+            Vector3 moveSpot = new Vector3(stagePos.x, stagePos.y + instrument.transform.position.y, stagePos.z);
+            StartCoroutine(DelayBeforeUngrab(currentInstrument));
+
+
+            //instrumentDisplays.GetComponent<ResetInstrumentPos>().DespawnAndSpawnInstrument(instrument);
+        }
+
+
+
+
+        /*foreach(Transform child in instrument.transform)
+        {
+            if(child.tag == "Instrument")
+            {
+
+                instrument.transform.position = transform.position;
+            }
+        }*/
+    }
 
     IEnumerator DelayBeforeUngrab(GameObject instrument)
     {
+
         yield return new WaitForSeconds(0.1f);
 
-        // Get the instrument to despawn & not an exciter
-        for(int i = 0; i < interactorExtractors.Length; i ++)
-        {
-             if (interactorExtractors[i].Source != null)
-            {
-                GameObject grabbedObject = interactorExtractors[i].Source.gameObject;
-                if (grabbedObject.tag == "Instrument")
-                {
-                    grabbedObject.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>().Ungrab();
-                }
-            }
-        } 
+
+        interactor.GetComponent<Tilia.Interactions.Interactables.Interactors.InteractorFacade>().Ungrab();
+
+        //GameObject instrumentChild = instrument.transform.GetChild(0).gameObject;
+        //instrumentChild.GetComponent<Tilia.Interactions.Interactables.Interactables.InteractableFacade>().Ungrab(instrumentChild);
+
+        //instrumentChild.GetComponent<Rigidbody>().isKinematic = true;
+        //yield return new WaitForSeconds(0.1f);
+        //instrumentChild.transform.position = moveSpot;
+
     }
 
     // All of the following just used for testing.. Not working!
