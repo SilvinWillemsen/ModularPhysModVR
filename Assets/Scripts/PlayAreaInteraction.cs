@@ -387,12 +387,12 @@ public class PlayAreaInteraction : MonoBehaviour
             int idx = (int)Math.Floor((xPos - 0.5f * barWidth) / barWidth); // notice that the xPos is shifted to start at the first note (half a barwidth)
 
             // the holes have index 2 and 6 in the octave (0: C#, 1: D#, 2: <hole>, 3: F#, etc.)
-            if (idx % 7 == 2 || idx % 7 == 6 || idx < 0 || idx > 21) // check whether this should be 20 instead
+            if (idx % 7 == 2 || idx % 7 == 6 || idx < 0 || idx > 27) // 27 because of 4 octaves (including holes) minus 1 due to the last hole
             {
                 outOfBoundsBlackNotes = true;
             }
-            
 
+            Debug.Log("Idx = " + idx);
             // Map xPos to plugin. As the holes are not included in the plugin, these need to be subtracted from the xPos
             float barWidthsTakenAway = 2.0f * (float)Math.Floor(idx / 7.0f); // for every octave take away two barWidths
             // take away an extra barWidth if the idx is that of a F#, G# or A#

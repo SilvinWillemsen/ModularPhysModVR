@@ -107,7 +107,7 @@ Material:
     - _DstBlend: 0
     - _Gloss: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0.959
+    - _Glossiness: 0.358
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mipmaps: 2
