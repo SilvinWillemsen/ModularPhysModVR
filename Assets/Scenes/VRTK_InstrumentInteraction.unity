@@ -3262,6 +3262,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 10815884, guid: 253b06f3bbaf4db4eb34fd22f43f9895, type: 3}
+      propertyPath: m_Flare
+      value: 
+      objectReference: {fileID: 12100000, guid: acb0c513ae181884388a07df5be44a55, type: 2}
+    - target: {fileID: 10815884, guid: 253b06f3bbaf4db4eb34fd22f43f9895, type: 3}
       propertyPath: m_Range
       value: 15
       objectReference: {fileID: 0}
@@ -5604,7 +5608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863927142}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: -0.41, z: 0}
+  m_LocalPosition: {x: -0, y: -0.353, z: 0}
   m_LocalScale: {x: 0.49999988, y: 0.4999999, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1447485287}
@@ -5655,7 +5659,7 @@ Light:
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_Flare: {fileID: 0}
+  m_Flare: {fileID: 12100000, guid: acb0c513ae181884388a07df5be44a55, type: 2}
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
@@ -7146,6 +7150,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 10815884, guid: 253b06f3bbaf4db4eb34fd22f43f9895, type: 3}
+      propertyPath: m_Flare
+      value: 
+      objectReference: {fileID: 12100000, guid: acb0c513ae181884388a07df5be44a55, type: 2}
+    - target: {fileID: 10815884, guid: 253b06f3bbaf4db4eb34fd22f43f9895, type: 3}
       propertyPath: m_Range
       value: 15
       objectReference: {fileID: 0}
@@ -7619,6 +7627,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 10815884, guid: 253b06f3bbaf4db4eb34fd22f43f9895, type: 3}
+      propertyPath: m_Flare
+      value: 
+      objectReference: {fileID: 12100000, guid: acb0c513ae181884388a07df5be44a55, type: 2}
     - target: {fileID: 10815884, guid: 253b06f3bbaf4db4eb34fd22f43f9895, type: 3}
       propertyPath: m_Range
       value: 15
@@ -8631,6 +8643,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 10815884, guid: 253b06f3bbaf4db4eb34fd22f43f9895, type: 3}
+      propertyPath: m_Flare
+      value: 
+      objectReference: {fileID: 12100000, guid: acb0c513ae181884388a07df5be44a55, type: 2}
     - target: {fileID: 10815884, guid: 253b06f3bbaf4db4eb34fd22f43f9895, type: 3}
       propertyPath: m_Range
       value: 15
@@ -11733,7 +11749,7 @@ Light:
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_Flare: {fileID: 12100000, guid: f08cfe5fe863ae7408ffca26d1727108, type: 2}
+  m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
@@ -11904,6 +11920,10 @@ PrefabInstance:
     - target: {fileID: 468280, guid: ca4a7e18b7d3cbd459f7ece1d3de3d4a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10819468, guid: ca4a7e18b7d3cbd459f7ece1d3de3d4a, type: 3}
+      propertyPath: m_Flare
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 10819468, guid: ca4a7e18b7d3cbd459f7ece1d3de3d4a, type: 3}
       propertyPath: m_Range
