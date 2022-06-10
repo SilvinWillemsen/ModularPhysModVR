@@ -1,5 +1,112 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-8781972420481507681
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: e01491d57ee0988469a6d373ed96dfb7
+  m_EffectName: Send
+  m_MixLevel: 03492615bccfb5e4c94a29c2c1e80dd5
+  m_Parameters: []
+  m_SendTarget: {fileID: -4287568937792653082}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &-4287568937792653082
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: d9878f2fb58454f459ddb66ca7fc9b4e
+  m_EffectName: Receive
+  m_MixLevel: 6d74cdee2563b8d468725f3b68168f92
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &-2777574886614454765
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: a2d1ce49842bf7741ba1e0145375d4fc
+  m_EffectName: Steam Audio Reverb
+  m_MixLevel: 21ffaabc482097d4990f887b286eb7e0
+  m_Parameters:
+  - m_ParameterName: Binaural
+    m_GUID: 18e8dd85a035fbf4c9574360cc012b89
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &-1143906121824161523
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 62def33ca6cb2c742be9ecd8b350f901
+  m_EffectName: audioplugin_ModularVST
+  m_MixLevel: 7a631ce742471514cbb6e7be433c6a8f
+  m_Parameters:
+  - m_ParameterName: Mouse X1
+    m_GUID: 17b58ce99bf7115418c10ca3aef897cc
+  - m_ParameterName: Mouse Y1
+    m_GUID: 10f1b8259869f22429bf6429c58c1e28
+  - m_ParameterName: Mouse X2
+    m_GUID: 3a5a2cc809ea2e04296e63bcfc32939c
+  - m_ParameterName: Mouse Y2
+    m_GUID: 8b45ca13b86339845b184f295652632a
+  - m_ParameterName: Smooth
+    m_GUID: fb4c4e688f4f5294eb1a5de029cad406
+  - m_ParameterName: Smoothness
+    m_GUID: b0a88e76406d30e4984cba211049f721
+  - m_ParameterName: Excite
+    m_GUID: dbcdba058b407804281935d8a6eb0d53
+  - m_ParameterName: Excitation Type
+    m_GUID: 0c5172f4b8705a34598dfdcddfc4fc7c
+  - m_ParameterName: Use Velocity
+    m_GUID: 089418408df689d40ad88b03f5df0417
+  - m_ParameterName: Velocity
+    m_GUID: 6cc0a268e266d7740ace1128154756cd
+  - m_ParameterName: Trigger1
+    m_GUID: e2d57cd2199e1444b984a545231b4519
+  - m_ParameterName: Trigger2
+    m_GUID: 1610a694f8c1a85429b9709233dabf50
+  - m_ParameterName: ActivateSecondE
+    m_GUID: f4a10c79f2e864147a491aa465bb9a36
+  - m_ParameterName: Preset Select
+    m_GUID: 5b5e95f814874d04fb843096a32b5c72
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &-105735003208934628
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Reverb
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: bd837aa99bbae4d48bf431f75dfd8aa4
+  m_Children: []
+  m_Volume: 54f65c7e3c65d7f4499940978c5de848
+  m_Pitch: e68769b4df330034fb82f2786795e2a1
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 2390845433623410520}
+  - {fileID: -4287568937792653082}
+  - {fileID: -2777574886614454765}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -16,37 +123,39 @@ AudioMixerController:
   m_EnableSuspend: 0
   m_UpdateMode: 1
   m_ExposedParameters:
-  - guid: 6bfa263554cd44b38aa7dacfd39303ac
+  - guid: 17b58ce99bf7115418c10ca3aef897cc
     name: mouseX1
-  - guid: 1c6e9ef124d0a4bcc9ee594cc872ec42
+  - guid: 10f1b8259869f22429bf6429c58c1e28
     name: mouseY1
-  - guid: 6a11fb5f0ed93424e8e8ea91f3e7744b
+  - guid: 3a5a2cc809ea2e04296e63bcfc32939c
     name: mouseX2
-  - guid: edf947480cf3a4995a692a989c192762
+  - guid: 8b45ca13b86339845b184f295652632a
     name: mouseY2
-  - guid: e520cccf733364d7b990c9ab1de767cb
+  - guid: fb4c4e688f4f5294eb1a5de029cad406
     name: smooth
-  - guid: f75a14e633e534c2a899780f6df9bf2a
+  - guid: b0a88e76406d30e4984cba211049f721
     name: smoothness
-  - guid: 75b982e61e10c4088b98c9c5eca326e5
+  - guid: dbcdba058b407804281935d8a6eb0d53
     name: excite
-  - guid: d8998bb761be04291842f708a8681a84
+  - guid: 0c5172f4b8705a34598dfdcddfc4fc7c
     name: excitationType
-  - guid: 23bcd905496b7430b95969c1abe8fa6b
+  - guid: 089418408df689d40ad88b03f5df0417
     name: useVelocity
-  - guid: d06803c8ee1834db1ace37c42bf5e366
+  - guid: 6cc0a268e266d7740ace1128154756cd
     name: velocity
-  - guid: e64df828fe1f74a258e2e0857b1af8d8
+  - guid: e2d57cd2199e1444b984a545231b4519
     name: trigger1
-  - guid: 47808672c87904889801786a58f7438a
+  - guid: 1610a694f8c1a85429b9709233dabf50
     name: trigger2
-  - guid: 4db2910210d654347bb613a6e37037de
+  - guid: f4a10c79f2e864147a491aa465bb9a36
     name: activateSecondExciter
-  - guid: 73b01a315c0034ecba55501aa9af7684
+  - guid: 5b5e95f814874d04fb843096a32b5c72
     name: presetSelect
   m_AudioMixerGroupViews:
   - guids:
     - a467cd9e32e9f419ba48f107a96416b4
+    - 1c7260662fbdbc24d8cdcb4dc0a1fef9
+    - bd837aa99bbae4d48bf431f75dfd8aa4
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -59,13 +168,14 @@ AudioMixerGroupController:
   m_Name: Master
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: a467cd9e32e9f419ba48f107a96416b4
-  m_Children: []
+  m_Children:
+  - {fileID: 2016379613977157417}
+  - {fileID: -105735003208934628}
   m_Volume: b488c5a76cf41489ba0ab65d0e1618d5
   m_Pitch: f83a82008b3f54b41a0a429c8fa94bfa
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
-  - {fileID: 4131571005868742647}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -97,8 +207,10 @@ AudioMixerSnapshotController:
     5db04090d6f7d417d8289ed06900b91e: 1
     ceb99f31ff9ab416e9da57c4bb4fe13d: 1
     4f6d42f3d0629a74ab50cb2fffe04e44: 0
+    03492615bccfb5e4c94a29c2c1e80dd5: 0
     43fd74551458c3147a57e38fb568c3ae: 0.412
     1ff7bb756c971444bb637113f7140262: 0.407
+    18e8dd85a035fbf4c9574360cc012b89: 0
     84b8c106bc7fd944094b6e4993bf93c5: 0.411
     febdb086d1ab647f3b801e9c4cea28cb: 1
     b2a50f28695ad4ca9af6ff511720ce38: 0
@@ -108,46 +220,54 @@ AudioMixerSnapshotController:
     587d220d56fda4542a333f10dc34f820: 0.09
     ae238d8d9a5764df78a425f9853c2c0d: 0
     ac0658ad054fe4623b617da2f16c1fa9: 0
+    54f65c7e3c65d7f4499940978c5de848: 0
   m_TransitionOverrides: {}
---- !u!244 &4131571005868742647
+--- !u!243 &2016379613977157417
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Plugin
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 1c7260662fbdbc24d8cdcb4dc0a1fef9
+  m_Children: []
+  m_Volume: 1ec32d87c63bc8344a739c47c05d4f6d
+  m_Pitch: c9b6bbeaa1d949144ba966cfb2548a76
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 4863483812227086241}
+  - {fileID: -1143906121824161523}
+  - {fileID: -8781972420481507681}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &2390845433623410520
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_EffectID: 6d43d75e2087449f393e7a90eeb5bad2
-  m_EffectName: audioplugin_ModularVST
-  m_MixLevel: 4c8266e1eb38c49379dced67e5199215
-  m_Parameters:
-  - m_ParameterName: Mouse X1
-    m_GUID: 6bfa263554cd44b38aa7dacfd39303ac
-  - m_ParameterName: Mouse Y1
-    m_GUID: 1c6e9ef124d0a4bcc9ee594cc872ec42
-  - m_ParameterName: Mouse X2
-    m_GUID: 6a11fb5f0ed93424e8e8ea91f3e7744b
-  - m_ParameterName: Mouse Y2
-    m_GUID: edf947480cf3a4995a692a989c192762
-  - m_ParameterName: Smooth
-    m_GUID: e520cccf733364d7b990c9ab1de767cb
-  - m_ParameterName: Smoothness
-    m_GUID: f75a14e633e534c2a899780f6df9bf2a
-  - m_ParameterName: Excite
-    m_GUID: 75b982e61e10c4088b98c9c5eca326e5
-  - m_ParameterName: Excitation Type
-    m_GUID: d8998bb761be04291842f708a8681a84
-  - m_ParameterName: Use Velocity
-    m_GUID: 23bcd905496b7430b95969c1abe8fa6b
-  - m_ParameterName: Velocity
-    m_GUID: d06803c8ee1834db1ace37c42bf5e366
-  - m_ParameterName: Trigger1
-    m_GUID: e64df828fe1f74a258e2e0857b1af8d8
-  - m_ParameterName: Trigger2
-    m_GUID: 47808672c87904889801786a58f7438a
-  - m_ParameterName: ActivateSecondE
-    m_GUID: 4db2910210d654347bb613a6e37037de
-  - m_ParameterName: Preset Select
-    m_GUID: 73b01a315c0034ecba55501aa9af7684
+  m_EffectID: acb0deb84f63793448831ef0743a4c00
+  m_EffectName: Attenuation
+  m_MixLevel: dbba567a57f1af54c93b837c5eafd28d
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &4863483812227086241
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: de307d5d0ed8b754f8bbf572cfd4233d
+  m_EffectName: Attenuation
+  m_MixLevel: 5a792904a5ff22544bf44a2fc7740bf3
+  m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
